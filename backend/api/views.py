@@ -20,7 +20,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
         price = len(serializer.validated_data) * 10
         return Response({'price': price})
 
-    @action(detail=False, methods=['POST'])
+    @action(detail=False, methods=['GET'])
     def calculate_repair(self, request):
         serializer = PhotoUploadSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
