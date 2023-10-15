@@ -57,7 +57,7 @@ POST http://localhost:8000/api/auth/token/login/
 Отправьте GET-запрос, чтобы получить стоимость:
 
 ```
-GET http://localhost:8000/api/property/get_price/
+POST http://localhost:8000/api/property/get_price/
 {
     "address": "Moscow",
     "house_material": "1",
@@ -88,7 +88,7 @@ Authorization: Token {token}
 Для оценки ремонта отправьте GET-запрос на:
 
 ```
-GET http://localhost:8000/api/property/calculate_repair
+POST http://localhost:8000/api/property/calculate_repair
 Authorization: Token {token}
 {
     "photos": ["sdfnjw2bj", "asdhu2gduiq"]

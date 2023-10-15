@@ -11,7 +11,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
     serializer_class = PriceSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    @action(detail=False, methods=['GET'],
+    @action(detail=False, methods=['POST'],
             permission_classes=[permissions.AllowAny])
     def get_price(self, request):
         serializer = PriceSerializer(data=request.data)
@@ -20,7 +20,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
         price = len(serializer.validated_data) * 10
         return Response({'price': price})
 
-    @action(detail=False, methods=['GET'])
+    @action(detail=False, methods=['POST'])
     def calculate_repair(self, request):
         serializer = PhotoUploadSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
