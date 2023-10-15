@@ -89,7 +89,6 @@ Authorization: Token {token}
 
 ```
 POST http://localhost:8000/api/property/calculate_repair
-Authorization: Token {token}
 {
     "photos": ["sdfnjw2bj", "asdhu2gduiq"]
 }
