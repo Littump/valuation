@@ -18,7 +18,10 @@ class PriceSerializer(serializers.ModelSerializer):
             "cnt_rooms",
             "floor",
             "area",
-            "repair"
+            "repair",
+            "text",
+            "has_lift",
+            "parking_type"
         )
 
 
