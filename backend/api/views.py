@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from .models import Property
 from .serializers import PhotoUploadSerializer, PriceSerializer
-from ml.utils import calculate_price, get_repair
+#from ml.utils import calculate_price, get_repair
 
 
 class PropertyViewSet(viewsets.ModelViewSet):
@@ -17,7 +17,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
     def get_price(self, request):
         serializer = PriceSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        price = calculate_price(serializer.validated_data)
+        price = 2#calculate_price(serializer.validated_data)
         return Response({'price': price})
 
     @action(detail=False, methods=['POST'],
@@ -26,7 +26,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
         serializer = PhotoUploadSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         photos = serializer.validated_data['photos']
-        repair = get_repair(photos)
+        repair = 2#get_repair(photos)
         return Response({'repair': repair})
 
     def get_queryset(self):

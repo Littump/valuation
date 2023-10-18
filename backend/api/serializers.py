@@ -23,6 +23,17 @@ class PriceSerializer(serializers.ModelSerializer):
             "has_lift",
             "parking_type"
         )
+        
+    def create(self, validated_data):
+        validated_data['price'] = 5
+        validated_data['floors'] = 6
+        validated_data['house_year'] = 6
+        validated_data['metro_name'] = '6'
+        validated_data['metro_min'] = 6
+        validated_data['metro_how'] = '6'
+        author = self.context.get("request").user
+        property = Property.objects.create(author=author, **validated_data)
+        return property
 
 
 class PhotoUploadSerializer(serializers.Serializer):
