@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from .models import Property
 
+from .utils import get_model
+
 # class PropertySerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Property
@@ -23,14 +25,16 @@ class PriceSerializer(serializers.ModelSerializer):
             "has_lift",
             "parking_type"
         )
-        
+
     def create(self, validated_data):
-        validated_data['price'] = 5
-        validated_data['floors'] = 6
-        validated_data['house_year'] = 6
-        validated_data['metro_name'] = '6'
-        validated_data['metro_min'] = 6
-        validated_data['metro_how'] = '6'
+        model = get_model()
+        data = model.get_appart_info(validated_data)
+        validated_data['price'] = data['price']
+        validated_data['floors'] = data['floors']
+        validated_data['house_year'] = data['house_year']
+        validated_data['metro_name'] = data['metro_name']
+        validated_data['metro_min'] = data['metro_min']
+        validated_data['metro_how'] = data['metro_how']
         author = self.context.get("request").user
         property = Property.objects.create(author=author, **validated_data)
         return property

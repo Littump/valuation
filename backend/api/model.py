@@ -26,7 +26,7 @@ import geopy.distance
 import joblib
 nltk.download('punkt')
 nltk.download('stopwords')
-from zhkh_utils import get_zhkh
+from .zhkh_utils import get_zhkh
 
 from string import punctuation
 _punctuation = list(punctuation)
@@ -84,6 +84,38 @@ class PriceEstimator:
             self.heads[head_name] = CatBoostRegressor()
             self.heads[head_name].load_model(os.path.join(self.models_folder, f'{head_name}.cbm'))
             self.cols_orders[head_name] = cols_order
+            
+    def get_appart_info(self, params: dict) -> dict:
+        '''
+        params: dict with keys:
+            - 'adress': str
+            - 'object_type': '1' | '2'
+            - 'text': str
+            - 'house_material': str            
+            - 'cnt_rooms': int
+            - 'floor': int
+            - 'area': float
+            - 'has_lift': int
+            - 'parking_type': str
+            - 'photos': (float, float) or list of PIL.Image objects
+        return: dict with keys:
+            - 'price': float
+            - 'house_year': int
+            - 'metro_name': str
+            - 'metro_dist': float
+        '''
+        res = {}
+        res['price'] = self.predict(params)
+        info = get_zhkh(params['adress'], self.df_zhkh)
+        if info is None:
+            res['house_year'], res['floors'] = '', ''
+        else:
+            res['house_year'], res['floors'] = info['Год постройки'], info['Число этажей']
+        res['metro_name'] = self._get_metro_info(self._get_coordinates_photon_with_retry(params['adress']))['nearest_station']
+        speed = 0.05
+        res['metro_min'] = self._get_metro_info(self._get_coordinates_photon_with_retry(params['adress']))['nearest_station_dist']/speed
+        res['metro_how'] = 'пешком'
+        return res
 
     def __init__(self, models_folder, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
         self.device = device

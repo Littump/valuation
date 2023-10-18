@@ -1,5 +1,7 @@
 from PIL import Image
 from io import BytesIO
+from .model import PriceEstimator
+from functools import lru_cache
 
 
 def convert_uploaded_files_to_images(uploaded_files):
@@ -11,10 +13,20 @@ def convert_uploaded_files_to_images(uploaded_files):
     return images
 
 
+@lru_cache
+def get_model():
+    model = PriceEstimator('/app/api/models')
+    return model
+
+
 def calculate_price(data):
-    return None
+    model = get_model()
+    price = model.predict(data)
+    return price
 
 
 def get_repair(photos):
+    model = get_model()
     photos = convert_uploaded_files_to_images(photos)
-    return None
+    result = model.get_repair(photos)
+    return result
