@@ -63,7 +63,7 @@ class PriceEstimator:
                 self.hook_info[name] = output.detach()
             return hook
 
-        model.load_state_dict(torch.load(path))
+        model.load_state_dict(torch.load(path, map_location=torch.device('cpu')))
         model.to(self.device)
         model.eval()
 
@@ -81,7 +81,7 @@ class PriceEstimator:
             with open(os.path.join(self.models_folder, "cols_order_for_"+head_name+'.txt'), 'r') as file:
                 for line in file:
                     cols_order.append(line.strip())
-            self.heads[head_name] = CatBoostRegressor(cat_features=_cat_features)
+            self.heads[head_name] = CatBoostRegressor()
             self.heads[head_name].load_model(os.path.join(self.models_folder, f'{head_name}.cbm'))
             self.cols_orders[head_name] = cols_order
 
@@ -93,9 +93,9 @@ class PriceEstimator:
         self.heads = {}
         self.cols_orders = {}
         self._load_heads()
-        self.metro_df = pd.read_csv(os.path.join(models_folder, 'msc_metro_with_decart.csv'))
-        self.df_zhkh = pd.read_csv(os.path.join(models_folder, 'zhkh_final.csv'))
-        self.df_infro = pd.read_csv(os.path.join(models_folder, 'msc_infro_decart.csv'))
+        self.metro_df = pd.read_csv(os.path.join(models_folder, 'msc_metro_with_decart.csv'), encoding='utf8')
+        self.df_zhkh = pd.read_csv(os.path.join(models_folder, 'zhkh_final.csv'), encoding='utf8')
+        self.df_infro = pd.read_csv(os.path.join(models_folder, 'msc_infro_decart.csv'), encoding='utf8')
         self.metro_tree = cKDTree(self.metro_df[['x_coord', 'y_coord']])
         self.infro_tree = cKDTree(self.df_infro[['x_coord', 'y_coord']])
         self.pca_photo = joblib.load(os.path.join(models_folder,'pca_photo.pkl'))
@@ -121,7 +121,7 @@ class PriceEstimator:
     
     def _get_metro_info(self, coords):
         neighbors = self.metro_tree.query(coords, k=2, p=2)
-        res = {'nearest_station':None, 'nearest_station_dist':None, 'second_nearest_station':None, 'second_nearest_station_dist':None}
+        res = {'nearest_station': None, 'nearest_station_dist':None, 'second_nearest_station':None, 'second_nearest_station_dist':None}
         if(neighbors[0][0] != np.inf):
             res['nearest_station'] = self.metro_df['names'].iloc[neighbors[1][0]]
             res['nearest_station_dist'] = neighbors[0][0]
@@ -272,11 +272,11 @@ class PriceEstimator:
             if(has_zhkh):
                 request = pd.DataFrame(request, index=[0])
                 request = request[self.cols_orders['msc_head_without_photo']]
-                prediction = self.heads['msc_head_without_photo'].predict(pd.DataFrame(request, index=[0]))[0]
+                prediction = self.heads['msc_head_without_photo'].predict(request)[0]
             else:
                 request = pd.DataFrame(request, index=[0])
                 request = request[self.cols_orders['msc_head_without_photo_and_zhkh']]
-                prediction = self.heads['msc_head_without_photo_and_zhkh'].predict(pd.DataFrame(request, index=[0]))[0]
+                prediction = self.heads['msc_head_without_photo_and_zhkh'].predict(request)[0]
 
         return (np.exp(prediction) * request['area'])[0]
     

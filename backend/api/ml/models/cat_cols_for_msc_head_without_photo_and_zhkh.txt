@@ -1,4 +1,4 @@
 house_material
-parking_type
 second_nearest_metro
+parking_type
 nearest_metro

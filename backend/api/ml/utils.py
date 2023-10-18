@@ -1,12 +1,12 @@
 from PIL import Image
-import io
+from io import BytesIO
 
 
 def convert_uploaded_files_to_images(uploaded_files):
     images = []
     for uploaded_file in uploaded_files:
         file_data = uploaded_file.read()
-        image = Image.open(io.BytesIO(file_data))
+        image = Image.open(BytesIO(file_data))
         images.append(image)
     return images
 
