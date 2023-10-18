@@ -231,7 +231,7 @@ class PriceEstimator:
             - 'area': float
             - 'has_lift': int
             - 'parking_type': str
-            - 'photos': (float, float) or list of PIL.Image objects
+            - 'repair': (float, float) or list of PIL.Image objects
         '''
         request = {}
         request['cnt_rooms'] = params['cnt_rooms']
@@ -241,9 +241,9 @@ class PriceEstimator:
         request['floor'] = params['floor']
         request['has_lift'] = params['has_lift']
         request['parking_type'] = params['parking_type']
-        adress = params['adress']
+        adress = params['address']
 
-        photos = params['photos']
+        photos = params['repair']
 
         has_photo = True
         if(len(photos)==2):
