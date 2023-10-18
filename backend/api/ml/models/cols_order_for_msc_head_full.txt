@@ -1,0 +1,76 @@
+dist_to_center
+cnt_rooms
+house_material
+продуктовый магазин
+Перекрытия
+parking_type
+pca_text_1
+pca_text_5
+pca_text_10
+Год постройки
+Площадь нежилых в м2
+фитнес-клуб
+pca_text_19
+pca_text_13
+Несущие стены
+x_coord
+Площадь жилых в м2
+pca_photo_4
+Культурное наследие
+interior_qual
+Теплоснабжение
+floor
+Водоотведение
+аптека
+pca_text_16
+pca_photo_6
+Холодное водоснабжение
+Площадь всего
+Электроснабжение
+y_coord
+Класс энергетической эффективности
+Газоснабжение
+поликлиника
+pca_text_4
+pca_text_12
+pca_text_11
+pca_text_3
+has_lift
+Фундамент
+interior_style
+Горячее водоснабжение
+pca_photo_5
+детский сад
+кафе
+infro_cnt
+pca_text_15
+pca_photo_0
+Количество лифтов
+pca_text_18
+area
+достопримечательность
+second_nearest_metro
+pca_text_6
+pca_text_14
+nearest_metro_dist
+pca_photo_2
+second_nearest_metro_dist
+nearest_metro
+Число этажей
+Количество подъездов
+pca_text_9
+object_type
+кинотеатр
+pca_text_8
+pca_text_0
+pca_photo_1
+pca_photo_7
+pca_text_7
+pca_text_2
+школа
+Приспособления для маломобильных людей
+Аварийный
+Количество квартир
+pca_text_17
+тц
+pca_photo_3
