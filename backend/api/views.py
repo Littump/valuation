@@ -17,8 +17,8 @@ class PropertyViewSet(viewsets.ModelViewSet):
     def get_price(self, request):
         serializer = PriceSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        interior_style = serializer.validated_data['repair'][0]
-        interior_qual = serializer.validated_data['repair'][2]
+        interior_style = float(serializer.validated_data['repair'].split(';')[0])
+        interior_qual = float(serializer.validated_data['repair'].split(';')[1])
         serializer.validated_data['repair'] = [interior_style, interior_qual]
         price = calculate_price(serializer.validated_data)
         return Response({'price': price})
