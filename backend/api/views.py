@@ -17,7 +17,9 @@ class PropertyViewSet(viewsets.ModelViewSet):
     def get_price(self, request):
         serializer = PriceSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.validated_data['repair'] = (2, 2)
+        interior_style = serializer.validated_data['repair'][0]
+        interior_qual = serializer.validated_data['repair'][2]
+        serializer.validated_data['repair'] = [interior_style, interior_qual]
         price = calculate_price(serializer.validated_data)
         return Response({'price': price})
 
@@ -28,7 +30,11 @@ class PropertyViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         photos = serializer.validated_data['photos']
         repair = get_repair(photos)
-        return Response({'repair': repair})
+        data = {
+            'interior_style': repair['interior_style'],
+            'interior_qual': repair['interior_qual']
+        }
+        return Response(data)
 
     def get_queryset(self):
         queryset = Property.objects.all()
