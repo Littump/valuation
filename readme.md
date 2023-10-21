@@ -100,17 +100,17 @@ Authorization: Token {token}
     "price": 2
 }
 Variants: {
-    "address": any
-    "house_material": "mnl" | config
-    "object_type": "2",
-    "cnt_rooms": "5",
-    "floor": "6",
-    "area": "66.5",
-    "repair": "2;2",
-    "has_lift": 0|1,
-    "parking_type": "", config | "0"
-    "text": "",
-    "price": 2
+    "address": any str
+    "house_material": "brc" | "mnl" | "pnl" | "blc" | "wdn" | "stl" | "brm"
+    "object_type": "1" | "2"
+    "cnt_rooms": any str
+    "floor": any str
+    "area": any str
+    "repair": str: "int;int"
+    "has_lift": 0 | 1
+    "parking_type": "0" | "grn" | "mlt" | "und" | "orf"
+    "text": any str
+    "price": any int
 }
 ```
 
@@ -119,6 +119,21 @@ GET http://localhost:8000/api/property/
 Authorization: Token {token}
 
 Filters-params: {
-    ""
+    "price": int_min,int_max
+    "cnt_rooms": int_min,int_max
+    "floor": int_min,int_max
+    "area": int_min,int_max
+    "floors": int_min,int_max
+    "house_year": int_min,int_max
+    "metro_min": int_min,int_max
+
+    "house_material": "brc" | "mnl" | "pnl" | "blc" | "wdn" | "stl" | "brm"
+    "object_type": "1" | "2"
+    "repair": str: "int;int"
+    "metro_name": any str
+
+    "address": "Москва" | "Санкт-Петербург" | "Казань" | "Нижний Новгород" | "Новосибирск" | "Екатеринбург"
+
+    "author": 1, если хотим только свои квартиры
 }
 ```
