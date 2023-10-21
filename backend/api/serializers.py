@@ -4,12 +4,6 @@ from .models import Property
 
 from .utils import get_model
 
-# class PropertySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Property
-#         fields = '__all__'
-
-
 class PriceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
@@ -26,10 +20,32 @@ class PriceSerializer(serializers.ModelSerializer):
             "parking_type"
         )
 
+
+class PropertySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Property
+        fields = (
+            "address",
+            "house_material",
+            "object_type",
+            "cnt_rooms",
+            "floor",
+            "area",
+            "repair",
+            "text",
+            "has_lift",
+            "parking_type",
+            "price"
+        )
+
     def create(self, validated_data):
         model = get_model()
+        str_repair = validated_data['repair']
+        interior_style = float(validated_data['repair'].split(';')[0])
+        interior_qual = float(validated_data['repair'].split(';')[1])
+        validated_data['repair'] = [interior_style, interior_qual]
         data = model.get_appart_info(validated_data)
-        validated_data['price'] = data['price']
+        validated_data['repair'] = str_repair
         validated_data['floors'] = data['floors']
         validated_data['house_year'] = data['house_year']
         validated_data['metro_name'] = data['metro_name']

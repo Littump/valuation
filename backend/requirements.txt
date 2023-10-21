@@ -24,6 +24,8 @@ social-auth-core==4.4.2
 sqlparse==0.4.4
 typing_extensions==4.8.0
 urllib3==2.0.6
+python-dotenv==1.0.0
+psycopg2-binary==2.9.3 
 
 catboost==1.2.2
 gensim==4.3.2

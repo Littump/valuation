@@ -4,7 +4,7 @@
 
 ## 1. Клонирование репозитория
 
-Сначала склонируйте репозиторий с помощью команды:
+1. Сначала склонируйте репозиторий с помощью команды:
 
 ```
 git clone https://github.com/Littump/valuation.git
@@ -53,43 +53,49 @@ POST http://localhost:8000/api/auth/token/login/
   "username": "vasya.pupkin"
 }
 ```
-3. Получение стоимости
-Отправьте GET-запрос, чтобы получить стоимость:
+3. Оценка ремонта
+Для оценки ремонта отправьте POST-запрос на:
+
+```
+POST http://localhost:8000/api/property/calculate_repair
+{
+    "photos": ["sdfnjw2bj", "asdhu2gduiq"]
+}
+```
+4. Получение стоимости
+Отправьте POST-запрос, чтобы получить стоимость:
 
 ```
 POST http://localhost:8000/api/property/get_price/
 {
-    "address": "Moscow",
-    "house_material": "1",
+    "address": "Москва, Ленинский проспект, дом 11, квартира 7",
+    "house_material": "mnl",
     "object_type": "2",
     "cnt_rooms": "3",
     "floor": "4",
-    "area": "5",
-    "repair": "6"
+    "area": "60.5",
+    "repair": "2;2",
+    "has_lift": "",
+    "parking_type": "",
+    "text": ""
 }
 ```
-4. Управление квартирами
+5. Управление квартирами
 Вы можете создавать, удалять и получать информацию о квартирах с использованием GET, POST и DELETE запросов на:
 
 ```
 GET/POST/DELETE http://localhost:8000/api/property/
 Authorization: Token {token}
 {
-    "address": "Moscow",
-    "house_material": "1",
+    "address": "Москва, Ленинский проспект, дом 11, квартира 7",
+    "house_material": "mnl",
     "object_type": "2",
     "cnt_rooms": "3",
     "floor": "4",
-    "area": "5",
-    "repair": "6"
-}
-```
-5. Оценка ремонта
-Для оценки ремонта отправьте GET-запрос на:
-
-```
-POST http://localhost:8000/api/property/calculate_repair
-{
-    "photos": ["sdfnjw2bj", "asdhu2gduiq"]
+    "area": "60.5",
+    "repair": "2;2",
+    "has_lift": "",
+    "parking_type": "",
+    "text": ""
 }
 ```

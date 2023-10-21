@@ -3,13 +3,14 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import Property
-from .serializers import PhotoUploadSerializer, PriceSerializer
+from .serializers import (PhotoUploadSerializer, PriceSerializer,
+                          PropertySerializer)
 from .utils import calculate_price, get_repair
 
 
 class PropertyViewSet(viewsets.ModelViewSet):
     queryset = Property.objects.all()
-    serializer_class = PriceSerializer
+    serializer_class = PropertySerializer
     permission_classes = [permissions.IsAuthenticated]
 
     @action(detail=False, methods=['POST'],
@@ -36,7 +37,34 @@ class PropertyViewSet(viewsets.ModelViewSet):
         }
         return Response(data)
 
+    def list(self, request):
+        queryset = self.get_queryset()
+        serialized_properties = []
+        for property in queryset:
+            interior_style = float(property.repair.split(';')[0])
+            interior_qual = float(property.repair.split(';')[1])
+            property_data = {
+                "address": property.address,
+                "house_material": property.house_material,
+                "object_type": property.object_type,
+                "cnt_rooms": property.cnt_rooms,
+                "floor": property.floor,
+                "area": property.area,
+                "repair": [interior_style, interior_qual],
+                "text": property.text,
+                "has_lift": property.has_lift,
+                "parking_type": property.parking_type,
+                "price": property.price
+            }
+
+            if property_data:
+                property_data["real_price"] = calculate_price(property_data)
+                serialized_properties.append(property_data)
+
+        return Response(serialized_properties)
+
     def get_queryset(self):
+        user = self.request.user
         queryset = Property.objects.all()
         params = self.request.query_params
 
@@ -59,15 +87,15 @@ class PropertyViewSet(viewsets.ModelViewSet):
                             }
                         )
                 elif field in [
-                    'address',
                     'house_material',
-                    'text',
                     'object_type',
                     'repair',
-                    'region',
-                    'metro_name',
-                    'metro_how'
+                    'metro_name'
                 ]:
                     queryset = queryset.filter(**{f'{field}__iexact': value})
+                elif field == 'author':
+                    queryset = queryset.filter(author=user)
+                elif field == 'address':
+                    queryset = queryset.filter(address__contains=value)
 
         return queryset

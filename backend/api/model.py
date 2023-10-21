@@ -88,7 +88,7 @@ class PriceEstimator:
     def get_appart_info(self, params: dict) -> dict:
         '''
         params: dict with keys:
-            - 'adress': str
+            - 'address': str
             - 'object_type': '1' | '2'
             - 'text': str
             - 'house_material': str            
@@ -99,21 +99,19 @@ class PriceEstimator:
             - 'parking_type': str
             - 'photos': (float, float) or list of PIL.Image objects
         return: dict with keys:
-            - 'price': float
             - 'house_year': int
             - 'metro_name': str
             - 'metro_dist': float
         '''
         res = {}
-        res['price'] = self.predict(params)
-        info = get_zhkh(params['adress'], self.df_zhkh)
+        info = get_zhkh(params['address'], self.df_zhkh)
         if info is None:
-            res['house_year'], res['floors'] = '', ''
+            res['house_year'], res['floors'] = 1, 1
         else:
             res['house_year'], res['floors'] = info['Год постройки'], info['Число этажей']
-        res['metro_name'] = self._get_metro_info(self._get_coordinates_photon_with_retry(params['adress']))['nearest_station']
+        res['metro_name'] = self._get_metro_info(self._get_coordinates_photon_with_retry(params['address']))['nearest_station']
         speed = 0.05
-        res['metro_min'] = self._get_metro_info(self._get_coordinates_photon_with_retry(params['adress']))['nearest_station_dist']/speed
+        res['metro_min'] = self._get_metro_info(self._get_coordinates_photon_with_retry(params['address']))['nearest_station_dist']/speed
         res['metro_how'] = 'пешком'
         return res
 
