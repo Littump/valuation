@@ -84,18 +84,41 @@ POST http://localhost:8000/api/property/get_price/
 Вы можете создавать, удалять и получать информацию о квартирах с использованием GET, POST и DELETE запросов на:
 
 ```
-GET/POST/DELETE http://localhost:8000/api/property/
+POST http://localhost:8000/api/property/
 Authorization: Token {token}
 {
     "address": "Москва, Ленинский проспект, дом 11, квартира 7",
     "house_material": "mnl",
     "object_type": "2",
-    "cnt_rooms": "3",
-    "floor": "4",
-    "area": "60.5",
+    "cnt_rooms": "5",
+    "floor": "6",
+    "area": "66.5",
     "repair": "2;2",
     "has_lift": "",
     "parking_type": "",
-    "text": ""
+    "text": "",
+    "price": 2
+}
+Variants: {
+    "address": any
+    "house_material": "mnl" | config
+    "object_type": "2",
+    "cnt_rooms": "5",
+    "floor": "6",
+    "area": "66.5",
+    "repair": "2;2",
+    "has_lift": 0|1,
+    "parking_type": "", config | "0"
+    "text": "",
+    "price": 2
+}
+```
+
+```
+GET http://localhost:8000/api/property/
+Authorization: Token {token}
+
+Filters-params: {
+    ""
 }
 ```
