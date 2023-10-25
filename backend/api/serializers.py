@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 from .models import Property
-
 from .utils import get_model
+
 
 class PriceSerializer(serializers.ModelSerializer):
     class Meta:
