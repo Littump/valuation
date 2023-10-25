@@ -1,6 +1,6 @@
-FROM node: as builder
+FROM node: as build
 WORKDIR /app
-COPY package.json
+COPY package.json ./
 RUN npm install --only=prod
 COPY . /app
 RUN npm run build
