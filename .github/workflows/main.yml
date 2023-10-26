@@ -66,23 +66,14 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSPHRASE }}
           script: |
+            cd site
+            sudo docker compose pull
             sudo docker compose down
-            sudo docker image prune --force
-            sudo docker container prune --force
-            sudo docker system prune --force
-
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/frontend_valuation:latest
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/backend_valuation:latest
-
-            sudo docker compose stop
-            sudo docker compose rm backend
             sudo docker compose up -d
-
-            sudo docker compose exec -T backend python manage.py makemigrations users
-            sudo docker compose exec -T backend python manage.py makemigrations recipes
-            sudo docker compose exec -T backend python manage.py migrate
-            sudo docker compose exec -T backend python manage.py collectstatic --no-input
-
+            sudo docker compose exec backend python manage.py migrate
+            sudo docker compose exec backend python manage.py collectstatic
+            sudo docker compose exec backend cp -r /app/static/. /backend_static/static/
+  
   send_message_telegram:
     name: message in tg
     runs-on: ubuntu-latest
