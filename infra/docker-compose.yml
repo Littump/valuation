@@ -19,7 +19,7 @@ services:
   frontend:
     image: littump/frontend_valuation:latest
     volumes:
-      - ../frontend/:/app/dist/
+      - ../frontend/:/frontend/dist/
     depends_on:
       - backend
   
