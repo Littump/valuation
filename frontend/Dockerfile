@@ -1,6 +1,9 @@
-FROM node:latest AS build
+FROM node:latest
+
 WORKDIR /frontend
-COPY package*.json ./
+
+COPY . /frontend
+
 RUN npm install
-COPY . ./
+
 RUN npm run build
