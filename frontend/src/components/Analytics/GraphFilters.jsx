@@ -130,7 +130,7 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       <MainHeading>Данные о доме</MainHeading>
 
       <LightHeading>Оси</LightHeading>
-      <div className="flex gap-4">
+      <div className="flex gap-4 md:flex-row flex-col">
         <GraphFilterDropdown
           value={values.axiosX}
           name="axiosX"
@@ -143,7 +143,7 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
         />
       </div>
       <LightHeading>Фильтры</LightHeading>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4 md:flex-row flex-col">
         {dropdownFilters}
         {fieldFilters}
       </div>

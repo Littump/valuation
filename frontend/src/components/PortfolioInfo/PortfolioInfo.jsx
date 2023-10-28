@@ -18,7 +18,7 @@ export default function PortfolioInfo() {
     />
   ));
   return (
-    <div className="grid grid-cols-2 gap-6 ">
+    <div className="grid md:grid-cols-2 gap-6 ">
       <PortfolioInfoCard cost={fullSum} heading={"Общая стоимость портфеля"} />
       {portfolioInfoCards}
     </div>

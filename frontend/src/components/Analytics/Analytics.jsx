@@ -10,7 +10,7 @@ export default function Analytics() {
     <div className="mt-5">
       <div className="text-center">
         <MainHeading>Аналитика</MainHeading>
-        <div className="flex sm:flex-row flex-col mx-auto lg:mx-0 gap-1 bg-white w-full sm:w-fit p-1 rounded-lg border-gray dark:bg-dark-600 dark:text-dark-200">
+        <div className="mt-4 max-w-[80vw] flex sm:flex-row flex-col mx-auto lg:mx-0 gap-1 bg-white w-full sm:w-fit p-1 rounded-lg border-gray dark:bg-dark-600 dark:text-dark-200">
           <div
             className={
               "h-full rounded-lg py-2 px-3 transition cursor-pointer " +
@@ -33,19 +33,23 @@ export default function Analytics() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-10">
-        <Graph
-          bgColor={"rgba(56,144,200,0.3)"}
-          borderColor={"rgba(56,144,200,1)"}
-          num={1}
-          type={isAll}
-        />
-        <Graph
-          bgColor={"rgba(200,0,4,0.3)"}
-          borderColor={"rgba(200,0,4,1)"}
-          num={2}
-          type={isAll}
-        />
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 max-w-[80vw] lg:max-w-full mx-auto">
+        <div>
+          <Graph
+            bgColor={"rgba(56,144,200,0.3)"}
+            borderColor={"rgba(56,144,200,1)"}
+            num={1}
+            type={isAll}
+          />
+        </div>
+        <div className="hidden lg:block">
+          <Graph
+            bgColor={"rgba(200,0,4,0.3)"}
+            borderColor={"rgba(200,0,4,1)"}
+            num={2}
+            type={isAll}
+          />
+        </div>
       </div>
     </div>
   );

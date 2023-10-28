@@ -43,7 +43,6 @@ export default function Graph({
     if (num === 1) return state.graphs.firstGraphData;
     else return state.graphs.secondGraphData;
   });
-  console.log(graphData);
   const axiosX = useSelector((state) => {
     if (num === 1) return state.graphs.firstGraphFilters.axiosX;
     else return state.graphs.secondGraphFilters.axiosX;

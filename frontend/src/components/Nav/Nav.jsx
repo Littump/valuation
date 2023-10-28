@@ -82,7 +82,7 @@ export default function Nav() {
                 </BlackButton>
               </Link>
             ) : (
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-row-reverse md:flex-row">
                 Вы вошли
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

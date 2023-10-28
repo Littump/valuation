@@ -1,46 +1,32 @@
-version: '3.8'
+version: "3.3"
 
 volumes:
-  db_value:
-  static_value:
+  pg_data:
 
 services:
-
   db:
-    image: postgres:13.3-alpine
-    restart: always
+    image: postgres:13
+    env_file: ../backend/.env
     volumes:
-      - db_value:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
-    env_file:
-      - ./.env
-
+      - pg_data:/var/lib/postgresql/data
   frontend:
-    image: littump/frontend_valuation:latest
+    build:
+      context: ../frontend/
+      dockerfile: Dockerfile.build
     volumes:
       - ../frontend/:/frontend/dist/
-    depends_on:
-      - backend
-  
   nginx:
     image: nginx:1.19.3
-    restart: always
     ports:
-      - "80:80"
+      - "8000:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ../frontend/dist:/usr/share/nginx/html/
-      - static_value:/var/html/static/
-    depends_on:
-      - frontend
-
+      - ../frontend/dist/:/usr/share/nginx/html/
+      - ../docs/:/usr/share/nginx/html/api/docs/
   backend:
-    image: littump/backend_valuation:latest
-    restart: always
-    volumes:
-      - static_value:/app/static/
+    build: ../backend/
+    env_file: ../backend/.env
     depends_on:
       - db
-    env_file:
-      - ./.env
+    # volumes:
+    #   - static:/backend_static

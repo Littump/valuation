@@ -30,7 +30,7 @@ export default function AddObject() {
     >
       {({ values, errors, touched }) => {
         return (
-          <Form className="sm:w-full mx-auto flex justify-center gap-3">
+          <Form className="sm:w-full mx-auto flex sm:justify-center gap-3 flex-col-reverse sm:flex-row items-center">
             <Field
               name="price"
               type="number"
