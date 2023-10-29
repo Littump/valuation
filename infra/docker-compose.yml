@@ -1,32 +1,45 @@
-version: "3.3"
+version: '3.8'
 
 volumes:
-  pg_data:
+  db_value:
 
 services:
+
   db:
-    image: postgres:13
-    env_file: ../backend/.env
+    image: postgres:13.3-alpine
+    restart: always
     volumes:
-      - pg_data:/var/lib/postgresql/data
-  frontend:
-    build:
-      context: ../frontend/
-      dockerfile: Dockerfile.build
-    volumes:
-      - ../frontend/:/frontend/dist/
-  nginx:
-    image: nginx:1.19.3
+      - db_value:/var/lib/postgresql/data/
     ports:
-      - "8000:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ../frontend/dist/:/usr/share/nginx/html/
-      - ../docs/:/usr/share/nginx/html/api/docs/
+      - "5432:5432"
+    env_file:
+      - ./.env
+
   backend:
-    build: ../backend/
-    env_file: ../backend/.env
+    image: littump/backend_valuation:latest
+    restart: always
     depends_on:
       - db
-    # volumes:
-    #   - static:/backend_static
+    env_file:
+      - ./.env
+
+  frontend:
+    image: littump/frontend_valuation:latest
+    volumes:
+      - ../frontend/:/app/result_build/
+    depends_on:
+      - backend
+
+  nginx:
+    image: nginx:1.19.3
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../frontend/build:/usr/share/nginx/html/
+      - ./docs/:/usr/share/nginx/html/api/docs/
+      - static_value:/var/html/static/
+      - media_value:/var/html/media/
+    depends_on:
+      - frontend
