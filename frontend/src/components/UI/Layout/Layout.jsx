@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <div
       className="
-    min-h-screen w-full dark:bg-dark-400
+    bg-white min-h-screen w-full dark:bg-dark-400
     "
     >
       <Nav />

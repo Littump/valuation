@@ -6,7 +6,16 @@
 # RUN npm run build
 # CMD cp -r build result_build
 
-FROM node:latest
-WORKDIR /frontend
-COPY . /frontend
+FROM node:latest as BUILD_IMAGE
+
+WORKDIR /app
+
+COPY package.json .
+
 RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+COPY /app/dist/ /app/dist/

@@ -51,7 +51,7 @@ const router = createHashRouter([
   {
     path: "/login",
     element: (
-      <div className="dark:bg-dark-400 min-h-[100vh]">
+      <div className="bg-white dark:bg-dark-400 min-h-[100vh]">
         <Login />
         <Footer />
       </div>

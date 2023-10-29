@@ -22,7 +22,7 @@ export default function RenovationFilters({ values }) {
     <div className="lg:pl-12 lg:w-full xs:w-10/12 w-full text-center lg:text-start">
       <div className="h-full gap-4 grid">
         <LightHeading>Данные о типе отделки и ремонте</LightHeading>
-        <div className="flex sm:flex-row flex-col mx-auto lg:mx-0 gap-1 bg-white w-full sm:w-fit p-1 rounded-lg border-gray dark:bg-dark-600 dark:text-dark-200">
+        <div className="flex sm:flex-row flex-col mx-auto lg:mx-0 gap-1 bg-white w-full sm:w-fit p-1 rounded-lg border-gray dark:bg-dark-600 text-black dark:text-dark-200">
           <div
             className={
               "h-full rounded-lg py-2 px-3 transition cursor-pointer " +
