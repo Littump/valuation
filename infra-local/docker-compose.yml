@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 
 volumes:
   pg_data:
@@ -15,15 +15,14 @@ services:
     depends_on:
       - db
   frontend:
+    ports:
+      - "8080:8080"
     build:
       context: ../frontend/
-      dockerfile: Dockerfile.build
-    volumes:
-      - ../frontend/:/frontend/dist/
+      dockerfile: Dockerfile.local
   nginx:
     image: nginx:1.19.3
     ports:
-      - "80:80"
+      - "8000:8000"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ../frontend/dist/:/usr/share/nginx/html/

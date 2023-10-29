@@ -18,7 +18,7 @@ services:
     build:
       context: ../frontend/
       dockerfile: Dockerfile.build
-    volumes:
+    volumes:a
       - ../frontend/:/frontend/dist/
   nginx:
     image: nginx:1.19.3
