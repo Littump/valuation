@@ -2,10 +2,10 @@ from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Property
-from .serializers import (PhotoUploadSerializer, PriceSerializer,
-                          PropertySerializer)
-from .utils import calculate_price, get_repair
+from api.models import Property
+from api.serializers import (PhotoUploadSerializer, PriceSerializer,
+                             PropertySerializer)
+from ml.utils import calculate_price, get_repair
 
 
 class PropertyViewSet(viewsets.ModelViewSet):

@@ -1,5 +1,6 @@
-import pandas as pd
 from typing import List
+
+import pandas as pd
 
 street_change = {"ул.": "улица ", "улица": "улица ", "Улица": "улица ",
                  "пер.": "переулок ", "переулок": "переулок ", "пер..": "переулок ",
@@ -21,6 +22,7 @@ street_change = {"ул.": "улица ", "улица": "улица ", "Улиц�
                  "жилрайон": "жилрайон ",
                  "ЖК": "жилой комплекс ", "Жилой": "жилой комплекс "
                  }
+
 town_change = {"гор.": "город ", "город": "город ",
                "с.": "село ", "село": "село ",
                "д.": "деревня ", "деревня": "деревня ",
@@ -28,6 +30,7 @@ town_change = {"гор.": "город ", "город": "город ",
                "Зеленоград": "город Зеленоград",
                "рп": "рабочий посёлок ",
                }
+
 
 def RenameDataFrame(df: pd.DataFrame) -> pd.DataFrame:
     df ['Адрес'] = df ['Адрес'].str.replace ('корпус ', 'к')
@@ -46,6 +49,7 @@ def RenameDataFrame(df: pd.DataFrame) -> pd.DataFrame:
     df ['Адрес'] = df ['Адрес'].replace (r'^туп\.,?\.? (.*),(.*)', r'\1 туп,\2', regex=True)
     df ['Адрес'] = df ['Адрес'].replace (r'^ш\.,?\.? (.*),(.*)', r'\1 ш,\2', regex=True)
     return df
+
 
 def ReformatAddress(df: pd.DataFrame) -> pd.DataFrame:
     df["Изначальный адрес"] = df["Адрес"]
@@ -109,13 +113,15 @@ def ReformatAddress(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop(columns = ["Изначальный адрес"])
     return df
 
+
 def MatchAddress(df_flats: pd.DataFrame, df_zh: pd.DataFrame) -> pd.DataFrame:
     return df_zh[df_zh["Форматированный адрес"] == df_flats["Форматированный адрес"][0]]
+
 
 def get_zhkh(adress, df_zhkh):
     try:
         res = MatchAddress(ReformatAddress(pd.DataFrame({'Адрес':[adress]})), df_zhkh)
         res = res.drop(columns = ["Форматированный адрес", 'index', "Адрес", "Ссылка", ])
         return res.iloc[0].to_dict()
-    except:
+    except Exception:
         return None
