@@ -26,9 +26,7 @@ services:
     restart: always
     image: littump/frontend_valuation:latest
     ports:
-      - 8080:80
-    expose:
-      - 8080
+      - "8080:80"
     volumes:
       - ../frontend/:/app/
     depends_on:
