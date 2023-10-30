@@ -34,14 +34,18 @@ export default function PhoneMenu({ menuIsShown }) {
         <li>
           <NavLink text="Оценка стоимости квартиры" href="/" />
         </li>
-        {
-          token === null ? <></> : <li>
-          <NavLink text="Аналитика" href="/analytics" />
-        </li>
-        <li>
-          <NavLink text="Оценка рисков" href="/info" />
-        </li>
-        }
+       {token === null ? (
+        <></>
+      ) : (
+        <>
+          <li>
+            <NavLink text="Аналитика" href="/analytics" />
+          </li>
+          <li>
+            <NavLink text="Оценка рисков" href="/info" />
+          </li>
+        </>
+      )}
        
         {address === "" || address === null || address === undefined ? null : (
           <li>
