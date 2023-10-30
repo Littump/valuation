@@ -22,12 +22,12 @@ services:
     env_file:
       - ./.env
 
-  frontend:
-    image: littump/frontend_valuation:latest
-    volumes:
-      - ./frontend/:/app/result_build/
-    depends_on:
-      - backend
+   frontend:
+    ports:
+      - "8080:8080"
+    build:
+      context: ../frontend/
+      dockerfile: Dockerfile
 
   nginx:
     image: nginx:1.19.3
@@ -36,6 +36,5 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./frontend/dist/:/usr/share/nginx/html/
     depends_on:
       - frontend
