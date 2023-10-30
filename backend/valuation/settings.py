@@ -59,6 +59,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://134.0.115.23:8080",
     "http://localhost:5173",
+    "http://127.0.0.1:80",
 ]
 
 ROOT_URLCONF = 'valuation.urls'
