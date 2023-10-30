@@ -5,6 +5,7 @@ export default function PhoneMenu({ menuIsShown }) {
   let menuClass = menuIsShown
     ? " translate-x-0"
     : " sm:translate-x-[45vw] translate-x-[100vw]";
+  let token = localStorage.getItem("auth_token");
   let address = useSelector((state) => state.building.buildingInfo.address);
   return (
     <div
@@ -33,12 +34,15 @@ export default function PhoneMenu({ menuIsShown }) {
         <li>
           <NavLink text="Оценка стоимости квартиры" href="/" />
         </li>
-        <li>
+        {
+          token === null ? <></> : <li>
           <NavLink text="Аналитика" href="/analytics" />
         </li>
         <li>
           <NavLink text="Оценка рисков" href="/info" />
         </li>
+        }
+       
         {address === "" || address === null || address === undefined ? null : (
           <li>
             <NavLink href="/analysis" text="Анализ" />
