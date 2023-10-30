@@ -18,4 +18,19 @@ COPY . .
 
 RUN npm run build
 
-COPY /app/dist/ /app/dist/
+
+FROM node:latest as PRODUCTION_IMAGE
+
+WORKDIR /app
+
+COPY --from=BUILD_IMAGE /app/dist/ /app/dist/
+
+EXPOSE 8080
+
+COPY package.json .
+
+EXPOSE 8080
+
+RUN npm install serve -g
+
+CMD ["npm","run","serve"]
