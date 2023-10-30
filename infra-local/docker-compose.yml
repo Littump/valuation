@@ -15,18 +15,15 @@ services:
     depends_on:
       - db
   frontend:
-    ports:
-      - 8080:80
-    expose:
-      - 8080
     build:
       context: ../frontend/
       dockerfile: Dockerfile
     volumes:
-      - ../frontend/:/app/
+      - ../frontend/:/app/result_build/
   nginx:
     image: nginx:1.19.3
     ports:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../frontend/dist:/usr/share/nginx/html/

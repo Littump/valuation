@@ -10,16 +10,18 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the entire application code to the container
-COPY . .
+COPY . ./
 
 # Build the React app for production
 RUN npm run build
 
+CMD cp -r dist result_build
+
 # Use Nginx as the production server
-FROM nginx:alpine
+# FROM nginx:alpine
 
 # Copy the built React app to Nginx's web server directory
-COPY --from=build /app/dist /usr/share/nginx/html
+# COPY --from=build /app/dist /usr/share/nginx/html
 
 # Start Nginx when the container runs
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
