@@ -1,36 +1,28 @@
-# FROM node:13.12.0-alpine as build
-# WORKDIR /app
-# COPY package*.json ./
-# RUN npm install
-# COPY . ./
-# RUN npm run build
-# CMD cp -r build result_build
+FROM node:18 as build
 
-FROM node:latest as BUILD_IMAGE
-
+# Set the working directory in the container
 WORKDIR /app
 
-COPY package.json .
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
+# Copy the entire application code to the container
 COPY . .
 
+# Build the React app for production
 RUN npm run build
 
+# Use Nginx as the production server
+FROM nginx:alpine
 
-FROM node:latest as PRODUCTION_IMAGE
+# Copy the built React app to Nginx's web server directory
+COPY --from=build /app/dist /usr/share/nginx/html
 
-WORKDIR /app
+# Expose port 80 for the Nginx server
+EXPOSE 8000
 
-COPY --from=BUILD_IMAGE /app/dist/ /app/dist/
-
-EXPOSE 8080
-
-COPY package.json .
-
-EXPOSE 8080
-
-RUN npm install serve -g
-
-CMD ["npm","run","serve"]
+# Start Nginx when the container runs
+CMD ["nginx", "-g", "daemon off;"]
