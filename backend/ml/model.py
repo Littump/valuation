@@ -261,7 +261,7 @@ class PriceEstimator:
     def predict(self, params: dict) -> float:
         '''
         params: dict with keys:
-            - 'adress': str
+            - 'address': str
             - 'object_type': '1' | '2'
             - 'text': str
             - 'house_material': str            
@@ -280,7 +280,7 @@ class PriceEstimator:
         request['floor'] = params['floor']
         request['has_lift'] = params['has_lift']
         request['parking_type'] = params['parking_type']
-        adress = params['adress']
+        adress = params['address']
 
         repair = params['repair']
         formated_adress = get_formated_adress(adress)
