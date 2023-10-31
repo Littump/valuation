@@ -57,9 +57,13 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
+    "http://134.0.115.23:80",
     "http://134.0.115.23:8080",
     "http://localhost:5173",
     "http://127.0.0.1:80",
+    "http://127.0.0.1:8080",
+    "estate-valuation.tech",
+    "estate-valuation.tech:8080",
 ]
 
 ROOT_URLCONF = 'valuation.urls'
