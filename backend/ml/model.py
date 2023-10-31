@@ -143,9 +143,11 @@ class PriceEstimator:
         '''
         res = {}
         formated_adress = get_formated_adress(params['address'])
-        latitude, longitude = self._get_coordinates_photon_with_retry(formated_adress)
+        latitude, longitude = self._get_coordinates_photon_with_retry(params['address'])
         if latitude is None:
-            raise Exception('Не удалось определить координаты по адресу')
+            latitude, longitude = self._get_coordinates_photon_with_retry(formated_adress)
+            if latitude is None:
+                raise Exception('Не удалось определить координаты по адресу')
         
         city = self._get_city_by_coords((latitude, longitude))
         zhkh_id = get_zhkh_new(formated_adress, self.df_zhkh)
@@ -261,7 +263,7 @@ class PriceEstimator:
     def predict(self, params: dict) -> float:
         '''
         params: dict with keys:
-            - 'adress': str
+            - 'address': str
             - 'object_type': '1' | '2'
             - 'text': str
             - 'house_material': str            
@@ -280,7 +282,7 @@ class PriceEstimator:
         request['floor'] = params['floor']
         request['has_lift'] = params['has_lift']
         request['parking_type'] = params['parking_type']
-        adress = params['adress']
+        adress = params['address']
 
         repair = params['repair']
         formated_adress = get_formated_adress(adress)
@@ -298,9 +300,11 @@ class PriceEstimator:
             for key in zhkh_info.keys():
                 request[key] = zhkh_info[key]        
         
-        latitude, longitude = self._get_coordinates_photon_with_retry(formated_adress)
+        latitude, longitude = self._get_coordinates_photon_with_retry(params['address'])
         if latitude is None:
-            raise Exception('Не удалось определить координаты по адресу')
+            latitude, longitude = self._get_coordinates_photon_with_retry(formated_adress)
+            if latitude is None:
+                raise Exception('Не удалось определить координаты по адресу')
         
         city = self._get_city_by_coords((latitude, longitude))
         request['y_coord'], request['x_coord']= self._coordinates_to_distance_from_city_center((latitude, longitude), city)
