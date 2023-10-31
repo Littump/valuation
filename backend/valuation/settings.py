@@ -64,6 +64,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8080",
     "estate-valuation.tech",
     "estate-valuation.tech:8080",
+    "http://45.12.4.25:80",
+    "http://45.12.4.25:8080",
 ]
 
 ROOT_URLCONF = 'valuation.urls'
