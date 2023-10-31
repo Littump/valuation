@@ -1,68 +1,69 @@
-pca_text_7
-Электроснабжение
-floor
-Культурное наследие
-Класс энергетической эффективности
-house_material
-nearest_metro_dist
-pca_text_14
-pca_text_4
-Горячее водоснабжение
-Газоснабжение
-Количество квартир
-аптека
-Площадь нежилых в м2
-Несущие стены
-достопримечательность
-pca_text_18
-pca_text_1
-pca_text_10
-pca_text_5
-Фундамент
-Год постройки
-школа
-pca_text_9
-Аварийный
-кафе
-pca_text_0
-infro_cnt
-продуктовый магазин
-pca_text_11
-pca_text_17
-interior_style
-поликлиника
-y_coord
-pca_text_3
-Теплоснабжение
-Количество лифтов
-cnt_rooms
-pca_text_6
-second_nearest_metro_dist
-Количество подъездов
-x_coord
-Перекрытия
-pca_text_16
-second_nearest_metro
-детский сад
-pca_text_15
-object_type
-Водоотведение
-pca_text_8
-pca_text_13
-interior_qual
-Число этажей
-Площадь жилых в м2
-тц
-Площадь всего
-фитнес-клуб
-Приспособления для маломобильных людей
 кинотеатр
-parking_type
+cnt_rooms
+nearest_metro_dist
+Водоотведение
+object_type
+аптека
+house_material
+pca_text_16
+pca_text_18
+interior_qual
+pca_text_13
+Электроснабжение
 pca_text_2
+Приспособления для маломобильных людей
+pca_text_10
+Количество подъездов
+детский сад
+interior_style
+pca_text_0
 has_lift
+Класс энергетической эффективности
+школа
 area
+x_coord
+nearest_train_dist
+dist_to_center
+floor
+pca_text_5
+pca_text_3
+pca_text_15
+pca_text_11
+parking_type
+pca_text_19
+фитнес-клуб
+Фундамент
+Количество лифтов
+pca_text_14
+pca_text_1
+Год постройки
+pca_text_9
+поликлиника
+Несущие стены
+nearest_plane_dist
+nearest_infro_cnt
+Горячее водоснабжение
+pca_text_6
+Площадь жилых в м2
+y_coord
+Теплоснабжение
+pca_text_7
+достопримечательность
+nearest_metro
+nearest_bus_dist
 pca_text_12
 Холодное водоснабжение
-nearest_metro
-pca_text_19
-dist_to_center
+pca_text_8
+продуктовый магазин
+Газоснабжение
+Перекрытия
+Площадь нежилых в м2
+Количество квартир
+кафе
+Культурное наследие
+pca_text_4
+Аварийный
+Площадь всего
+Число этажей
+тц
+pca_text_17

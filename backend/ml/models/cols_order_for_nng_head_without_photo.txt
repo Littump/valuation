@@ -1,0 +1,69 @@
+кинотеатр
+cnt_rooms
+nearest_metro_dist
+Водоотведение
+object_type
+аптека
+house_material
+pca_text_16
+pca_text_18
+interior_qual
+pca_text_13
+Электроснабжение
+pca_text_2
+Приспособления для маломобильных людей
+pca_text_10
+Количество подъездов
+детский сад
+interior_style
+pca_text_0
+has_lift
+Класс энергетической эффективности
+школа
+area
+x_coord
+nearest_train_dist
+dist_to_center
+floor
+pca_text_5
+pca_text_3
+pca_text_15
+pca_text_11
+parking_type
+pca_text_19
+фитнес-клуб
+Фундамент
+Количество лифтов
+pca_text_14
+pca_text_1
+Год постройки
+pca_text_9
+поликлиника
+Несущие стены
+nearest_plane_dist
+nearest_infro_cnt
+Горячее водоснабжение
+pca_text_6
+Площадь жилых в м2
+y_coord
+Теплоснабжение
+pca_text_7
+достопримечательность
+nearest_metro
+nearest_bus_dist
+pca_text_12
+Холодное водоснабжение
+pca_text_8
+продуктовый магазин
+Газоснабжение
+Перекрытия
+Площадь нежилых в м2
+Количество квартир
+кафе
+Культурное наследие
+pca_text_4
+Аварийный
+Площадь всего
+Число этажей
+тц
+pca_text_17
