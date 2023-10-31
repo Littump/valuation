@@ -1,7 +1,10 @@
-from PIL import Image
-from io import BytesIO
-from .model import PriceEstimator
+import os
 from functools import lru_cache
+from io import BytesIO
+
+from PIL import Image
+
+from ml.model import PriceEstimator
 
 
 def convert_uploaded_files_to_images(uploaded_files):
@@ -15,7 +18,10 @@ def convert_uploaded_files_to_images(uploaded_files):
 
 @lru_cache
 def get_model():
-    model = PriceEstimator('/app/api/models')
+    current_file_path = os.path.abspath(__file__)
+    current_directory = os.path.dirname(current_file_path)
+    models_directory = os.path.join(current_directory, "models")
+    model = PriceEstimator(models_directory)
     return model
 
 
