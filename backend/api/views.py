@@ -3,8 +3,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from api.models import Property
-from api.serializers import (PhotoUploadSerializer, PriceSerializer,
-                             PropertySerializer)
+from api.serializers import (
+    PhotoUploadSerializer,
+    PriceSerializer,
+    PropertySerializer,
+)
 from ml.utils import calculate_price, get_repair
 
 

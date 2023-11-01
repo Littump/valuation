@@ -1,0 +1,68 @@
+{
+    "desc": "если массив - это значит можно вернуть любое значение из массива",
+    "func": [
+        {
+            "who": "@physnomath",
+            "name": "get_info_appartment",
+            "input": "address (str)",
+            "output": {
+                "region": ["msc", "spb", "kzn", "nng", "ekb", "nsb"],
+                "metro_name": "str",
+                "price": "int",
+                "house_year": ["int", 0],
+                "metro_min": "int"
+            }
+        },
+        {
+            "who": "@physnomath",
+            "name": "get_infrastructure",
+            "input": "address (str)",
+            "output": {
+                "hospitals": {
+                    "count": "int",
+                    "items": [
+                        {
+                            "name": "str",
+                            "point": ["int", "int"]
+                        },
+                        {
+                            "name": "str",
+                            "point": ["int", "int"]
+                        },
+                        ...
+                    ]
+                },
+                "shops": {
+                    "count": "int",
+                    "items": [
+                        {
+                            "name": "str",
+                            "point": ["int", "int"]
+                        },
+                        {
+                            "name": "str",
+                            "point": ["int", "int"]
+                        },
+                        ...
+                    ]
+                }
+                // и так далее все категории (10 штук)
+            }
+        },
+        {
+            "who": "@Rollersman",
+            "name": "get_info_house",
+            "input": "address (str)",
+            "output": {
+                "status": [true, false],
+                // если true
+                "info": {
+                    "year": "int",
+                    "count_entrances": "int",
+                    "gas": "str",
+                    "hot_water": "str"
+                }
+            }
+        },
+    ]
+}

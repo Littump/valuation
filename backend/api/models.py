@@ -9,8 +9,10 @@ class User(AbstractUser):
         ('investor', 'Инвестор'),
         ('employee', 'Сотрудник'),
     )
-
-    role = models.CharField(choices=ROLE_CHOICES)
+    role = models.CharField(
+        max_length=32,
+        choices=ROLE_CHOICES,
+    )
 
 
 class Property(models.Model):
@@ -24,7 +26,10 @@ class Property(models.Model):
         ('stl', 'Сталинский'),
         ('brm', 'Кирпично-монолитный'),
     )
-    house_material = role = models.CharField(choices=HOUSE_MATERIAL_CHOICES)
+    house_material = models.CharField(
+        max_length=3,
+        choices=HOUSE_MATERIAL_CHOICES,
+    )
 
     OBJECT_TYPE = (
         (1, 'Первичка'),
@@ -45,7 +50,10 @@ class Property(models.Model):
         ('2;2', 'Евроремонт ремонт с мебелью'),
         ('3;2', 'Дизайнерский ремонт с мебелью'),
     )
-    repair = models.CharField(choices=REPAIR_TYPE)
+    repair = models.CharField(
+        max_length=3,
+        choices=REPAIR_TYPE,
+    )
 
     METRO_HOW_TYPE = (
         (1, 'Пешком'),
@@ -66,17 +74,32 @@ class Property(models.Model):
         ('orf', 'На крыше'),
         ('none', 'Отсутствует'),
     )
-    parking_type = models.CharField(choices=PARKING_TYPE_TYPE)
+    parking_type = models.CharField(
+        max_length=4,
+        choices=PARKING_TYPE_TYPE,
+    )
 
-    address = models.CharField()
-    region = models.CharField()
-    metro_name = models.CharField()
+    REGION_CHOICES = (
+        ('msc', 'Москва'),
+        ('spb', 'Санкт-Петербург'),
+        ('kzn', 'Казань'),
+        ('nng', 'Нижний Новгород'),
+        ('ekb', 'Екатеринбург'),
+        ('nsb', 'Новосибирск'),
+    )
+    region = models.CharField(
+        max_length=32,
+        choices=REGION_CHOICES,
+    )
+
+    address = models.CharField(max_length=256)
+    metro_name = models.CharField(max_length=32)
 
     floor = models.IntegerField()
+    house_year = models.IntegerField()
     cnt_rooms = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     floors = models.PositiveIntegerField()
-    house_year = models.PositiveIntegerField()
     metro_min = models.PositiveIntegerField()
 
     area = models.FloatField()
