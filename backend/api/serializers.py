@@ -4,18 +4,19 @@ from api.models import Property
 from ml.utils import get_model
 
 
-class PriceSerializer(serializers.ModelSerializer):
+class PropertyCalculateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
         fields = (
             "address",
             "house_material",
+            "text",
             "object_type",
             "cnt_rooms",
             "floor",
+            "floors",
             "area",
             "repair",
-            "text",
             "has_lift",
             "parking_type"
         )
@@ -27,32 +28,27 @@ class PropertySerializer(serializers.ModelSerializer):
         fields = (
             "address",
             "house_material",
+            "text",
             "object_type",
             "cnt_rooms",
             "floor",
+            "floors",
             "area",
             "repair",
-            "text",
             "has_lift",
             "parking_type",
-            "price"
+            "price_buy",
         )
 
     def create(self, validated_data):
-        model = get_model()
-        str_repair = validated_data['repair']
-        interior_style = float(validated_data['repair'].split(';')[0])
-        interior_qual = float(validated_data['repair'].split(';')[1])
-        validated_data['repair'] = [interior_style, interior_qual]
-        data = model.get_appart_info(validated_data)
-        validated_data['repair'] = str_repair
-        validated_data['floors'] = data['floors']
-        validated_data['house_year'] = data['house_year']
-        validated_data['metro_name'] = data['metro_name']
-        validated_data['metro_min'] = data['metro_min']
-        validated_data['metro_how'] = data['metro_how']
-        author = self.context.get("request").user
-        property = Property.objects.create(author=author, **validated_data)
+        house_info = get_info_house(validated_data['address'])
+        validated_data['metro_how'] = 1
+        validated_data['region'] = house_info['region']
+        validated_data['metro_name'] = house_info['metro_name']
+        validated_data['house_year'] = house_info['house_year']
+        validated_data['metro_min'] = house_info['metro_min']
+        validated_data['author'] = self.context.get("request").user
+        property = Property.objects.create(**validated_data)
         return property
 
 

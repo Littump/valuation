@@ -98,9 +98,10 @@ class Property(models.Model):
     floor = models.IntegerField()
     house_year = models.IntegerField()
     cnt_rooms = models.PositiveIntegerField()
-    price = models.PositiveIntegerField()
     floors = models.PositiveIntegerField()
     metro_min = models.PositiveIntegerField()
+    price_buy = models.PositiveIntegerField(blank=True)
+    price_sell = models.PositiveIntegerField(blank=True)
 
     area = models.FloatField()
 
