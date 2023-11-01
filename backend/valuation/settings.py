@@ -62,8 +62,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:80",
     "http://127.0.0.1:8080",
-    "estate-valuation.tech",
-    "estate-valuation.tech:8080",
+    "http://estate-valuation.tech:80",
+    "http://estate-valuation.tech:8080",
     "http://45.12.4.25:80",
     "http://45.12.4.25:8080",
 ]
