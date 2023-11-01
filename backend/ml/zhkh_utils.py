@@ -1,6 +1,7 @@
-from typing import List
-
 import pandas as pd
+from typing import List    
+from rapidfuzz  import fuzz
+from rapidfuzz  import process
 
 street_change = {"ул.": "улица ", "улица": "улица ", "Улица": "улица ",
                  "пер.": "переулок ", "переулок": "переулок ", "пер..": "переулок ",
@@ -22,7 +23,6 @@ street_change = {"ул.": "улица ", "улица": "улица ", "Улиц�
                  "жилрайон": "жилрайон ",
                  "ЖК": "жилой комплекс ", "Жилой": "жилой комплекс "
                  }
-
 town_change = {"гор.": "город ", "город": "город ",
                "с.": "село ", "село": "село ",
                "д.": "деревня ", "деревня": "деревня ",
@@ -30,7 +30,6 @@ town_change = {"гор.": "город ", "город": "город ",
                "Зеленоград": "город Зеленоград",
                "рп": "рабочий посёлок ",
                }
-
 
 def RenameDataFrame(df: pd.DataFrame) -> pd.DataFrame:
     df ['Адрес'] = df ['Адрес'].str.replace ('корпус ', 'к')
@@ -49,7 +48,6 @@ def RenameDataFrame(df: pd.DataFrame) -> pd.DataFrame:
     df ['Адрес'] = df ['Адрес'].replace (r'^туп\.,?\.? (.*),(.*)', r'\1 туп,\2', regex=True)
     df ['Адрес'] = df ['Адрес'].replace (r'^ш\.,?\.? (.*),(.*)', r'\1 ш,\2', regex=True)
     return df
-
 
 def ReformatAddress(df: pd.DataFrame) -> pd.DataFrame:
     df["Изначальный адрес"] = df["Адрес"]
@@ -82,11 +80,12 @@ def ReformatAddress(df: pd.DataFrame) -> pd.DataFrame:
                     street = " ".join(words[0:j] + words[j+1:])
                     break
             if rest != "":
-                if k == len(parts) - 1:
-                    df.loc[i, "Дом"] = df.loc[i, "Улица"]
                 df.loc[i, "Улица"] = rest + street
-                break
-            df.loc[i, "Улица"] = df["Населённый пункт"][i]
+                if k == len(parts) - 1:
+                    df.loc[i, "Дом"] = df.loc[i, "Улица"]                
+                
+        if df.loc[i, "Улица"] == "Empty":
+            df.loc[i, "Улица"] = df.loc[i, "Населённый пункт"]
         if df.loc[i, "Дом"] == "Empty":
             home = df["Адрес"][i].split(", ")[-1]
             home = home.split()
@@ -113,15 +112,22 @@ def ReformatAddress(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop(columns = ["Изначальный адрес"])
     return df
 
-
 def MatchAddress(df_flats: pd.DataFrame, df_zh: pd.DataFrame) -> pd.DataFrame:
     return df_zh[df_zh["Форматированный адрес"] == df_flats["Форматированный адрес"][0]]
-
-
+                 
 def get_zhkh(adress, df_zhkh):
     try:
         res = MatchAddress(ReformatAddress(pd.DataFrame({'Адрес':[adress]})), df_zhkh)
         res = res.drop(columns = ["Форматированный адрес", 'index', "Адрес", "Ссылка", ])
         return res.iloc[0].to_dict()
-    except Exception:
+    except:
         return None
+
+def get_zhkh_new(adress, df_zhkh):
+    best_match = process.extractOne(adress, list(df_zhkh['Форматированный адрес']), scorer=fuzz.ratio, score_cutoff=97)
+    if (best_match != None):
+        return best_match[2]
+    return None
+
+def get_formated_adress(adress):
+    return ReformatAddress(pd.DataFrame({'Адрес':[adress]}))['Форматированный адрес'].iloc[0]
