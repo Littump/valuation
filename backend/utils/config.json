@@ -8,7 +8,6 @@
             "output": {
                 "region": ["msc", "spb", "kzn", "nng", "ekb", "nsb"],
                 "metro_name": "str",
-                "price": "int",
                 "house_year": ["int", 0],
                 "metro_min": "int"
             }
