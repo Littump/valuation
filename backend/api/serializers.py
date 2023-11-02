@@ -1,7 +1,9 @@
 from rest_framework import serializers
 
 from api.models import Property
-from ml.utils import get_model
+from ml.utils import (
+    get_appart_info
+)
 
 
 class PropertyCalculateSerializer(serializers.ModelSerializer):
@@ -41,9 +43,9 @@ class PropertySerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        house_info = get_info_house(validated_data['address'])
+        house_info = get_appart_info(validated_data['address'])
         validated_data['metro_how'] = 1
-        validated_data['region'] = house_info['region']
+        validated_data['region'] = house_info.get('region', None)
         validated_data['metro_name'] = house_info['metro_name']
         validated_data['house_year'] = house_info['house_year']
         validated_data['metro_min'] = house_info['metro_min']

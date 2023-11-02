@@ -6,9 +6,23 @@ from api.models import Property
 from api.serializers import (
     PropertySerializer,
     PhotoUploadSerializer,
-    PropertyCalculateSerializer
+    PropertyCalculateSerializer,
 )
-from ml.utils import calculate_price, get_repair
+from ml.utils import (
+    calculate_price,
+    get_repair,
+    get_infrastructure,
+    get_appart_info,
+)
+
+
+def get_info_house(address):
+    return {
+        "year": 1984,
+        "count_entrances": 2,
+        "gas": "Центральное",
+        "hot_water": "Полное снабжение",
+    }
 
 
 class PropertyViewSet(viewsets.ModelViewSet):
@@ -19,7 +33,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
     @staticmethod
     def get_similar_objects(data):
         # из датасета + цена + цена модели
-        ...
+        return {}
 
     @action(detail=False, methods=['POST'],
             permission_classes=[permissions.AllowAny])
@@ -36,7 +50,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
         address = serializer.validated_data['address']
         house_info = get_info_house(address)
         infrastructure = get_infrastructure(address)
-        similar_objects = get_similar_objects(serializer.validated_data)
+        similar_objects = self.get_similar_objects(serializer.validated_data)
         return Response({
             'price': price,
             'house_info': house_info,
@@ -79,9 +93,9 @@ class PropertyViewSet(viewsets.ModelViewSet):
             }
 
             property_data["real_price"] = calculate_price(property_data)
-            house_info = get_info_house(property_data['address'])
+            house_info = get_appart_info(property_data['address'])
             property_data['metro_how'] = 1
-            property_data['region'] = house_info['region']
+            property_data['region'] = house_info.get('region', None)
             property_data['metro_name'] = house_info['metro_name']
             property_data['house_year'] = house_info['house_year']
             property_data['metro_min'] = house_info['metro_min']

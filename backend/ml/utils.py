@@ -36,3 +36,15 @@ def get_repair(photos):
     photos = convert_uploaded_files_to_images(photos)
     result = model.get_repair(photos)
     return result
+
+
+def get_infrastructure(address):
+    model = get_model()
+    result = model.get_infrastructure(address)
+    return result
+
+
+def get_appart_info(address):
+    model = get_model()
+    result = model.get_appart_info(address)
+    return result
