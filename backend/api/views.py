@@ -12,8 +12,7 @@ from api.serializers import (
 from ml.utils import (
     calculate_price,
     get_repair,
-    get_infrastructure,
-    get_appart_info,
+    get_infrastructure
 )
 
 
@@ -81,7 +80,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
             interior_style = float(property.repair.split(';')[0])
             interior_qual = float(property.repair.split(';')[1])
             serialized_property["repair"] = [interior_style, interior_qual]
-            
+
             if 'author' in params:
                 serialized_property["price"] = property.price_buy
             else:
