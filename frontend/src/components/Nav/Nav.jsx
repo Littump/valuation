@@ -85,6 +85,7 @@ export default function Nav() {
             ) : (
               <div className="flex gap-2 flex-row-reverse lg:flex-row">
                 <button
+                  className="hover:text-blue-500 dark:hover:text-dark-300 transition"
                   type="button"
                   onClick={() => {
                     localStorage.removeItem("auth_token");
