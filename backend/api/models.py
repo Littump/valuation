@@ -1,18 +1,7 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth import get_user_model
 
-
-class User(AbstractUser):
-    ROLE_CHOICES = (
-        ('analyst', 'Аналитик'),
-        ('appraiser', 'Оценщик'),
-        ('investor', 'Инвестор'),
-        ('employee', 'Сотрудник'),
-    )
-    role = models.CharField(
-        max_length=32,
-        choices=ROLE_CHOICES,
-    )
+User = get_user_model()
 
 
 class Property(models.Model):
