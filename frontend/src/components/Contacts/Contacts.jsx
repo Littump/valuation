@@ -1,7 +1,7 @@
 import { contactsData } from "../../config/contacts";
 import Contact from "./Contact.jsx";
 
-import ContactsHeader from "./contactsHeader";
+import ContactsHeader from "./СontactsHeader.jsx";
 
 export default function Contacts() {
   const contacts = contactsData.map((contact) => {
