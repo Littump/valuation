@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function Analytics() {
   let [isAll, setisAll] = useState(true);
   const auth_token = localStorage.getItem("auth_token");
-  // if (auth_token === null) return <></>;
+  if (auth_token === null) return <></>;
   return (
     <div className="mt-5">
       <div className="text-center">

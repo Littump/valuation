@@ -13,7 +13,7 @@ export default function DesktopMenu() {
         <NavLink text="О нас" href="/contacts" />
       </li>
 
-      {!token === null ? (
+      {token === null ? (
         <></>
       ) : (
         <>
