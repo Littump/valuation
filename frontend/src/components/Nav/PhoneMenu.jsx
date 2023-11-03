@@ -35,7 +35,7 @@ export default function PhoneMenu({ menuIsShown }) {
           <NavLink text="Оценка стоимости квартиры" href="/" />
         </li>
         <li>
-          <NavLink text="О нас" href="/contacts" />
+          <NavLink text="О нас" href="/about" />
         </li>
         {token === null ? (
           <></>

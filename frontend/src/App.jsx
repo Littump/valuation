@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import Analysis from "./components/Analysis/Analysis.jsx";
 import Login from "./components/Login/Login.jsx";
 import Analytics from "./components/Analytics/Analytics.jsx";
-import Contacts from "./components/Contacts/Contacts.jsx";
+import About from "./components/About/About.jsx";
 
 const router = createHashRouter([
   {
@@ -21,10 +21,10 @@ const router = createHashRouter([
     errorElement: <ErrorComponent />,
   },
   {
-    path: "/contacts",
+    path: "/about",
     element: (
       <Layout>
-        <Contacts />
+        <About />
       </Layout>
     ),
     errorElement: <ErrorComponent />,

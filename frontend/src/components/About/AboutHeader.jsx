@@ -3,7 +3,7 @@ import BorderLayout from "../UI/BorderLayout/BorderLayout.jsx";
 import MainHeading from "../UI/MainHeading/MainHeading.jsx";
 import presentation from "../../../public/FINODAYS24.pdf";
 
-export default function ContactsHeader({ heading, text }) {
+export default function AboutHeader() {
   return (
     <div className="w-full">
       <BorderLayout>

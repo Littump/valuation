@@ -84,7 +84,14 @@ export default function Nav() {
               </Link>
             ) : (
               <div className="flex gap-2 flex-row-reverse lg:flex-row">
-                Вы вошли
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.removeItem("auth_token");
+                  }}
+                >
+                  Выйти
+                </button>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

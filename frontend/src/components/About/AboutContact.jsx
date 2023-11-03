@@ -1,6 +1,7 @@
 import MainHeading from "../UI/MainHeading/MainHeading";
 import Heading from "../UI/Heading/Heading";
-export default function Contact({ props }) {
+
+export default function AboutContact({ props }) {
   return (
     <div className=" dark:bg-dark-600 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-start">
       <div>
