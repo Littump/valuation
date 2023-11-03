@@ -7,6 +7,7 @@ from api.serializers import (
     PropertySerializer,
     PhotoUploadSerializer,
     PropertyCalculateSerializer,
+    PropertySerializerResponse,
 )
 from ml.utils import (
     calculate_price,
@@ -32,8 +33,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
 
     @staticmethod
     def get_similar_objects(data):
-        # из датасета + цена + цена модели
-        return {}
+        return []
 
     @action(detail=False, methods=['POST'],
             permission_classes=[permissions.AllowAny])
@@ -65,43 +65,52 @@ class PropertyViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         photos = serializer.validated_data['photos']
         repair = get_repair(photos)
-        data = {
-            'interior_style': repair['interior_style'],
-            'interior_qual': repair['interior_qual']
-        }
-        return Response(data)
+        data = (f'{int(round(repair["interior_style"]))};'
+                f'{int(round(repair["interior_qual"]))}')
+        return Response({'repair': data})
 
     def list(self, request):
         user = self.request.user
+        params = self.request.query_params
         queryset = Property.objects.filter(author=user)
         serialized_properties = []
         for property in queryset:
+            serialized_property = PropertySerializerResponse(property).data
+
+            repair = property.repair
             interior_style = float(property.repair.split(';')[0])
             interior_qual = float(property.repair.split(';')[1])
-            property_data = {
-                "address": property.address,
-                "house_material": property.house_material,
-                "object_type": property.object_type,
-                "cnt_rooms": property.cnt_rooms,
-                "floor": property.floor,
-                "area": property.area,
-                "repair": [interior_style, interior_qual],
-                "text": property.text,
-                "has_lift": property.has_lift,
-                "parking_type": property.parking_type,
-                "price": property.price
-            }
+            serialized_property["repair"] = [interior_style, interior_qual]
+            
+            if 'author' in params:
+                serialized_property["price"] = property.price_buy
+            else:
+                serialized_property["price"] = property.price_sell
 
-            property_data["real_price"] = calculate_price(property_data)
-            house_info = get_appart_info(property_data['address'])
-            property_data['metro_how'] = 1
-            property_data['region'] = house_info.get('region', None)
-            property_data['metro_name'] = house_info['metro_name']
-            property_data['house_year'] = house_info['house_year']
-            property_data['metro_min'] = house_info['metro_min']
-            serialized_properties.append(property_data)
+            serialized_property["real_price"] = calculate_price(serialized_property)
+            serialized_property['repair'] = repair
+            serialized_properties.append(serialized_property)
 
         return Response(serialized_properties)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serialized_property = PropertySerializerResponse(instance).data
+
+        repair = instance.repair
+        interior_style = float(instance.repair.split(';')[0])
+        interior_qual = float(instance.repair.split(';')[1])
+        serialized_property["repair"] = [interior_style, interior_qual]
+
+        if 'author' in request.query_params:
+            serialized_property["price"] = instance.price_buy
+        else:
+            serialized_property["price"] = instance.price_sell
+
+        serialized_property["real_price"] = calculate_price(serialized_property)
+        serialized_property['repair'] = repair
+
+        return Response(serialized_property)
 
     def get_queryset(self):
         user = self.request.user
