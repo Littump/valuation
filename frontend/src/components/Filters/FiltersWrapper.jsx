@@ -112,18 +112,22 @@ export function FiltersWrapper() {
               <RenovationFilters values={values} />
             </div>
             <div className="w-64 xs:w-72 mx-auto flex justify-center flex-col gap-2">
-              <div>
-                <label className="label cursor-pointer flex gap-2 justify-center">
-                  <Field
-                    type="checkbox"
-                    name="addBuilding"
-                    className="checkbox ml-0 border-black dark:border-dark-200"
-                  />
-                  <span className="label-text font-semibold">
-                    Добавить квартиру в портфель
-                  </span>
-                </label>
-              </div>
+              {auth_token === null ? (
+                <></>
+              ) : (
+                <div>
+                  <label className="label cursor-pointer flex gap-2 justify-center">
+                    <Field
+                      type="checkbox"
+                      name="addBuilding"
+                      className="checkbox ml-0 border-black dark:border-dark-200"
+                    />
+                    <span className="label-text font-semibold">
+                      Добавить квартиру в портфель
+                    </span>
+                  </label>
+                </div>
+              )}
               <div className="mb-2">
                 <Field
                   name="price"

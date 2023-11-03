@@ -1,5 +1,5 @@
 import { contactsData } from "../../config/contacts";
-import Contact from "./contact.jsx";
+import Contact from "./Contact.jsx";
 
 import ContactsHeader from "./contactsHeader";
 
