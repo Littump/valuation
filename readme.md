@@ -77,7 +77,8 @@
 3. Игитов Максим (@MaksIgitov) - Data Scientist
 4. Ратков Виктор (@physnomath) - ML-developer
 5. Якимов Роман (@littump) - Fullstack-developer
-
+5. Горошко Андрей (@andrew_pontific) - Frontend-разработчик
+   
 Проект был сделан при поддержке Газпромбанк.Тех
 
 ## Лицензия
