@@ -24,13 +24,7 @@ export function PortfolioObjects() {
   let objectsComponent = objects.map((object) =>
     additionalFilter.indexOf(object.liquidity) !== -1 &&
     (mainFilter === "" || mainFilter === "Объекты с риском") ? (
-      <Object
-        key={object.id}
-        id={object.id}
-        address={object.address}
-        cost={object.cost}
-        liquidity={object.liquidity}
-      />
+      <Object buildingInfo={object} />
     ) : (
       ""
     )

@@ -3,16 +3,10 @@ import { setFilter, setMapCenter } from "./mapAction.js";
 
 const initialState = {
   activeFilter: "Этот дом",
-  buildingInfo: [
-    {
-      heading: "Ближайшее метро",
-      info: "Лесная",
-    },
-    {
-      heading: "Ближайший трк",
-      info: "Европолис",
-    },
-  ],
+  buildings: {
+    metro: ["Лесная", "Площадь мужества"],
+    otherObjects: ["Музей чего-то", "Медный всадник"],
+  },
 };
 
 export default createReducer(initialState, (builder) => {

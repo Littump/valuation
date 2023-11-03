@@ -1,4 +1,4 @@
-import { Formik, Form, Field } from "formik";
+import { Field } from "formik";
 import { useState } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import arrow from "../../../../public/imgs/arrow.svg";
@@ -17,20 +17,28 @@ export default function DropdownMenu({ options, value, name, error }) {
         }
         onClick={() => setMenuIsShown((prev) => !prev)}
       >
-        {value === "" ? "выберите" : value}
+        {value === ""
+          ? "выберите"
+          : value?.length >= 20
+          ? value.toString().substr(0, 16) + "..."
+          : value}
         <span className="absolute right-4">
-          {menuIsShown ? (
-            <img src={arrow} alt="" />
-          ) : (
-            <img src={arrow} alt="" className="rotate-180" />
-          )}
+          <img
+            src={arrow}
+            alt=""
+            className={
+              menuIsShown
+                ? "transition rotate-[180deg]"
+                : "transition rotate-[0deg]"
+            }
+          />
         </span>
       </div>
       {/*    menu*/}
       <div
         onClick={() => setMenuIsShown(false)}
         className={
-          "max-w-[272px] xs:max-w-[363px] sm:max-w-[385px] w-full z-10 grid rounded-lg bg-white dark:bg-dark-600 max-h-32 overflow-y-scroll border border-gray dark:border-dark-700 absolute transition " +
+          "w-full z-10 grid rounded-lg bg-white dark:bg-dark-600 max-h-32 overflow-y-scroll border border-gray dark:border-dark-700 absolute transition " +
           (!menuIsShown && "invisible")
         }
       >

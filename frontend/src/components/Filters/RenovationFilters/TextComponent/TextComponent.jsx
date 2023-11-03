@@ -37,13 +37,14 @@ export default function TextComponent({ values }) {
     ],
   };
   return (
-    <div className="">
-      <DropdownMenu
-        name={"renovationType"}
-        value={values.renovationType}
-        options={renovationTypes}
-      />
-
+    <div>
+      <div className="relative sm:w-full">
+        <DropdownMenu
+          name={"renovationType"}
+          value={values.renovationType}
+          options={renovationTypes}
+        />
+      </div>
       <div className="grid grid-cols-2 grid-rows-2 gap-2 lg:gap-4 py-4">
         {values.renovationType === ""
           ? null

@@ -5,8 +5,10 @@ import BorderLayout from "../UI/BorderLayout/BorderLayout.jsx";
 export default function Cost() {
   const realcost = useSelector((state) => state.building.realCost);
   const marketCost = useSelector((state) => state.building.marketCost);
-  let realCostAnswer = realcost ? realcost + " млн Р" : "введите данные";
-  let marketCostAnswer = marketCost ? marketCost + " млн Р" : "введите данные";
+  let realCostAnswer = realcost ? realcost + " млн Р" : "не удалось определить";
+  let marketCostAnswer = marketCost
+    ? marketCost + " млн Р"
+    : "не удалось определить";
 
   return (
     <div className="flex flex-col gap-6 items-center mx-0 xs:mx-10 sm:mx-0">

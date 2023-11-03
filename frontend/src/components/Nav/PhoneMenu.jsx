@@ -4,13 +4,13 @@ import NavLink from "../UI/NavLinkComponent/NavLinkComponent";
 export default function PhoneMenu({ menuIsShown }) {
   let menuClass = menuIsShown
     ? " translate-x-0"
-    : " sm:translate-x-[45vw] translate-x-[100vw]";
+    : " sm:translate-x-[55vw] translate-x-[85vw]";
   let token = localStorage.getItem("auth_token");
   let address = useSelector((state) => state.building.buildingInfo.address);
   return (
     <div
       className={
-        "flex flex-col items-end justify-start gap-10 md:hidden h-[100vh] bg-white shadow-xl py-7 px-6 transition duration-300 w-[80vw] sm:w-[45vw] fixed top-0 dark:bg-dark-400 right-0 z-10" +
+        "flex flex-col items-end justify-start gap-10 lg:hidden h-[100vh] bg-white shadow-xl py-7 pr-6 transition duration-300 w-[85vw] sm:w-[45vw] fixed top-0 dark:bg-dark-400 right-0 z-10" +
         menuClass
       }
     >
@@ -34,19 +34,22 @@ export default function PhoneMenu({ menuIsShown }) {
         <li>
           <NavLink text="Оценка стоимости квартиры" href="/" />
         </li>
-       {token === null ? (
-        <></>
-      ) : (
-        <>
-          <li>
-            <NavLink text="Аналитика" href="/analytics" />
-          </li>
-          <li>
-            <NavLink text="Оценка рисков" href="/info" />
-          </li>
-        </>
-      )}
-       
+        <li>
+          <NavLink text="О нас" href="/contacts" />
+        </li>
+        {token === null ? (
+          <></>
+        ) : (
+          <>
+            <li>
+              <NavLink text="Аналитика" href="/analytics" />
+            </li>
+            <li>
+              <NavLink text="Оценка рисков" href="/info" />
+            </li>
+          </>
+        )}
+
         {address === "" || address === null || address === undefined ? null : (
           <li>
             <NavLink href="/analysis" text="Анализ" />

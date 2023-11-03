@@ -5,12 +5,12 @@ import { useState } from "react";
 export default function Analytics() {
   let [isAll, setisAll] = useState(true);
   const auth_token = localStorage.getItem("auth_token");
-  if (auth_token === null) return <></>;
+  // if (auth_token === null) return <></>;
   return (
     <div className="mt-5">
       <div className="text-center">
         <MainHeading>Аналитика</MainHeading>
-        <div className="mt-4 max-w-[80vw] flex sm:flex-row flex-col mx-auto lg:mx-0 gap-1 bg-white w-full sm:w-fit p-1 rounded-lg border-gray dark:bg-dark-600 dark:text-dark-200">
+        <div className="mt-4 w-40 sm:max-w-[80vw] flex sm:flex-row flex-col mx-auto lg:mx-0 gap-1 bg-white sm:w-fit p-1 rounded-lg border-gray dark:bg-dark-600 dark:text-dark-200">
           <div
             className={
               "h-full rounded-lg py-2 px-3 transition cursor-pointer " +

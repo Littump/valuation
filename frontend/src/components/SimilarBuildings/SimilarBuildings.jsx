@@ -1,17 +1,15 @@
 import { useSelector } from "react-redux";
 import Object from "../UI/Object/Object.jsx";
 import MainHeading from "../UI/MainHeading/MainHeading.jsx";
-import { PurpleButton } from "../UI/Button/Button.jsx";
 
 export function SimilarBuildings() {
   let buildings = useSelector((state) => state.similarBuildings.buildings);
   let buildingsComponent = buildings.map((info) => (
     <Object
-      key={info.id}
-      address={info.address}
-      id={info.id}
-      cost={info.cost}
-      liquidity={info.liquidity}
+      hasDelete={false}
+      buildingInfo={info}
+      key={info.address}
+      name={"similarObject" + (info.id - 1)}
     />
   ));
   return (

@@ -13,14 +13,13 @@ import MainHeading from "../UI/MainHeading/MainHeading.jsx";
 import LightHeading from "../UI/LightHeading/LightHeading.jsx";
 
 export default function GraphFilters({ values, setFieldValue, theme }) {
-  const diapasonFiltersData = [
+  const rangeFiltersData = [
     {
       text: "Всего комнат",
       value: values.roomsNumber,
       name: "roomsNumber",
       min: 1,
       max: 60,
-      hidden: !(values.activeFilter === "Всего комнат"),
     },
     {
       text: "Площадь квартиры",
@@ -28,7 +27,6 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       name: "area",
       min: 1,
       max: 500,
-      hidden: !(values.activeFilter === "Площадь квартиры"),
     },
     {
       text: "Этаж",
@@ -36,7 +34,6 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       name: "floor",
       min: 1,
       max: 200,
-      hidden: !(values.activeFilter === "Этаж"),
     },
     {
       text: "Цена (млн. Р)",
@@ -44,7 +41,6 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       name: "price",
       min: 1,
       max: 500,
-      hidden: !(values.activeFilter === "Цена (млн. Р)"),
     },
     {
       text: "Дата строительства",
@@ -52,29 +48,26 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       name: "date",
       min: 1900,
       max: 2023,
-      hidden: !(values.activeFilter === "Дата строительства"),
     },
     {
-      text: "Метро в минутах (если нет - 0)",
+      text: "Метро в минутах",
       value: values.metroMin,
       name: "metroMin",
       min: 0,
       max: 60,
-      hidden: !(values.activeFilter === "Метро в минутах (если нет - 0)"),
     },
   ];
 
-  let diapasonFilters = diapasonFiltersData.map((el) => (
-    <div className={"graphRange" + (el.hidden ? " hidden" : "")} key={el.name}>
-      <Heading>{el.text}</Heading>
-      <GraphRange
-        theme={theme}
-        values={el.value}
-        setFieldValue={(value) => setFieldValue(el.name, value)}
-        min={el.min}
-        max={el.max}
-      />
-    </div>
+  let rangeFilters = rangeFiltersData.map((el) => (
+    <GraphRange
+      key={el.name}
+      theme={theme}
+      values={el.value}
+      name={el.name}
+      min={el.min}
+      max={el.max}
+      text={el.text}
+    />
   ));
 
   const dropdownFiltersData = [
@@ -92,7 +85,7 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       options: houseMaterials,
     },
     {
-      text: "тип ремонта",
+      text: "Тип ремонта",
       value: values.repairType,
       name: "repairType",
       options: repairTypes,
@@ -100,7 +93,7 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
   ];
 
   let dropdownFilters = dropdownFiltersData.map((el) => (
-    <div className="flex flex-col gap-2" key={el.name}>
+    <div className="flex flex-col gap-2 w-36 xs:w-40 sm:w-56" key={el.name}>
       <Heading>{el.text}</Heading>
       <GraphFilterDropdown
         value={el.value}
@@ -114,23 +107,30 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
     {
       name: "metroName",
       text: "Метро рядом",
+      placeholder: "Название станции",
+    },
+    {
+      name: "district",
+      text: "Район",
+      placeholder: "Название района",
     },
   ];
 
   let fieldFilters = fieldFiltersData.map((el) => (
-    <Field
-      key={el.name}
-      name={el.name}
-      placeholder={el.text}
-      className="myInput "
-    />
+    <div className="flex flex-col gap-2" key={el.name}>
+      <Heading>{el.text}</Heading>
+      <Field
+        name={el.name}
+        placeholder={el.placeholder}
+        className="myInput w-36 xs:w-40 sm:w-56 py-3"
+      />
+    </div>
   ));
   return (
-    <div className="flex flex-col gap-4 mt-4">
+    <div className="flex flex-col items-center gap-4 mt-4">
       <MainHeading>Данные о доме</MainHeading>
-
-      <LightHeading>Оси</LightHeading>
-      <div className="flex gap-4 md:flex-row flex-col">
+      <LightHeading>Зависимость</LightHeading>
+      <div className="flex gap-4 flex-row items-center mb-6">
         <GraphFilterDropdown
           value={values.axiosX}
           name="axiosX"
@@ -142,32 +142,13 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
           options={axios}
         />
       </div>
-      <LightHeading>Фильтры</LightHeading>
-      <div className="flex flex-wrap gap-4 md:flex-row flex-col">
+      <div className="flex flex-wrap gap-4 flex-row items-center justify-center">
         {dropdownFilters}
         {fieldFilters}
       </div>
-
-      <LightHeading>Диапозоны данных</LightHeading>
-      <div className="w-full flex gap-4 items-center">
-        <div className="flex flex-col gap-2">
-          <GraphFilterDropdown
-            value={values.activeFilter}
-            name="activeFilter"
-            options={diapasonFiltersData.map((el) => el.text)}
-          />
-        </div>
+      <div className="flex flex-wrap flex-row gap-4 mt-4 items-center justify-center max-w-md sm:max-w-xl">
+        {rangeFilters}
       </div>
-
-      <div className="flex flex-col gap-2">{diapasonFilters}</div>
-      {/*<div className="flex flex-col gap-1">*/}
-      {/*    <LightHeading>Инфраструктура</LightHeading>*/}
-      {/*    <div role="group" aria-labelledby="my-radio-group"*/}
-      {/*         className="flex flex-wrap gap-4 mt-4">*/}
-      {/*        <GraphTags values={values.tags} name='tags' options={tags}/>*/}
-      {/*    </div>*/}
-
-      {/*</div>*/}
     </div>
   );
 }

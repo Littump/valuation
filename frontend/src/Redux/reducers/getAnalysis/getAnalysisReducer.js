@@ -3,7 +3,8 @@ import { setBuildingInfo, setCost } from "./getAnalysisAction.js";
 
 const initialState = {
   realCost: null,
-  marketCost: "23",
+  marketCost: null,
+  coordinates: [0, 0],
   buildingInfo: {
     tag: null,
     address: null,
@@ -21,9 +22,13 @@ export default createReducer(initialState, (builder) => {
   builder
     .addCase(setBuildingInfo, (state, action) => {
       state.buildingInfo = action.buildingInfo;
+      state.coordinates = [55, 56]; // перенести в setCost
     })
     .addCase(setCost, (state, action) => {
-      state.realCost = action.cost.toFixed(2);
-      state.marketCost = (action.cost * 0.97).toFixed(1);
+      state.realCost = (
+        action.cost * Math.random() * (0.98 - 0.95) +
+        0.95
+      ).toFixed(1);
+      state.marketCost = action.cost.toFixed(2);
     });
 });

@@ -2,7 +2,6 @@ import Cost from "../Cost/Cost.jsx";
 import MapContainer from "../MapContainer/MapContainer.jsx";
 import { SimilarBuildings } from "../SimilarBuildings/SimilarBuildings.jsx";
 import { useSelector } from "react-redux";
-import AddObject from "../addObject/AddObject.jsx";
 import { Link } from "react-router-dom";
 
 export default function Analysis() {
@@ -24,7 +23,6 @@ export default function Analysis() {
   return (
     <div className="py-10 flex flex-col gap-10">
       <Cost />
-      <AddObject />
       <MapContainer />
       <SimilarBuildings />
     </div>

@@ -8,7 +8,7 @@ export default function MainFilter({ filter }) {
   };
   return (
     <div
-      className="border border-gray flex gap-1 p-0.5 rounded-lg dark:bg-dark-800 dark:border-none"
+      className="border border-gray flex gap-1 p-0.5 rounded-lg dark:bg-dark-800 dark:border-none mx-auto xs:mx-0"
       role="group"
     >
       <label onClick={() => setFilter("")}>

@@ -8,7 +8,7 @@ export default function AdditionalFilter({ filter }) {
     dispatch({ type: "myObjects/setAdditionalFilter", filter: filter });
   };
   return (
-    <div className="flex gap-2 flex-col xs:flex-row">
+    <div className="flex gap-2 flex-col xs:flex-row mx-auto w-56 xs:mx-0 xs:w-auto">
       <label>
         <Field
           type="checkbox"

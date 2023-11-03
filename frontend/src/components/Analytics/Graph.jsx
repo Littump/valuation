@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGraphHook } from "../../hooks/getGraphHook.js";
 import Loading from "../UI/Loading/Loading.jsx";
 import getGraphType from "../../functions/getGraphType.js";
+import FormObserver from "./FormObserver.jsx";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -72,31 +73,49 @@ export default function Graph({
       initialValues={{
         axiosX: "площадь",
         axiosY: "цена",
-        tags: "",
-        floor: [1, 200],
-        floors: [1, 200],
-        area: [1, 500],
-        date: [1900, 2023],
-        price: [1, 500],
-        metroMin: [0, 60],
-        roomsNumber: [1, 20],
+        floor: {
+          min: 1,
+          max: 200,
+        },
+        floors: {
+          min: 1,
+          max: 200,
+        },
+        area: {
+          min: 1,
+          max: 500,
+        },
+        date: {
+          min: 1900,
+          max: 2023,
+        },
+        price: {
+          min: 1,
+          max: 500,
+        },
+        metroMin: {
+          min: 0,
+          max: 60,
+        },
+        roomsNumber: {
+          min: 1,
+          max: 20,
+        },
         region: "Любой",
         houseType: "Любой",
         houseMaterial: "Любой",
         metroName: "",
-        activeFilter: "Всего комнат",
+        district: "",
         repairType: "Любой",
       }}
       onSubmit={(values) => {
-        // отправлем даные в сторе
-        dispatch({ type: "graphs/setFilters", number: num, filters: values });
-        // отправляем запрос
         mutate({ values, type }); //all || user
       }}
     >
       {({ values, setFieldValue, setValues }) => {
         return (
           <Form className="flex flex-col gap-8 my-10 items-center">
+            <FormObserver values={values} number={num} />
             <div className="bg-light-gray p-10 rounded-xl flex flex-col items-center gap-6 dark:bg-dark-400 dark:border dark:border-dark-300">
               <Line
                 options={options}
@@ -143,15 +162,19 @@ export default function Graph({
                       setValues({
                         axiosX: otherFilters.axiosX,
                         axiosY: otherFilters.axiosY,
-                        tags: otherFilters.tags,
-                        floor: otherFilters.floor,
-                        floors: otherFilters.floors,
-                        area: otherFilters.area,
-                        date: otherFilters.date,
-                        price: otherFilters.price,
-                        metroMin: otherFilters.metroMin,
-                        roomsNumber: otherFilters.roomsNumber,
+                        floor: { ...otherFilters.floor },
+                        floors: { ...otherFilters.floors },
+                        area: { ...otherFilters.area },
+                        date: { ...otherFilters.date },
+                        price: { ...otherFilters.price },
+                        metroMin: { ...otherFilters.metroMin },
+                        roomsNumber: { ...otherFilters.roomsNumber },
                         region: otherFilters.region,
+                        houseType: otherFilters.houseType,
+                        metroName: otherFilters.metroName,
+                        repairType: otherFilters.repairType,
+                        houseMaterial: otherFilters.houseMaterial,
+                        district: otherFilters.district,
                         activeFilter: otherFilters.activeFilter,
                       });
                     }}

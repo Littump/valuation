@@ -16,7 +16,7 @@ export const region = [
 ];
 export const axios = ["цена", "площадь", "этаж", "количество комнат"];
 export const houseMaterials = [
-  "Люобой",
+  "Любой",
   "Кирпичный",
   "Блочный",
   "Монолитный",

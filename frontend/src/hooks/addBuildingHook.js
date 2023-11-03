@@ -3,9 +3,8 @@ import userBuildingsService from "../services/userBuildingsService";
 import { useSelector } from "react-redux";
 
 export const addBuildingHook = () => {
-  const buildingInfo = useSelector((state) => state.building.buildingInfo);
   return useMutation({
-    mutationFn: (price) =>
+    mutationFn: ({ buildingInfo, price }) =>
       userBuildingsService.addBuilding({ buildingInfo, price }),
     onSuccess: (data) => {
       console.log(data);

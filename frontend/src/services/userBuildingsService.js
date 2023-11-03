@@ -16,19 +16,6 @@ class userBuildingsService {
     return axios.delete(`${URL}/api/property/${id}`);
   }
   async addBuilding({ buildingInfo, price }) {
-    console.log({
-      address: buildingInfo?.address.toString(),
-      house_material: getHouseMaterial(buildingInfo?.houseType.toString()),
-      object_type: getObjectType(buildingInfo?.flatType.toString()),
-      cnt_rooms: buildingInfo?.roomsNumber.toString(),
-      floor: buildingInfo?.floor.toString(),
-      area: buildingInfo?.square.toString(),
-      repair: buildingInfo?.repair.toString(),
-      has_lift: +buildingInfo?.hasLift,
-      parking_type: getParkingType(buildingInfo?.parkingType.toString()),
-      text: buildingInfo?.description.toString(),
-      price: price,
-    });
     return axios.post(
       `${URL}/api/property/`,
       {

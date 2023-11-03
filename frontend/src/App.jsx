@@ -7,9 +7,8 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Analysis from "./components/Analysis/Analysis.jsx";
 import Login from "./components/Login/Login.jsx";
-import Footer from "./components/Footer/Footer.jsx";
-import SignUp from "./components/SignUp/SignUp.jsx";
 import Analytics from "./components/Analytics/Analytics.jsx";
+import Contacts from "./components/Contacts/Contacts.jsx";
 
 const router = createHashRouter([
   {
@@ -17,6 +16,15 @@ const router = createHashRouter([
     element: (
       <Layout>
         <Home />
+      </Layout>
+    ),
+    errorElement: <ErrorComponent />,
+  },
+  {
+    path: "/contacts",
+    element: (
+      <Layout>
+        <Contacts />
       </Layout>
     ),
     errorElement: <ErrorComponent />,
@@ -51,9 +59,8 @@ const router = createHashRouter([
   {
     path: "/login",
     element: (
-      <div className="bg-white dark:bg-dark-400 min-h-[100vh]">
+      <div className=" dark:bg-dark-400 min-h-[100vh]">
         <Login />
-        <Footer />
       </div>
     ),
     errorElement: <ErrorComponent />,
@@ -66,8 +73,10 @@ function App() {
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
+      document.documentElement.dataset.theme = "dark";
     } else {
       document.documentElement.classList.remove("dark");
+      document.documentElement.dataset.theme = "light";
     }
   }, [theme]);
   return <RouterProvider router={router} />;

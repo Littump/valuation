@@ -28,7 +28,7 @@ export default function PortfolioGraph() {
   };
 
   return (
-    <div className="h-full bg-light-gray rounded-xl overflow-hidden flex flex-col justify-between py-4 items-center dark:bg-dark-600">
+    <div className="h-full bg-light-gray rounded-xl overflow-hidden flex flex-col justify-between py-8 items-center dark:bg-dark-600">
       <div className="text-xl text-black font-semibold mt-4 dark:text-dark-100">
         Ликвидность объектов в портфеле
       </div>

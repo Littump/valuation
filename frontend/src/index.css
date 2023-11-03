@@ -38,7 +38,7 @@ html {
     border-radius: 12px;
   }
   .myInput {
-    @apply bg-white dark:bg-dark-600 dark:text-dark-200 dark:border-dark-600 sm:w-80 py-2 px-3 rounded-lg transition text-dark-gray-400 font-semibold outline-0 border border-gray focus:text-dark-gray-600 dark:focus:bg-dark-400 dark:focus:border-dark-300;
+    @apply bg-white dark:bg-dark-600 dark:text-dark-200 dark:border-dark-600 sm:w-72 xl:w-80 py-3 px-3 rounded-lg transition text-dark-gray-400 font-semibold outline-0 border border-gray focus:text-dark-gray-600 dark:focus:bg-dark-400 dark:focus:border-dark-300;
   }
   .button {
     @apply transition px-3 py-2 rounded-lg cursor-pointer;

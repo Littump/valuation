@@ -5,11 +5,15 @@ export default function DesktopMenu() {
   let address = useSelector((state) => state.building.buildingInfo.address);
   let token = localStorage.getItem("auth_token");
   return (
-    <ul className="gap-10 justify-start items-center hidden md:flex">
+    <ul className="gap-10 justify-start items-center hidden lg:flex">
       <li>
         <NavLink text="Оценка стоимости квартиры" href="/" />
       </li>
-      {token === null ? (
+      <li>
+        <NavLink text="О нас" href="/contacts" />
+      </li>
+
+      {!token === null ? (
         <></>
       ) : (
         <>
