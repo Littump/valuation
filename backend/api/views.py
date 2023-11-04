@@ -32,7 +32,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
 
     @staticmethod
     def get_similar_objects(data):
-        return []
+        
 
     @action(detail=False, methods=['POST'],
             permission_classes=[permissions.AllowAny])

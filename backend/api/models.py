@@ -94,6 +94,9 @@ class Property(models.Model):
     price_sell = models.IntegerField(null=True)
 
     area = models.FloatField()
+    latitude = models.FloatField(null=True)
+    latitude = models.FloatField(null=True)
+    dist_to_center = models.FloatField(null=True)
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
