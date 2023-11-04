@@ -14,6 +14,7 @@ from ml.utils import (
     get_repair,
     get_infrastructure
 )
+from utils.geocoder.geocoder import get_coordinates
 
 
 def get_info_house(address):
@@ -44,14 +45,20 @@ class PropertyViewSet(viewsets.ModelViewSet):
             float(serializer.validated_data['repair'].split(';')[1]),
         )
         serializer.validated_data['repair'] = [interior_style, interior_qual]
-        price = calculate_price(serializer.validated_data)
-
         address = serializer.validated_data['address']
+        latitude, longitude, address = get_coordinates(address)
+        serializer.validated_data['latitude'] = latitude
+        serializer.validated_data['longitude'] = longitude
+        serializer.validated_data['address'] = address
+
+        price = calculate_price(serializer.validated_data)
         house_info = get_info_house(address)
         infrastructure = get_infrastructure(address)
         similar_objects = self.get_similar_objects(serializer.validated_data)
         return Response({
             'price': price,
+            'latitude': latitude,
+            'longitude': longitude,
             'house_info': house_info,
             'infrastructure': infrastructure,
             'similar_objects': similar_objects,
