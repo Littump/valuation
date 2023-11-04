@@ -45,8 +45,8 @@ weights: Dict[str, float] = {
 }
 
 area_borders: Dict[str, float] = {
-    'min': 0.5,
-    'max': 1.5
+    'min': 0.25,
+    'max': 1.25
 }
 
 rad: float = 6.0
