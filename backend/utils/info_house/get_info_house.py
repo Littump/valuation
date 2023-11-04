@@ -14,8 +14,9 @@ class ObjectInfo:
         current_directory = os.path.dirname(current_file_path)
         path_csv = os.path.join(current_directory, file_name)
         self.zh_df = pd.read_csv(path_csv)
-
-    def PrepareToReformat(self, address: str) -> str:
+    
+    @staticmethod
+    def PrepareToReformat(address: str) -> str:
         address = address.replace('корпус ', 'к')
         address = address.replace('строение ', 'с')
         address = address.replace('Строение ', 'с')
@@ -33,7 +34,8 @@ class ObjectInfo:
         address = re.sub(r'^ш\.,?\.? (.*),(.*)', r'\1 ш,\2', address)
         return address
 
-    def ReformatAddress(self, address: str) -> str:
+    @staticmethod
+    def ReformatAddress(address: str) -> str:
         formatted_address: str = ""
         if address.lower().find("москва") != -1:
             formatted_address = "Москва, город Москва"
