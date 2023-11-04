@@ -58,8 +58,8 @@ class ObjectsHelper:
             neighbors_list[ind]["area"] = cut_flat_df.loc[ret[ind], "area"]
             neighbors_list[ind]["dist_to_center"] = cut_flat_df.loc[ret[ind], "dist_to_center"]
             neighbors_list[ind]["house_material"] = cut_flat_df.loc[ret[ind], "house_material"]
-            neighbors_list[ind]["repair"] = (str(int(cut_flat_df.loc[ret[ind], "interior_style"])) +
-                                             ";" + str(int(cut_flat_df.loc[ret[ind], "interior_qual"])))
+            neighbors_list[ind]["repair"] = (str(int(round(cut_flat_df.loc[ret[ind], "interior_style"]))) +
+                                             ";" + str(int(round(cut_flat_df.loc[ret[ind], "interior_qual"]))))
             neighbors_list[ind]["object_type"] = cut_flat_df.loc[ret[ind], "object_type"]
             neighbors_list[ind]["floor"] = cut_flat_df.loc[ret[ind], "floor"]
             neighbors_list[ind]["parking_type"] = cut_flat_df.loc[ret[ind], "parking_type"]
