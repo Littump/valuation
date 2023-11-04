@@ -100,4 +100,4 @@ class Property(models.Model):
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    text = models.TextField(null=True)
+    text = models.TextField(null=True, blank=True)
