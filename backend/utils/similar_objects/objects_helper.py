@@ -7,7 +7,7 @@ from .config import weights, num_features, cat_features, area_borders, rad, flat
 
 class ObjectsHelper:
     def __init__(self):
-        file_name = 'train_df_without_na.csv'
+        file_name = 'real_estate.csv'
         current_file_path = os.path.abspath(__file__)
         current_directory = os.path.dirname(current_file_path)
         path_csv = os.path.join(current_directory, file_name)
