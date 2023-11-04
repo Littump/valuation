@@ -4,13 +4,14 @@ num_features: List[str] = [
     'area',
     'dist_to_center',
     'floor',
-    'floors',
-    'metro_min',
+    #'floors',
+    #'metro_min',
     'cnt_rooms'
 ]
 
 
-cat_features: List[str] = ['house_material', 'has_lift', 'object_type', 'parking_type', 'repair']
+cat_features: List[str] = ['house_material', 'has_lift', 'object_type', 'parking_type']
+                          #'repair']
 
 weights: Dict[str, float] = {
     'cnt_rooms': 1.0,
