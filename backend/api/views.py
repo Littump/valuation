@@ -52,8 +52,8 @@ class PropertyViewSet(viewsets.ModelViewSet):
         serializer.validated_data['address'] = address
 
         price = calculate_price(serializer.validated_data)
-        house_info = get_info_house(address)
-        infrastructure = get_infrastructure(address)
+        house_info = get_info_house(address, latitude, longitude)
+        infrastructure = get_infrastructure(address, latitude, longitude)
         similar_objects = self.get_similar_objects(serializer.validated_data)
         return Response({
             'price': price,

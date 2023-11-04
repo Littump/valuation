@@ -55,7 +55,11 @@ class PropertySerializer(serializers.ModelSerializer):
         validated_data['latitude'] = latitude
         validated_data['longitude'] = longitude
         validated_data['address'] = address
-        house_info = get_appart_info(validated_data['address'])
+        house_info = get_appart_info(
+            validated_data['address'],
+            latitude,
+            longitude,
+        )
         validated_data['metro_how'] = 1
         validated_data['region'] = house_info.get('region', None)
         validated_data['metro_name'] = house_info['metro_name']
