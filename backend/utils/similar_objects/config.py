@@ -5,7 +5,6 @@ num_features: List[str] = [
     'dist_to_center',
     'floor',
     'floors',
-    #'metro_min',
     'cnt_rooms'
 ]
 
