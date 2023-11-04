@@ -3,7 +3,7 @@ from typing import List, Dict, Union
 import re
 import os
 
-from .config import street_change, home_change
+from config import street_change, home_change
 
 
 class ObjectInfo:
@@ -88,8 +88,8 @@ class ObjectInfo:
     def get_info_house(self, address: str) -> Dict[str, Union[str, int, None]]:
         address = self.ReformatAddress(self.PrepareToReformat(address))
         res: Dict[str, Union[str, int, None]] = dict()
-        if len(self.zh_df[self.zh_df["Форматированный адрес"] == address]) != 0:
-            homes: pd.DataFrame = self.zh_df[self.zh_df["Форматированный адрес"] == address]
+        if len(self.zh_df[self.zh_df["Форматированный адрес lowercase"] == address.lower()]) != 0:
+            homes: pd.DataFrame = self.zh_df[self.zh_df["Форматированный адрес lowercase"] == address.lower()]
             res["year"] = homes.loc[homes.index[0], "Год постройки"]
             res["count_entrances"] = homes.loc[homes.index[0], "Количество подъездов"]
             res["gas"] = homes.loc[homes.index[0], "Газоснабжение"]
@@ -97,3 +97,4 @@ class ObjectInfo:
         else:
             res["year"] = res["count_entrances"] = res["gas"] = res["hot_water"] = None
         return res
+        

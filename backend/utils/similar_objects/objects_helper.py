@@ -1,8 +1,8 @@
 import os
 import pandas as pd
-from typing import List
+from typing import List, Dict, Union
 from geopy.distance import geodesic
-from .config import weights, num_features, cat_features, area_borders, rad, flats_to_show
+from config import weights, num_features, cat_features, area_borders, rad, flats_to_show
 
 
 class ObjectsHelper:
@@ -13,7 +13,9 @@ class ObjectsHelper:
         path_csv = os.path.join(current_directory, file_name)
         self.flat_df = pd.read_csv(path_csv)
 
-    def distance_multi(self, cut_flat_df, target_flat_info) -> List[tuple[int, float]]:
+    @staticmethod
+    def distance_multi(cut_flat_df: pd.DataFrame, target_flat_info: Dict[str, Union[str, float, int]]) -> (
+            List)[tuple[int, float]]:
         dist: pd.Series = pd.Series([0] * len(cut_flat_df))
         dist.index = cut_flat_df.index
         for feature in num_features:
@@ -27,7 +29,7 @@ class ObjectsHelper:
             dist[cut_flat_df[feature] != value] += weight ** 2
         return [(index, dist[index]) for index in dist.index]
 
-    def flat_neighbors(self, target_flat_info) -> pd.DataFrame:
+    def flat_neighbors(self, target_flat_info: Dict[str, Union[str, float, int]]) -> pd.DataFrame:
         target_flat_point: tuple[float, float] = (target_flat_info["latitude"], target_flat_info["longitude"])
         reg: str = target_flat_info['region']
         cut_flat_df = self.flat_df[(self.flat_df["region"] == reg) &
@@ -45,3 +47,4 @@ class ObjectsHelper:
         ret = ret[:min(flats_to_show, len(mas))]
         df_ret: pd.DataFrame = cut_flat_df.loc[ret, :]
         return df_ret
+    
