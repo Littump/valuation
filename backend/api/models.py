@@ -5,6 +5,7 @@ User = get_user_model()
 
 
 class Property(models.Model):
+    id = models.AutoField(primary_key=True)
 
     HOUSE_MATERIAL_CHOICES = (
         ('brc', 'Кирпичный'),
@@ -89,11 +90,11 @@ class Property(models.Model):
     cnt_rooms = models.PositiveIntegerField()
     floors = models.PositiveIntegerField()
     metro_min = models.PositiveIntegerField()
-    price_buy = models.PositiveIntegerField(blank=True)
-    price_sell = models.PositiveIntegerField(blank=True)
+    price_buy = models.IntegerField(null=True)
+    price_sell = models.IntegerField(null=True)
 
     area = models.FloatField()
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    text = models.TextField(blank=True)
+    text = models.TextField(null=True)
