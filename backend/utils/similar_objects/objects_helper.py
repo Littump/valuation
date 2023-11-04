@@ -24,7 +24,7 @@ class ObjectsHelper:
             dist[cut_flat_df[feature] != value] += weight ** 2
         return [(index, dist[index]) for index in dist.index]
 
-    def flat_neighbors(self, target_flat_info: Dict[str, Union[str, float, int]]) -> (
+    def get_flat_neighbors(self, target_flat_info: Dict[str, Union[str, float, int]]) -> (
             List)[Dict[str, Union[int, float, str, None]]]:
         for key in replace_region:
             if target_flat_info["address"].lower().find(key) != -1:
