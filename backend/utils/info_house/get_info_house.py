@@ -7,15 +7,15 @@ from utils.info_house.config import street_change, home_change
 
 
 class ObjectInfo:
+
     def __init__(self):
         file_name = "zhkh_final.csv"
         current_file_path = os.path.abspath(__file__)
         current_directory = os.path.dirname(current_file_path)
         path_csv = os.path.join(current_directory, file_name)
         self.zh_df = pd.read_csv(path_csv)
-        
-    @staticmethod
-    def PrepareToReformat(address: str) -> str:
+
+    def PrepareToReformat(self, address: str) -> str:
         address = address.replace('корпус ', 'к')
         address = address.replace('строение ', 'с')
         address = address.replace('Строение ', 'с')
@@ -32,10 +32,8 @@ class ObjectInfo:
         address = re.sub(r'^туп\.,?\.? (.*),(.*)', r'\1 туп,\2', address)
         address = re.sub(r'^ш\.,?\.? (.*),(.*)', r'\1 ш,\2', address)
         return address
-    
-    @staticmethod
-    def ReformatAddress(address: str) -> str:
-        print(address.lower())
+
+    def ReformatAddress(self, address: str) -> str:
         formatted_address: str = ""
         if address.lower().find("москва") != -1:
             formatted_address = "Москва, город Москва"
@@ -86,10 +84,9 @@ class ObjectInfo:
                 res += symb.lower()
         formatted_address += ", " + res
         return formatted_address
-    
-    @staticmethod
-    def get_info_house(address: str) -> Dict[str, Union[str, int, None]]:
-        address = ReformatAddress(PrepareToReformat(address))
+
+    def get_info_house(self, address: str) -> Dict[str, Union[str, int, None]]:
+        address = self.ReformatAddress(self.PrepareToReformat(address))
         res: Dict[str, Union[str, int, None]] = dict()
         if len(self.zh_df[self.zh_df["Форматированный адрес"] == address]) != 0:
             homes: pd.DataFrame = self.zh_df[self.zh_df["Форматированный адрес"] == address]

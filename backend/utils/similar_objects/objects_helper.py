@@ -13,8 +13,7 @@ class ObjectsHelper:
         path_csv = os.path.join(current_directory, file_name)
         self.flat_df = pd.read_csv(path_csv)
 
-    @staticmethod
-    def distance_multi(cut_flat_df, target_flat_info) -> List[tuple[int, float]]:
+    def distance_multi(self, cut_flat_df, target_flat_info) -> List[tuple[int, float]]:
         dist: pd.Series = pd.Series([0] * len(cut_flat_df))
         dist.index = cut_flat_df.index
         for feature in num_features:
@@ -28,8 +27,7 @@ class ObjectsHelper:
             dist[cut_flat_df[feature] != value] += weight ** 2
         return [(index, dist[index]) for index in dist.index]
 
-    @staticmethod
-    def flat_neighbors(target_flat_info) -> pd.DataFrame:
+    def flat_neighbors(self, target_flat_info) -> pd.DataFrame:
         target_flat_point: tuple[float, float] = (target_flat_info["latitude"], target_flat_info["longitude"])
         reg: str = target_flat_info['region']
         cut_flat_df = self.flat_df[(self.flat_df["region"] == reg) &
@@ -41,10 +39,9 @@ class ObjectsHelper:
             if geodesic(flat_from_df_point, target_flat_point) < rad:
                 near_flats.append(ind)
         cut_flat_df = cut_flat_df.loc[near_flats, :]
-        mas: List[tuple[int, float]] = distance_multi(cut_flat_df, target_flat_info)
+        mas: List[tuple[int, float]] = self.distance_multi(cut_flat_df, target_flat_info)
         mas.sort(key=lambda x: x[1])
         ret: List[int] = [elem[0] for elem in mas]
         ret = ret[:min(flats_to_show, len(mas))]
         df_ret: pd.DataFrame = cut_flat_df.loc[ret, :]
         return df_ret
-
