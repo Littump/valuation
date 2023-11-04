@@ -1,5 +1,23 @@
 from typing import List, Dict
 
+replace_region: Dict[str, str] = {
+    "москва": "msc",
+    "санкт-петербург": "spb",
+    "новосибирск": "nsk",
+    "екатеринбург": "ekb",
+    "казань": "kzn",
+    "нижний новгород": "nng",
+    "татарстан": "kzn",
+    "свердловск": "ekb",
+    "нижегородская": "nng",
+}
+
+reg_to_coords: Dict[str, tuple[float, float]] = {"msc": (55.751999, 37.617734),
+                                                 "nsk": (55.026498, 82.921457),
+                                                 "ekb": (56.838060, 60.603651),
+                                                 "nng": (56.326797, 44.006516),
+                                                 "kzn": (55.796127, 49.106414),
+                                                 "spb": (59.938784, 30.314997)}
 num_features: List[str] = [
     'area',
     'dist_to_center',
@@ -9,7 +27,6 @@ num_features: List[str] = [
     'interior_qual',
     'interior_style',
 ]
-
 
 cat_features: List[str] = ['house_material', 'has_lift', 'object_type', 'parking_type']
 
@@ -32,5 +49,5 @@ area_borders: Dict[str, float] = {
     'max': 1.5
 }
 
-rad: float = 10.0
+rad: float = 6.0
 flats_to_show: int = 5
