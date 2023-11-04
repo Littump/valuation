@@ -3,7 +3,7 @@ from typing import List, Dict, Union
 import re
 import os
 
-from config import street_change, home_change
+from .config import street_change, home_change
 
 
 class ObjectInfo:

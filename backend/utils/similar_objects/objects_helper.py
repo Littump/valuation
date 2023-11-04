@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from typing import List, Dict, Union
 from geopy.distance import geodesic
-from config import weights, num_features, cat_features, area_borders, rad, flats_to_show
+from .config import weights, num_features, cat_features, area_borders, rad, flats_to_show
 
 
 class ObjectsHelper:
