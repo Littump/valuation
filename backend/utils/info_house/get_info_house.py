@@ -14,7 +14,7 @@ class ObjectInfo:
         current_directory = os.path.dirname(current_file_path)
         path_csv = os.path.join(current_directory, file_name)
         self.zh_df = pd.read_csv(path_csv)
-    
+
     @staticmethod
     def PrepareToReformat(address: str) -> str:
         address = address.replace('корпус ', 'к')
@@ -99,4 +99,3 @@ class ObjectInfo:
         else:
             res["year"] = res["count_entrances"] = res["gas"] = res["hot_water"] = None
         return res
-        
