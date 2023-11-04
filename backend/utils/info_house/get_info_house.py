@@ -14,8 +14,9 @@ class ObjectInfo:
         current_directory = os.path.dirname(current_file_path)
         path_csv = os.path.join(current_directory, file_name)
         self.zh_df = pd.read_csv(path_csv)
-
-    def PrepareToReformat(self, address: str) -> str:
+    
+    @staticmethod
+    def PrepareToReformat(address: str) -> str:
         address = address.replace('корпус ', 'к')
         address = address.replace('строение ', 'с')
         address = address.replace('Строение ', 'с')
@@ -33,7 +34,8 @@ class ObjectInfo:
         address = re.sub(r'^ш\.,?\.? (.*),(.*)', r'\1 ш,\2', address)
         return address
 
-    def ReformatAddress(self, address: str) -> str:
+    @staticmethod
+    def ReformatAddress(address: str) -> str:
         formatted_address: str = ""
         if address.lower().find("москва") != -1:
             formatted_address = "Москва, город Москва"
@@ -88,8 +90,8 @@ class ObjectInfo:
     def get_info_house(self, address: str) -> Dict[str, Union[str, int, None]]:
         address = self.ReformatAddress(self.PrepareToReformat(address))
         res: Dict[str, Union[str, int, None]] = dict()
-        if len(self.zh_df[self.zh_df["Форматированный адрес"] == address]) != 0:
-            homes: pd.DataFrame = self.zh_df[self.zh_df["Форматированный адрес"] == address]
+        if len(self.zh_df[self.zh_df["Форматированный адрес lowercase"] == address.lower()]) != 0:
+            homes: pd.DataFrame = self.zh_df[self.zh_df["Форматированный адрес lowercase"] == address.lower()]
             res["year"] = homes.loc[homes.index[0], "Год постройки"]
             res["count_entrances"] = homes.loc[homes.index[0], "Количество подъездов"]
             res["gas"] = homes.loc[homes.index[0], "Газоснабжение"]
@@ -97,3 +99,4 @@ class ObjectInfo:
         else:
             res["year"] = res["count_entrances"] = res["gas"] = res["hot_water"] = None
         return res
+        
