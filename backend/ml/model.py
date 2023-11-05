@@ -345,7 +345,7 @@ class PriceEstimator:
             request['interior_style'] = repair[0]
             request['interior_qual'] = repair[1]
 
-        text_embeddings = self._get_text_embeddings(params['text'])
+        text_embeddings = self._get_text_embeddings(params.get('text', ''))
         pca_text_res = self.pca_text.transform(
             text_embeddings.reshape(1, -1))[0]
         for i in range(len(pca_text_res)):

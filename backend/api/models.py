@@ -19,6 +19,7 @@ class Property(models.Model):
     house_material = models.CharField(
         max_length=3,
         choices=HOUSE_MATERIAL_CHOICES,
+        null=True
     )
 
     OBJECT_TYPE = (
@@ -61,12 +62,12 @@ class Property(models.Model):
         ('grn', 'Наземная'),
         ('mlt', 'Многоуровневая'),
         ('und', 'Подземная'),
-        ('orf', 'На крыше'),
-        ('none', 'Отсутствует'),
+        ('orf', 'На крыше')
     )
     parking_type = models.CharField(
         max_length=4,
         choices=PARKING_TYPE_TYPE,
+        null=True
     )
 
     REGION_CHOICES = (
@@ -83,13 +84,13 @@ class Property(models.Model):
     )
 
     address = models.CharField(max_length=256)
-    metro_name = models.CharField(max_length=32)
+    metro_name = models.CharField(max_length=32, null=True)
 
     floor = models.IntegerField()
-    house_year = models.IntegerField()
+    house_year = models.IntegerField(null=True)
     cnt_rooms = models.FloatField()
     floors = models.PositiveIntegerField()
-    metro_min = models.PositiveIntegerField()
+    metro_min = models.PositiveIntegerField(null=True)
     price_buy = models.IntegerField(null=True)
     price_sell = models.IntegerField(null=True)
 
@@ -100,3 +101,11 @@ class Property(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     text = models.TextField(null=True, blank=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['address', 'price_sell', 'floor'],
+                name='Unuque property',
+            )
+        ]
