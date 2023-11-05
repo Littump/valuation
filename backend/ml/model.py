@@ -311,7 +311,7 @@ class PriceEstimator:
             for key in zhkh_info.keys():
                 request[key] = zhkh_info[key]
 
-        latitude, longitude = params['lat'], params['lon']
+        latitude, longitude = params['latitude'], params['longitude']
 
         city = self._get_city_by_coords((latitude, longitude))
         request['y_coord'], request['x_coord'] = self._coordinates_to_distance_from_city_center(
