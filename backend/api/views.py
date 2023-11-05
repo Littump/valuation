@@ -42,8 +42,8 @@ class PropertyViewSet(viewsets.ModelViewSet):
         serializer.validated_data['latitude'] = latitude
         serializer.validated_data['longitude'] = longitude
         serializer.validated_data['address'] = address
-
         price = calculate_price(serializer.validated_data)
+        serializer.validated_data['repair'] = f'{interior_style};{interior_qual}'
         house_info = self.object_info.get_info_house(address)
         infrastructure = get_infrastructure(address, latitude, longitude)
         similar_objects = self.objects_helper.get_flat_neighbors(serializer.validated_data)
