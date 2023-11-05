@@ -291,7 +291,7 @@ class PriceEstimator:
         request['house_material'] = params['house_material']
         request['floor'] = params['floor']
         request['has_lift'] = params['has_lift']
-        request['parking_type'] = params['parking_type']
+        request['parking_type'] = params.get('parking_type', '0')
         adress = params['address']
         request['floors'] = params['floors']
         repair = params['repair']
@@ -436,7 +436,7 @@ class PriceEstimator:
                     embeddings = x2.cpu()
                 else:
                     iter_estims = torch.concat((iter_estims, x.cpu()))
-                    embeddings = torch.concat((embeddings, x2.cpu()))
+                    embeddings = torch.concat((embeddings, x2.cpu(parking_type)))
 
         interior_style, interior_qual = iter_estims.mean(axis=0).numpy()
         embeddings = embeddings.mean(axis=0).numpy()
