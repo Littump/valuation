@@ -15,11 +15,11 @@ class Property(models.Model):
         ('wdn', 'Деревянный'),
         ('stl', 'Сталинский'),
         ('brm', 'Кирпично-монолитный'),
+        ('0', 'Отсутствует'),
     )
     house_material = models.CharField(
         max_length=3,
-        choices=HOUSE_MATERIAL_CHOICES,
-        null=True
+        choices=HOUSE_MATERIAL_CHOICES
     )
 
     OBJECT_TYPE = (
@@ -62,12 +62,12 @@ class Property(models.Model):
         ('grn', 'Наземная'),
         ('mlt', 'Многоуровневая'),
         ('und', 'Подземная'),
-        ('orf', 'На крыше')
+        ('orf', 'На крыше'),
+        ('0', 'Отсутствует'),
     )
     parking_type = models.CharField(
         max_length=4,
-        choices=PARKING_TYPE_TYPE,
-        null=True
+        choices=PARKING_TYPE_TYPE
     )
 
     REGION_CHOICES = (
