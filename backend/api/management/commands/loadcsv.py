@@ -31,29 +31,37 @@ class Command(BaseCommand):
             )
             data = data_from_csv()
             for elem in data:
-                # try:
-                Property.objects.create(
-                    house_material=elem['house_material'],
-                    object_type=elem['object_type'],
-                    repair=elem['repair'],
-                    metro_how=elem['metro_how'],
-                    has_lift=int(elem['has_lift']),
-                    parking_type=elem['parking_type'],
-                    region=elem['region'],
-                    address=elem['address'],
-                    metro_name=elem['metro_name'],
-                    floor=int(elem['floor']),
-                    house_year=int(float(elem['house_year'])),
-                    cnt_rooms=float(elem['cnt_rooms']),
-                    floors=int(elem['floors']),
-                    metro_min=int(elem['metro_min']),
-                    price_sell=int(elem['price_sell']),
-                    area=float(elem['area']),
-                    latitude=float(elem['latitude']),
-                    longitude=float(elem['longitude']),
-                    author=user,
-                )
-                # except Exception:
-                #     continue
+                house_material = elem['house_material']
+                parking_type = elem['parking_type']
+                metro_name = elem['metro_name'] if elem['metro_name'] != '0' else None
+                house_year = int(float(elem['house_year'])) if elem['house_year'] != '0' else None
+                latitude = round(float(elem['latitude']), 6)
+                longitude = round(float(elem['longitude']), 6)
+
+                try:
+                    Property.objects.create(
+                        house_material=house_material,
+                        object_type=int(elem['object_type']),
+                        repair=elem['repair'],
+                        metro_how=int(elem['metro_how']),
+                        has_lift=int(elem['has_lift']),
+                        parking_type=parking_type,
+                        region=elem['region'],
+                        address=elem['address'],
+                        metro_name=metro_name,
+                        floor=int(elem['floor']),
+                        house_year=house_year,
+                        cnt_rooms=float(elem['cnt_rooms']),
+                        floors=int(elem['floors']),
+                        metro_min=int(elem['metro_min']),
+                        price_sell=int(elem['price_sell']),
+                        area=float(elem['area']),
+                        latitude=latitude,
+                        longitude=longitude,
+                        text='',
+                        author=user,
+                    )
+                except Exception as e:
+                    print(f'Error: {e}\nData: {elem}\n\n\n')
 
         main()

@@ -44,7 +44,7 @@ def get_infrastructure(address, lat, lon):
     return result
 
 
-def get_appart_info(address):
+def get_appart_info(address, lat, lon):
     model = get_model()
-    result = model.get_appart_info(address)
+    result = model.get_appart_info(address, lat, lon)
     return result

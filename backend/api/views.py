@@ -20,7 +20,6 @@ from utils.similar_objects.objects_helper import ObjectsHelper
 
 
 class PropertyViewSet(viewsets.ModelViewSet):
-    
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -70,25 +69,24 @@ class PropertyViewSet(viewsets.ModelViewSet):
     def list(self, request):
         user = self.request.user
         params = self.request.query_params
-        queryset = Property.objects.filter(author=user)
+        queryset = self.get_queryset()
         serialized_properties = []
-        for property in queryset:
-            serialized_property = PropertySerializerResponse(property).data
+        for propert in queryset:
+            serialized_property = PropertySerializerResponse(propert).data
 
-            repair = property.repair
-            interior_style = float(property.repair.split(';')[0])
-            interior_qual = float(property.repair.split(';')[1])
+            repair = propert.repair
+            interior_style = float(propert.repair.split(';')[0])
+            interior_qual = float(propert.repair.split(';')[1])
             serialized_property["repair"] = [interior_style, interior_qual]
 
             if 'author' in params:
-                serialized_property["price"] = property.price_buy
+                serialized_property["price"] = propert.price_buy
             else:
-                serialized_property["price"] = property.price_sell
+                serialized_property["price"] = propert.price_sell
 
             serialized_property["real_price"] = calculate_price(serialized_property)
             serialized_property['repair'] = repair
             serialized_properties.append(serialized_property)
-
         return Response(serialized_properties)
 
     def retrieve(self, request, *args, **kwargs):
@@ -153,4 +151,5 @@ class PropertyViewSet(viewsets.ModelViewSet):
                 'region',
             ]:
                 queryset = queryset.filter(**{f'{field}__iexact': value})
+        raise Exception(len(queryset))
         return queryset
