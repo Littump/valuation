@@ -83,6 +83,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
     def list(self, request):
         params = self.request.query_params
         queryset = self.get_queryset()
+
         if 'analytics' not in params:
             serialized_properties = []
             for propert in queryset:
@@ -113,7 +114,17 @@ class PropertyViewSet(viewsets.ModelViewSet):
             return Response(result)
         if params['type_analytics'] == 'cloud':
             field_1 = params['field1']
+            if field_1 == 'price':
+                if 'author' in params:
+                    field_1 = 'price_buy'
+                else:
+                    field_1 = 'price_sell'
             field_2 = params['field2']
+            if field_2 == 'price':
+                if 'author' in params:
+                    field_1 = 'price_buy'
+                else:
+                    field_1 = 'price_sell'
             cnt = 0
             result = []
             queryset_list = list(queryset)
