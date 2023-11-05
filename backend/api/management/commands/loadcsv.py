@@ -43,7 +43,7 @@ class Command(BaseCommand):
                     address=elem['address'],
                     metro_name=elem['metro_name'],
                     floor=int(elem['floor']),
-                    house_year=int(elem['house_year']),
+                    house_year=int(float(elem['house_year'])),
                     cnt_rooms=float(elem['cnt_rooms']),
                     floors=int(elem['floors']),
                     metro_min=int(elem['metro_min']),
