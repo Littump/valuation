@@ -67,7 +67,6 @@ class PropertyViewSet(viewsets.ModelViewSet):
         return Response({'repair': data})
 
     def list(self, request):
-        user = self.request.user
         params = self.request.query_params
         queryset = self.get_queryset()
         serialized_properties = []
