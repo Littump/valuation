@@ -58,6 +58,7 @@ class ObjectsHelper:
         neighbors_list: List[Dict[str, Union[int, float, str, None]]] = [dict()] * len(ret)
         for ind in range(len(ret)):
             neighbors_list[ind] = dict()
+            neighbors_list[ind]["id"] = cut_flat_df.loc[ret[ind], "id"]
             neighbors_list[ind]["region"] = cut_flat_df.loc[ret[ind], "region"]
             neighbors_list[ind]["price"] = cut_flat_df.loc[ret[ind], "price"]
             neighbors_list[ind]["rooms"] = cut_flat_df.loc[ret[ind], "rooms"]
