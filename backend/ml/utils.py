@@ -38,9 +38,9 @@ def get_repair(photos):
     return result
 
 
-def get_infrastructure(address):
+def get_infrastructure(address, lat, lon):
     model = get_model()
-    result = model.get_infrastructure(address)
+    result = model.get_infrastructure(address, lat, lon)
     return result
 
 
