@@ -291,7 +291,7 @@ class PriceEstimator:
         request['house_material'] = params['house_material']
         request['floor'] = params['floor']
         request['has_lift'] = params['has_lift']
-        request['parking_type'] = params.get('parking_type', '0')
+        request['parking_type'] = params['parking_type']
         adress = params['address']
         request['floors'] = params['floors']
         repair = params['repair']
