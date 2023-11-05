@@ -1,6 +1,5 @@
 import { useMutation } from "react-query";
 import userBuildingsService from "../services/userBuildingsService";
-import { useSelector } from "react-redux";
 
 export const addBuildingHook = () => {
   return useMutation({

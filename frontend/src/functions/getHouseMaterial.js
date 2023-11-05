@@ -1,6 +1,6 @@
-export default function getHouseMaterial(parkingType) {
-  if (parkingType === "") return "";
-  let parkingTypes = {
+export default function getHouseMaterial(material) {
+  if (material === "") return "mnl";
+  let materials = {
     кирпичный: "brc",
     монолитный: "mnl",
     панельный: "pnl",
@@ -9,5 +9,5 @@ export default function getHouseMaterial(parkingType) {
     сталинский: "stl",
     "кирпично-монолитный": "brm",
   };
-  return parkingTypes[parkingType];
+  return materials[material];
 }

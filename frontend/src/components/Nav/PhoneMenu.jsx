@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import NavLink from "../UI/NavLinkComponent/NavLinkComponent";
 
-export default function PhoneMenu({ menuIsShown }) {
+export default function PhoneMenu({ menuIsShown, setMenuIsShown }) {
   let menuClass = menuIsShown
     ? " translate-x-0"
     : " sm:translate-x-[55vw] translate-x-[85vw]";
@@ -14,7 +14,7 @@ export default function PhoneMenu({ menuIsShown }) {
         menuClass
       }
     >
-      <button type="button">
+      <button type="button" onClick={() => setMenuIsShown((prev) => !prev)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -31,27 +31,27 @@ export default function PhoneMenu({ menuIsShown }) {
         </svg>
       </button>
       <ul className="flex flex-col gap-6 w-full justify-center text-end">
-        <li>
+        <li onClick={() => setMenuIsShown((prev) => !prev)}>
           <NavLink text="Оценка стоимости квартиры" href="/" />
         </li>
-        <li>
+        <li onClick={() => setMenuIsShown((prev) => !prev)}>
           <NavLink text="О нас" href="/about" />
         </li>
         {token === null ? (
           <></>
         ) : (
           <>
-            <li>
+            <li onClick={() => setMenuIsShown((prev) => !prev)}>
               <NavLink text="Аналитика" href="/analytics" />
             </li>
-            <li>
+            <li onClick={() => setMenuIsShown((prev) => !prev)}>
               <NavLink text="Оценка рисков" href="/info" />
             </li>
           </>
         )}
 
         {address === "" || address === null || address === undefined ? null : (
-          <li>
+          <li onClick={() => setMenuIsShown((prev) => !prev)}>
             <NavLink href="/analysis" text="Анализ" />
           </li>
         )}

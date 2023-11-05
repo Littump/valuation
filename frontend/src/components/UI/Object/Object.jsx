@@ -15,50 +15,90 @@ export default function Object({ buildingInfo, hasDelete = true, name }) {
     else if (realCost / marketCost <= 0.95) return high;
     else return normal;
   };
+  let getColor = (realCost, marketCost) => {
+    if (realCost / marketCost >= 1.05) return "red";
+    else if (realCost / marketCost <= 0.95) return "green";
+    else return "blue-500";
+  };
   return (
     <div
       className={
-        "collapse collapse-arrow bg-light-gray rounded-xl dark:bg-dark-600 pr-6 " +
+        "collapse collapse-arrow bg-light-gray rounded-xl dark:bg-dark-600 md:pr-6 " +
         (buildingInfo.isOpen ? "collapse-open" : "")
       }
       name={name}
     >
       <div
-        className="collapse-title text-xl font-medium flex items-center justify-start py-3 gap-2 pl-6 "
+        className="collapse-title text-xl font-medium flex flex-col md:flex-row md:items-center justify-start py-3 gap-2 sm:pl-6 "
         onClick={() =>
           dispatch({ type: "similarBuildings/setIsOpen", id: buildingInfo.id })
         }
       >
-        {
+        {!hasDelete ? (
+          <></>
+        ) : (
           <img
             src={getLiquidityImg(
-              buildingInfo.realCost,
-              buildingInfo.marketCost
+              buildingInfo?.realCost,
+              buildingInfo?.marketCost
             )}
             alt=""
+            className="hidden md:block"
           />
-        }
-        <div className="flex flex-col lg:items-start items-center ml-2">
+        )}
+
+        <div className="items-start md:ml-2 max-w-3xl">
           <span className="text-sm dark:text-dark-100">
             ID: {buildingInfo.id}
           </span>
           <Heading>{buildingInfo.address}</Heading>
         </div>
-        <div className="flex flex-col ml-auto mr-8">
-          <span className="text-sm text-dark-gray-400 dark:text-dark-200">
-            Цена покупки
-          </span>
-          <span className="text-red text-xl font-bold lg:ml-auto mr-2 ">
-            {buildingInfo.realCost + " млн Р"}
-          </span>
-        </div>
-        <div className="flex flex-col mr-6">
-          <span className="text-sm text-dark-gray-400 dark:text-dark-200">
-            Рыночная цена
-          </span>
-          <span className="text-green text-xl font-bold lg:ml-auto mr-2 ">
-            {buildingInfo.marketCost + " млн Р"}
-          </span>
+        <div className="flex md:ml-auto">
+          {!hasDelete ? (
+            <div className="flex flex-col mr-6">
+              <span className="text-sm text-dark-gray-400 dark:text-dark-200">
+                Рыночная цена
+              </span>
+              <span
+                className={
+                  " text-xl font-bold lg:ml-auto mr-2 " +
+                  "text-" +
+                  (Math.floor(buildingInfo.price) % 3 === 0
+                    ? "red"
+                    : Math.floor(buildingInfo.price) % 3 === 1
+                    ? "blue-500"
+                    : "green")
+                }
+              >
+                {buildingInfo.price + " млн Р"}
+              </span>
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col mr-6">
+                <span className="text-sm text-dark-gray-400 dark:text-dark-200">
+                  Цена покупки
+                </span>
+                <span className="text-red text-xl font-bold lg:ml-auto mr-2 ">
+                  {buildingInfo.realCost + " млн Р"}
+                </span>
+              </div>
+              <div className="flex flex-col mr-6">
+                <span className="text-sm text-dark-gray-400 dark:text-dark-200">
+                  Рыночная цена
+                </span>
+                <span
+                  className={
+                    " text-xl font-bold lg:ml-auto mr-2 " +
+                    "text-" +
+                    getColor(buildingInfo.realCost, buildingInfo.marketCost)
+                  }
+                >
+                  {buildingInfo.price + " млн Р"}
+                </span>
+              </div>
+            </>
+          )}
         </div>
 
         {hasDelete ? (

@@ -37,7 +37,7 @@ export default function Login() {
                   </h2>
                   <label className="dark:text-dark-100 text-black flex flex-col gap-2">
                     <div className="text-dark-gray-400 dark:text-dark-200 font-semibold text-sm">
-                      Корпоротивная почта
+                      Логин
                     </div>
                     <Field
                       type="text"

@@ -1,5 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { setBuildingInfo, setCost } from "./getAnalysisAction.js";
+import {
+  setBuildingInfo,
+  setBuildingInfoResponse,
+  setCost,
+  setHouseCoordinates,
+  setInfrastructure,
+} from "./getAnalysisAction.js";
 
 const initialState = {
   realCost: null,
@@ -16,18 +22,33 @@ const initialState = {
     floor: null,
     repair: null,
   },
+  buildingInfoResponse: {
+    hot_water: null,
+    year: null,
+    gas: null,
+    count_entrances: null,
+  },
+  infrastructure: {},
 };
 
 export default createReducer(initialState, (builder) => {
   builder
     .addCase(setBuildingInfo, (state, action) => {
       state.buildingInfo = action.buildingInfo;
-      state.coordinates = [55, 56]; // перенести в setCost
+    })
+    .addCase(setBuildingInfoResponse, (state, action) => {
+      state.buildingInfoResponse = action.buildingInfoResponse;
+    })
+    .addCase(setHouseCoordinates, (state, action) => {
+      state.coordinates = action.coordinates;
+    })
+    .addCase(setInfrastructure, (state, action) => {
+      state.infrastructure = action.infrastructure;
     })
     .addCase(setCost, (state, action) => {
       state.realCost = (
-        action.cost * Math.random() * (0.98 - 0.95) +
-        0.95
+        action.cost *
+        (Math.random() * (0.98 - 0.95) + 0.95)
       ).toFixed(1);
       state.marketCost = action.cost.toFixed(2);
     });

@@ -8,8 +8,7 @@ import renovation from "../../../../public/imgs/renovation.svg";
 import { getRenovationTypeHook } from "../../../hooks/getRenovationTypeHook.js";
 import Loading from "../../UI/Loading/Loading.jsx";
 
-export default function RenovationFilters({ values }) {
-  let [isDrop, setIsDrop] = useState(true); // todo делать в диспатч и сделать отправку repair нормально
+export default function RenovationFilters({ values, setIsDrop }) {
   let dispatch = useDispatch();
   let renovationTypeX = useSelector(
     (state) => state.renovation.renovationTypeX
@@ -20,7 +19,7 @@ export default function RenovationFilters({ values }) {
   let renovationImages = useSelector((state) => state.renovation.images);
   let mutation = getRenovationTypeHook();
   return (
-    <div className="lg:pl-12 lg:w-full xs:w-10/12 w-8/12 lg:text-start">
+    <div className="lg:pl-12 lg:w-full xs:w-10/12 w-11/12 lg:text-start">
       <div className="h-full gap-4 grid">
         <div className="text-center lg:text-start">
           <LightHeading>Данные о типе отделки и ремонте</LightHeading>
@@ -29,26 +28,26 @@ export default function RenovationFilters({ values }) {
           <div
             className={
               "h-full rounded-lg py-2 px-3 transition cursor-pointer " +
-              (isDrop &&
+              (values.isDrop &&
                 "bg-blue-400 text-white dark:bg-dark-500 dark:text-dark-100")
             }
-            onClick={() => setIsDrop(true)}
+            onClick={() => setIsDrop("isDrop", true)}
           >
             Подобрать автоматически
           </div>
           <div
             className={
               "h-full rounded-lg py-2 px-3 transition cursor-pointer " +
-              (!isDrop &&
+              (!values.isDrop &&
                 "bg-blue-400 text-white dark:bg-dark-500 dark:text-dark-100")
             }
-            onClick={() => setIsDrop(false)}
+            onClick={() => setIsDrop("isDrop", false)}
           >
             Ручной ввод
           </div>
         </div>
-        {isDrop ? <DropComponent /> : <TextComponent values={values} />}
-        {!isDrop ? (
+        {values.isDrop ? <DropComponent /> : <TextComponent values={values} />}
+        {!values.isDrop ? (
           <></>
         ) : (
           <PurpleButton variant="normal">
@@ -73,7 +72,9 @@ export default function RenovationFilters({ values }) {
             </button>
           </PurpleButton>
         )}
-        {renovationTypeY == "" ? null : (
+        {!values.isDrop ? (
+          <></>
+        ) : renovationTypeY == "" ? null : (
           <div className="text-black max-w-lg md:max-w-3xl border border-blue-500 w-full flex gap-1 px-4 sm:px-0 sm:gap-4 justify-center items-center py-3 rounded-lg font-semibold dark:bg-dark-600 dark:text-dark-100 dark:border-dark-700">
             <img src={renovation} alt="" className="fill-dark-300" />
             {renovationTypeX === undefined || renovationTypeY === undefined

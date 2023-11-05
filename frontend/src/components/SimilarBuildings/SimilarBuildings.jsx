@@ -8,7 +8,7 @@ export function SimilarBuildings() {
     <Object
       hasDelete={false}
       buildingInfo={info}
-      key={info.address}
+      key={info.address + info.id}
       name={"similarObject" + (info.id - 1)}
     />
   ));
@@ -17,9 +17,7 @@ export function SimilarBuildings() {
       <div className=" text-center lg:text-start">
         <MainHeading>Похожие квартиры</MainHeading>
       </div>
-      <div className="grid lg:flex lg:flex-col md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
-        {buildingsComponent}
-      </div>
+      <div className="flex flex-col gap-4">{buildingsComponent}</div>
       {/* <div className="flex justify-start">
                 <PurpleButton><div className="px-4">Показать больше вариантов</div></PurpleButton>
             </div> */}

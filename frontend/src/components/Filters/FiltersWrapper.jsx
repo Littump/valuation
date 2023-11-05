@@ -45,6 +45,10 @@ export function FiltersWrapper() {
       .string()
       .typeError("Должно быть строкой")
       .required("Обязательно"),
+    floors: yup
+      .string()
+      .typeError("Должно быть строкой")
+      .required("Обязательно"),
     price: yup.string().when("addBuilding", {
       is: true,
       then: () =>
@@ -62,14 +66,16 @@ export function FiltersWrapper() {
         parkingType: "",
         address: "",
         houseType: "",
-        description: "",
+        text: "",
         flatType: "",
         square: "",
         roomsNumber: "",
         floor: "",
+        floors: "",
         renovationType: "",
         renovationTypePicked: "",
         addBuilding: false,
+        isDrop: true,
         price: "",
       }}
       validationSchema={validationsSchema}
@@ -79,20 +85,17 @@ export function FiltersWrapper() {
           parkingType: values.parkingType,
           address: values.address,
           houseType: values.houseType,
-          description: values.description,
+          text: values.text,
           flatType: values.flatType,
           square: values.square,
           roomsNumber: values.roomsNumber,
           floor: values.floor,
-          repair:
-            values.renovationTypePicked !== ""
-              ? getRepairType(
-                  values.renovationType,
-                  values.renovationTypePicked
-                )
-              : images.length !== 0
-              ? getRepairType(repairX.trim(), repairY.trim())
-              : "1;3",
+          floors: values.floors,
+          repair: !values.isDrop
+            ? getRepairType(values.renovationType, values.renovationTypePicked)
+            : images.length !== 0
+            ? getRepairType(repairX.trim(), repairY.trim())
+            : "1;1",
         };
         dispatch({
           type: "analysis/setBuildingInfo",
@@ -100,16 +103,16 @@ export function FiltersWrapper() {
         });
         getPriceMutation.mutate(buildingInfo);
         if (values.addBuilding) {
-          addBuildingMutation.mutate({ buildingInfo, price: 1000 }); //todo price yflj gthtlfnm
+          addBuildingMutation.mutate({ buildingInfo, price: values.price }); //todo price yflj gthtlfnm
         }
       }}
     >
-      {({ values, errors, touched }) => {
+      {({ values, errors, touched, setFieldValue }) => {
         return (
           <Form className="flex flex-col gap-8 lg:max-w-full max-w-xl text-start">
-            <div className="lg:grid lg:grid-cols-2 flex flex-col-reverse items-center lg:items-start gap-20 lg:gap-12">
+            <div className="lg:flex lg:flex-row w-full flex flex-col-reverse items-center lg:items-start gap-20 lg:gap-6">
               <HouseFilters values={values} errors={errors} touched={touched} />
-              <RenovationFilters values={values} />
+              <RenovationFilters values={values} setIsDrop={setFieldValue} />
             </div>
             <div className="w-64 xs:w-72 mx-auto flex justify-center flex-col gap-2">
               {auth_token === null ? (

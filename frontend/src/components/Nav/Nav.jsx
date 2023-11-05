@@ -13,9 +13,8 @@ export default function Nav() {
     onTriggered: () => setMenuIsShown(false),
   });
   return (
-    <>
+    <span ref={ref}>
       <div
-        ref={ref}
         className="
         nav
         z-10
@@ -113,6 +112,6 @@ export default function Nav() {
         </ul>
       </div>
       <PhoneMenu menuIsShown={menuIsShown} setMenuIsShown={setMenuIsShown} />
-    </>
+    </span>
   );
 }

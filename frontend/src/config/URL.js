@@ -1,1 +1,1 @@
-export const URL = "http://45.12.4.25"; //http://localhost:8000
+export const URL = "http://localhost:80"; //http://45.12.4.25

@@ -109,15 +109,10 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       text: "Метро рядом",
       placeholder: "Название станции",
     },
-    {
-      name: "district",
-      text: "Район",
-      placeholder: "Название района",
-    },
   ];
 
   let fieldFilters = fieldFiltersData.map((el) => (
-    <div className="flex flex-col gap-2" key={el.name}>
+    <div className="flex flex-col gap-2 mr-auto" key={el.name}>
       <Heading>{el.text}</Heading>
       <Field
         name={el.name}

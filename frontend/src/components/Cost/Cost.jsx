@@ -12,9 +12,9 @@ export default function Cost() {
 
   return (
     <div className="flex flex-col gap-6 items-center mx-0 xs:mx-10 sm:mx-0">
-      <div className="flex gap-4 sm:flex-row flex-col">
+      <div className="flex gap-4 sm:flex-row flex-col w-full">
         <BorderLayout>
-          <div className="flex flex-col text-center lg:text-start lg:flex-row justify-start gap-4 items-center">
+          <div className="flex flex-col px-4 sm:px-0 text-center lg:text-start lg:flex-row justify-start gap-4 items-center">
             <div className="rounded-2xl py-10 px-6 w-full lg:w-auto bg-blue-300 dark:bg-dark-600 dark:text-dark-300 flex-nowrap whitespace-nowrap flex justify-center items-center font-bold text-3xl text-blue-500">
               {marketCostAnswer}
             </div>
@@ -22,7 +22,7 @@ export default function Cost() {
           </div>
         </BorderLayout>
         <BorderLayout>
-          <div className="flex flex-col text-center lg:text-start lg:flex-row justify-start gap-4 items-center">
+          <div className="flex flex-col px-4 sm:px-0 text-center lg:text-start lg:flex-row justify-start gap-4 items-center">
             <div className="rounded-2xl py-10 px-6 w-full lg:w-auto bg-blue-300 dark:bg-dark-600 dark:text-dark-300 flex-nowrap whitespace-nowrap flex justify-center items-center font-bold text-3xl text-blue-500">
               {realCostAnswer}
             </div>

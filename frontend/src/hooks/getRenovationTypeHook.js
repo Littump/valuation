@@ -12,8 +12,8 @@ export const getRenovationTypeHook = () => {
     onSuccess: (data) => {
       console.log(data);
       let renovationType = getRepairName(
-        Math.round(data.data.interior_style) - 1,
-        Math.round(data.data.interior_qual) - 1
+        parseInt(data.data.repair[0]),
+        parseInt(data.data.repair[2])
       );
       dispatch({
         type: "renovation/setRenovationType",

@@ -3,6 +3,7 @@ import getParkingType from "../functions/getParkingType";
 import getObjectType from "../functions/getObjectType";
 import getHouseMaterial from "../functions/getHouseMaterial";
 import { URL } from "../config/URL";
+import getRoomsNumber from "../functions/getRoomsNumber";
 
 class userBuildingsService {
   async getBuildings() {
@@ -22,14 +23,15 @@ class userBuildingsService {
         address: buildingInfo?.address.toString(),
         house_material: getHouseMaterial(buildingInfo?.houseType.toString()),
         object_type: getObjectType(buildingInfo?.flatType.toString()),
-        cnt_rooms: buildingInfo?.roomsNumber.toString(),
-        floor: buildingInfo?.floor.toString(),
-        area: buildingInfo?.square.toString(),
+        cnt_rooms: getRoomsNumber(buildingInfo?.roomsNumber),
+        floor: parseInt(buildingInfo?.floor),
+        floors: parseInt(buildingInfo?.floors),
+        area: parseFloat(buildingInfo?.square),
         repair: buildingInfo?.repair.toString(),
-        has_lift: +buildingInfo?.hasLift,
+        has_lift: buildingInfo?.hasLift ? 1 : 0,
         parking_type: getParkingType(buildingInfo?.parkingType.toString()),
-        text: buildingInfo?.description.toString(),
-        price: price,
+        text: buildingInfo.text.toString(),
+        price_buy: price,
       },
       {
         headers: {
