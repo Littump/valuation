@@ -304,8 +304,8 @@ components:
         has_lift:
           type: integer
           enum:
+            - 0
             - 1
-            - 2
           example: 1
         parking_type:
           type: string

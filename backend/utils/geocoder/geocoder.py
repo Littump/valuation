@@ -6,6 +6,7 @@ def get_coordinates(address: str):
     url = 'https://catalog.api.2gis.com/3.0/items/geocode'
     params = {
         'q': address,
+        'fields': 'items.point',
     }
     for key in api_keys:
         params['key'] = key
@@ -15,6 +16,6 @@ def get_coordinates(address: str):
         data = response.json()
         if data['meta']['code'] == 200:
             break
-    point = data['items'][0]['point']
-    full_name = data['items'][0]['full_name']
+    point = data['result']['items'][0]['point']
+    full_name = data['result']['items'][0]['full_name']
     return point['lat'], point['lon'], full_name
