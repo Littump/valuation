@@ -15,25 +15,17 @@ from ml.utils import (
     get_infrastructure
 )
 from utils.geocoder.geocoder import get_coordinates
-
-
-def get_info_house(address):
-    return {
-        "year": 1984,
-        "count_entrances": 2,
-        "gas": "Центральное",
-        "hot_water": "Полное снабжение",
-    }
+from utils.info_house.get_info_house import ObjectInfo
+from utils.similar_objects.objects_helper import ObjectsHelper
 
 
 class PropertyViewSet(viewsets.ModelViewSet):
+    
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
     permission_classes = [permissions.IsAuthenticated]
-
-    @staticmethod
-    def get_similar_objects(data):
-        return []
+    object_info = ObjectInfo()
+    objects_helper = ObjectsHelper()
 
     @action(detail=False, methods=['POST'],
             permission_classes=[permissions.AllowAny])
@@ -52,9 +44,9 @@ class PropertyViewSet(viewsets.ModelViewSet):
         serializer.validated_data['address'] = address
 
         price = calculate_price(serializer.validated_data)
-        house_info = get_info_house(address)
+        house_info = self.object_info.get_info_house(address)
         infrastructure = get_infrastructure(address, latitude, longitude)
-        similar_objects = self.get_similar_objects(serializer.validated_data)
+        similar_objects = self.objects_helper.get_flat_neighbors(serializer.validated_data)
         return Response({
             'price': price,
             'latitude': latitude,
