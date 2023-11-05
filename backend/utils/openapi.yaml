@@ -94,6 +94,12 @@ paths:
                   price:
                     type: integer
                     example: 12000000
+                  latitude:
+                    type: number
+                    example: 37.421683
+                  longitude:
+                    type: number
+                    example: 51.582653
                   house_info:
                     $ref: '#/components/schemas/HouseInfo'
                   infrastructure:

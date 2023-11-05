@@ -4,6 +4,7 @@ from api.models import Property
 from ml.utils import (
     get_appart_info
 )
+from utils.geocoder.geocoder import get_coordinates
 
 
 class PropertyCalculateSerializer(serializers.ModelSerializer):
@@ -49,7 +50,16 @@ class PropertySerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        house_info = get_appart_info(validated_data['address'])
+        address = validated_data['address']
+        latitude, longitude, address = get_coordinates(address)
+        validated_data['latitude'] = latitude
+        validated_data['longitude'] = longitude
+        validated_data['address'] = address
+        house_info = get_appart_info(
+            validated_data['address'],
+            latitude,
+            longitude,
+        )
         validated_data['metro_how'] = 1
         validated_data['region'] = house_info.get('region', None)
         validated_data['metro_name'] = house_info['metro_name']

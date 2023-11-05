@@ -87,14 +87,16 @@ class Property(models.Model):
 
     floor = models.IntegerField()
     house_year = models.IntegerField()
-    cnt_rooms = models.PositiveIntegerField()
+    cnt_rooms = models.FloatField()
     floors = models.PositiveIntegerField()
     metro_min = models.PositiveIntegerField()
     price_buy = models.IntegerField(null=True)
     price_sell = models.IntegerField(null=True)
 
     area = models.FloatField()
+    latitude = models.FloatField(blank=True)
+    latitude = models.FloatField(blank=True)
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    text = models.TextField(null=True)
+    text = models.TextField(null=True, blank=True)
