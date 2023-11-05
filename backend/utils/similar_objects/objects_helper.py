@@ -1,3 +1,10 @@
+import os
+import pandas as pd
+from typing import List, Dict, Union
+from geopy.distance import geodesic
+from utils.similar_objects.config import weights, num_features, cat_features, area_borders, rad, flats_to_show, replace_region, reg_to_coords
+
+
 class ObjectsHelper:
     def __init__(self):
         file_name = 'real_estate.csv'

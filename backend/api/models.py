@@ -53,9 +53,9 @@ class Property(models.Model):
 
     HAS_LIFT_TYPE = (
         (1, 'Имеется'),
-        (2, 'Отсутствует'),
+        (0, 'Отсутствует'),
     )
-    has_lift = models.PositiveIntegerField(choices=HAS_LIFT_TYPE)
+    has_lift = models.IntegerField(choices=HAS_LIFT_TYPE)
 
     PARKING_TYPE_TYPE = (
         ('grn', 'Наземная'),
@@ -95,7 +95,7 @@ class Property(models.Model):
 
     area = models.FloatField()
     latitude = models.FloatField(blank=True)
-    latitude = models.FloatField(blank=True)
+    longitude = models.FloatField(blank=True)
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 

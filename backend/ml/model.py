@@ -7,7 +7,6 @@ import torch
 import torch.nn as nn
 import torchvision.transforms as transforms
 from torchvision import models
-import numpy as np
 from tensorflow.keras.applications.efficientnet import EfficientNetB0
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
 from tensorflow.keras.models import Model
@@ -24,6 +23,7 @@ import geopy.distance
 import joblib
 nltk.download('punkt')
 nltk.download('stopwords')
+import numpy as np
 
 _punctuation = list(punctuation)
 
@@ -276,10 +276,13 @@ class PriceEstimator:
             - 'house_material': str            
             - 'cnt_rooms': int
             - 'floor': int
+            - 'floors': int
             - 'area': float
             - 'has_lift': int
             - 'parking_type': str
             - 'repair': (float, float) or list of PIL.Image objects
+            - 'lat': float
+            - 'lon': float
         '''
         request = {}
         request['cnt_rooms'] = params['cnt_rooms']
@@ -290,7 +293,7 @@ class PriceEstimator:
         request['has_lift'] = params['has_lift']
         request['parking_type'] = params['parking_type']
         adress = params['address']
-
+        request['floors'] = params['floors']
         repair = params['repair']
         formated_adress = get_formated_adress(adress)
 
@@ -308,13 +311,7 @@ class PriceEstimator:
             for key in zhkh_info.keys():
                 request[key] = zhkh_info[key]
 
-        latitude, longitude = self._get_coordinates_photon_with_retry(
-            params['address'])
-        if latitude is None:
-            latitude, longitude = self._get_coordinates_photon_with_retry(
-                formated_adress)
-            if latitude is None:
-                raise Exception('Не удалось определить координаты по адресу')
+        latitude, longitude = params['lat'], params['lon']
 
         city = self._get_city_by_coords((latitude, longitude))
         request['y_coord'], request['x_coord'] = self._coordinates_to_distance_from_city_center(
@@ -445,7 +442,7 @@ class PriceEstimator:
         embeddings = embeddings.mean(axis=0).numpy()
         return {'interior_style': interior_style, 'interior_qual': interior_qual, 'embeddings': embeddings}
     
-    def get_appart_info(self, address) -> dict:
+    def get_appart_info(self, address, lat, lon) -> dict:
         '''
         params: dict with keys:
             - 'address': str
@@ -453,15 +450,11 @@ class PriceEstimator:
             - 'house_year': int
             - 'metro_name': str
             - 'metro_dist': float
+            - 'region': str
         '''
         res = {}
         formated_adress = get_formated_adress(address)
-        latitude, longitude = self._get_coordinates_photon_with_retry(address)
-        if latitude is None:
-            latitude, longitude = self._get_coordinates_photon_with_retry(
-                formated_adress)
-            if latitude is None:
-                raise Exception('Не удалось определить координаты по адресу')
+        latitude, longitude = lat, lon
 
         city = self._get_city_by_coords((latitude, longitude))
         res['region'] = city
@@ -480,7 +473,7 @@ class PriceEstimator:
             (x, y), city)['nearest_metro_dist'] / speed        
         return res
     
-    def get_infrastructure(self, address):
+    def get_infrastructure(self, address, lat, lon):
         '''
         params: dict with keys:
             - 'address': str
@@ -501,15 +494,7 @@ class PriceEstimator:
             - 'shops': ...
             ...
         '''
-        res = {}
-        formated_adress = get_formated_adress(address)
-        latitude, longitude = self._get_coordinates_photon_with_retry(address)
-        if latitude is None:
-            latitude, longitude = self._get_coordinates_photon_with_retry(
-                formated_adress)
-            if latitude is None:
-                raise Exception('Не удалось определить координаты по адресу')
-
+        latitude, longitude = lat, lon
         city = self._get_city_by_coords((latitude, longitude))
         y, x = self._coordinates_to_distance_from_city_center(
             (latitude, longitude), city)
