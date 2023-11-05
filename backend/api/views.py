@@ -1,8 +1,11 @@
+import random
+from collections import defaultdict
+
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from api.models import Property
+from api.models import Property, User
 from api.serializers import (
     PropertySerializer,
     PhotoUploadSerializer,
@@ -17,6 +20,17 @@ from ml.utils import (
 from utils.geocoder.geocoder import get_coordinates
 from utils.info_house.get_info_house import ObjectInfo
 from utils.similar_objects.objects_helper import ObjectsHelper
+
+
+def get_user():
+    user, created = User.objects.get_or_create(
+        username="theUser",
+        first_name="John",
+        last_name="James",
+        email="john@email.com",
+        password="12345asdeq",
+    )
+    return user
 
 
 class PropertyViewSet(viewsets.ModelViewSet):
@@ -69,24 +83,61 @@ class PropertyViewSet(viewsets.ModelViewSet):
     def list(self, request):
         params = self.request.query_params
         queryset = self.get_queryset()
-        serialized_properties = []
-        for propert in queryset:
-            serialized_property = PropertySerializerResponse(propert).data
 
-            repair = propert.repair
-            interior_style = float(propert.repair.split(';')[0])
-            interior_qual = float(propert.repair.split(';')[1])
-            serialized_property["repair"] = [interior_style, interior_qual]
+        if 'analytics' not in params:
+            serialized_properties = []
+            for propert in queryset:
+                serialized_property = PropertySerializerResponse(propert).data
 
-            if 'author' in params:
-                serialized_property["price"] = propert.price_buy
-            else:
-                serialized_property["price"] = propert.price_sell
+                repair = propert.repair
+                interior_style = float(propert.repair.split(';')[0])
+                interior_qual = float(propert.repair.split(';')[1])
+                serialized_property["repair"] = [interior_style, interior_qual]
 
-            serialized_property["real_price"] = calculate_price(serialized_property)
-            serialized_property['repair'] = repair
-            serialized_properties.append(serialized_property)
-        return Response(serialized_properties)
+                if 'author' in params:
+                    serialized_property["price"] = propert.price_buy
+                    serialized_property["real_price"] = calculate_price(serialized_property)
+                else:
+                    serialized_property["price"] = propert.price_sell
+
+                serialized_property['repair'] = repair
+                serialized_properties.append(serialized_property)
+            return Response(serialized_properties)
+
+        if params['type_analytics'] == 'column':
+            field = params['field']
+            result = defaultdict(int)
+            for propert in queryset:
+                value = getattr(propert, field)
+                if value:
+                    result[value] += 1
+            return Response(result)
+        if params['type_analytics'] == 'cloud':
+            field_1 = params['field1']
+            if field_1 == 'price':
+                if 'author' in params:
+                    field_1 = 'price_buy'
+                else:
+                    field_1 = 'price_sell'
+            field_2 = params['field2']
+            if field_2 == 'price':
+                if 'author' in params:
+                    field_1 = 'price_buy'
+                else:
+                    field_1 = 'price_sell'
+            cnt = 0
+            result = []
+            queryset_list = list(queryset)
+            random.shuffle(queryset_list)
+            for propert in queryset_list:
+                value_1 = getattr(propert, field_1)
+                value_2 = getattr(propert, field_2)
+                if value_1 and value_2:
+                    result.append([value_1, value_2])
+                    cnt += 1
+                if cnt == 200:
+                    break
+            return Response({"result": result})
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -109,9 +160,11 @@ class PropertyViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Property.objects.all()
         params = self.request.query_params
-
+        if 'author' in params:
+            queryset = self.queryset.filter(author=user)
+        else:
+            queryset = self.queryset.filter(author=get_user())
         for field, value in params.items():
             if field == 'author':
                 queryset = queryset.filter(author=user)
@@ -150,5 +203,4 @@ class PropertyViewSet(viewsets.ModelViewSet):
                 'region',
             ]:
                 queryset = queryset.filter(**{f'{field}__iexact': value})
-        raise Exception(len(queryset))
         return queryset
