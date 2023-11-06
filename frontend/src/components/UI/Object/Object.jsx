@@ -107,6 +107,14 @@ export default function Object({
                 >
                   {buildingInfo.marketCost + " млн Р"}
                 </span>
+                <div className="flex flex-col mr-6">
+                  <span className="text-sm text-dark-gray-400 dark:text-dark-200">
+                    Вероятный прогноз на полгода
+                  </span>
+                  <span className={" text-xl font-bold lg:ml-auto mr-2 "}>
+                    {buildingInfo.realCost + " %"}
+                  </span>
+                </div>
               </div>
             </>
           )}

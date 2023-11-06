@@ -10,7 +10,7 @@ export const getRenovationTypeHook = () => {
   return useMutation({
     mutationFn: () => getRenovationTypeService.getRenovationType(images),
     onSuccess: (data) => {
-
+      console.log(data);
       let renovationType = getRepairName(
         parseInt(data.data.repair[0]),
         parseInt(data.data.repair[2])
