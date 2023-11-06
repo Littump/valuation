@@ -15,7 +15,7 @@ export default function QrBlock({ heading, text, img, link }) {
               <img src={img} alt="qr" className="w-28 h-28" />
             </a>
           </div>
-          <div className="flex flex-col justify-center sm:gap-3">
+          <div className="flex flex-col max-w-xs sm:max-w-none justify-center sm:gap-3">
             <MainHeading>{heading}</MainHeading>
             <Text>{text}</Text>
           </div>

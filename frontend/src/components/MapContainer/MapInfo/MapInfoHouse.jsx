@@ -26,7 +26,10 @@ export default function MapInfoHouse() {
     { heading: "Площадь", text: houseInfo.square + "м²" },
     {
       heading: "Парковка",
-      text: houseInfo.parkingType === "0" ? "нет" : houseInfo.parkingType,
+      text:
+        houseInfo.parkingType === "0" || houseInfo.parkingType === ""
+          ? "нет"
+          : houseInfo.parkingType,
     },
   ];
   return (

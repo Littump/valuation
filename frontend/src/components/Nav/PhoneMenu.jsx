@@ -10,7 +10,7 @@ export default function PhoneMenu({ menuIsShown, setMenuIsShown }) {
   return (
     <div
       className={
-        "flex flex-col items-end justify-start gap-10 lg:hidden h-[100vh] bg-white shadow-xl py-7 pr-6 transition duration-300 w-[85vw] sm:w-[45vw] fixed top-0 dark:bg-dark-400 right-0 z-10" +
+        "flex flex-col items-end justify-start gap-10 lg:hidden h-[130vh] bg-white shadow-xl py-7 pr-6 transition duration-300 w-[85vw] sm:w-[45vw] fixed top-0 dark:bg-dark-400 right-0 z-10" +
         menuClass
       }
     >
