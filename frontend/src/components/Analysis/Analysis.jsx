@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Analysis() {
-  const buildingInfo = useSelector((state) => state.building.buildingInfo);
+  const buildingInfo = useSelector((state) => state.building);
 
   if (
     buildingInfo.marketCost === "" ||

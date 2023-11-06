@@ -6,7 +6,7 @@ export default function PhoneMenu({ menuIsShown, setMenuIsShown }) {
     ? " translate-x-0"
     : " sm:translate-x-[55vw] translate-x-[85vw]";
   let token = localStorage.getItem("auth_token");
-  let cost = useSelector((state) => state.building.buildingInfo.marketCost);
+  let cost = useSelector((state) => state.building.marketCost);
   return (
     <div
       className={

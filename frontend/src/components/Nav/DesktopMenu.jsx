@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import NavLink from "../UI/NavLinkComponent/NavLinkComponent";
 
 export default function DesktopMenu() {
-  let cost = useSelector((state) => state.building.buildingInfo.marketCost);
+  let cost = useSelector((state) => state.building.marketCost);
   let token = localStorage.getItem("auth_token");
   return (
     <ul className="gap-10 justify-start items-center hidden lg:flex">

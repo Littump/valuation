@@ -22,10 +22,11 @@ class getPriceService {
         text: buildingInfo.text.toString(),
       })
       .then((res) => {
-        if (res.ok) {
+        if (res.status === 200) {
           return res;
+        } else {
+          throw new Error("ошибка сервера");
         }
-        throw new Error("нет ответа с сервера");
       });
   }
 }

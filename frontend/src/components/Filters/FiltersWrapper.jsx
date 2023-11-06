@@ -58,7 +58,6 @@ export function FiltersWrapper() {
           .required("Введите стоимость"),
     }),
   });
-  console.log(getPriceMutation);
   return (
     <Formik
       initialValues={{
