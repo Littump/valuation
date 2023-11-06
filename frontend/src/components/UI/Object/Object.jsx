@@ -35,7 +35,7 @@ export default function Object({
       name={name}
     >
       <div
-        className="collapse-title text-xl font-medium flex flex-col md:flex-row md:items-center justify-start py-3 gap-2 sm:pl-6 "
+        className="collapse-title text-xl font-medium flex flex-col md:flex-row md:items-center justify-start py-3 gap-1 sm:pl-6 "
         onClick={() =>
           dispatch({ type: openFunctionAction, id: buildingInfo.id })
         }
@@ -53,7 +53,7 @@ export default function Object({
           />
         )}
 
-        <div className="flex flex-col items-start md:ml-2 max-w-3xl">
+        <div className="flex flex-col text-start items-start md:ml-2 max-w-3xl">
           <span className="text-sm dark:text-dark-100">
             ID: {buildingInfo.id}
           </span>
@@ -82,20 +82,36 @@ export default function Object({
           ) : (
             <>
               <div className="flex flex-col mr-6">
-                <span className="text-sm text-dark-gray-400 dark:text-dark-200">
+                <span className="text-xs text-dark-gray-400 dark:text-dark-200">
+                  Вероятный рост цены за полгода
+                </span>
+                <span
+                  className={`text-sm font-bold lg:ml-auto mr-2 ${
+                    buildingInfo.realCost >= 5
+                      ? "text-green"
+                      : buildingInfo.realCost <= -5
+                      ? "text-red"
+                      : "text-blue-500"
+                  }`}
+                >
+                  {buildingInfo.realCost + " %"}
+                </span>
+              </div>
+              <div className="flex flex-col mr-6">
+                <span className="text-xs text-dark-gray-400 dark:text-dark-200">
                   Цена покупки
                 </span>
-                <span className="text-red text-xl font-bold lg:ml-auto mr-2 ">
+                <span className="text-red text-sm font-bold lg:ml-auto mr-2 ">
                   {buildingInfo.realCost + " млн Р"}
                 </span>
               </div>
               <div className="flex flex-col mr-6">
-                <span className="text-sm text-dark-gray-400 dark:text-dark-200">
+                <span className="text-xs text-dark-gray-400 dark:text-dark-200">
                   Рыночная цена
                 </span>
                 <span
                   className={
-                    " text-xl font-bold lg:ml-auto mr-2 " +
+                    " text-sm font-bold lg:ml-auto mr-2 " +
                     "text-" +
                     (hasDelete
                       ? "green"
@@ -107,14 +123,6 @@ export default function Object({
                 >
                   {buildingInfo.marketCost + " млн Р"}
                 </span>
-                <div className="flex flex-col mr-6">
-                  <span className="text-sm text-dark-gray-400 dark:text-dark-200">
-                    Вероятный прогноз на полгода
-                  </span>
-                  <span className={" text-xl font-bold lg:ml-auto mr-2 "}>
-                    {buildingInfo.realCost + " %"}
-                  </span>
-                </div>
               </div>
             </>
           )}
