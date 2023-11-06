@@ -19,7 +19,7 @@ export default function RenovationFilters({ values, setIsDrop }) {
   let renovationImages = useSelector((state) => state.renovation.images);
   let mutation = getRenovationTypeHook();
   return (
-    <div className="lg:pl-12 lg:w-full xs:w-10/12 w-11/12 lg:text-start">
+    <div className="lg:pl-12 lg:w-full xs:w-10/12 w-11/12 lg:text-start ">
       <div className="h-full gap-4 grid">
         <div className="text-center lg:text-start">
           <LightHeading>Данные о типе отделки и ремонте</LightHeading>

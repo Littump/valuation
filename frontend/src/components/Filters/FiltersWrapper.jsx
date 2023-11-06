@@ -110,7 +110,7 @@ export function FiltersWrapper() {
       {({ values, errors, touched, setFieldValue }) => {
         return (
           <Form className="flex flex-col gap-8 lg:max-w-full max-w-xl text-start">
-            <div className="lg:flex lg:flex-row w-full flex flex-col-reverse items-center lg:items-start gap-20 lg:gap-6">
+            <div className="lg:flex lg:flex-row w-full flex flex-col-reverse items-center lg:items-start lg:gap-6">
               <HouseFilters values={values} errors={errors} touched={touched} />
               <RenovationFilters values={values} setIsDrop={setFieldValue} />
             </div>

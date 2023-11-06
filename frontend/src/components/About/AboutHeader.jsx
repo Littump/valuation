@@ -11,9 +11,10 @@ export default function AboutHeader() {
           <div className="flex flex-col justify-center gap-3">
             <MainHeading>Наша команда</MainHeading>
             <Text>
-              Проект "Оценка стоимости недвижимости" представляет собой
-              веб-приложение, разработанное для определения стоимости квартиры
-              на основе различных входных параметров.
+              При помощи нашего сервиса вы сможете оценить и получить прогноз на
+              стоимость объектов недвижимости, вывести аналитику по рынку
+              недвижимости и собственному портфелю, а также произвести оценку
+              рисков и подбор похожих объектов
             </Text>
             <div className="flex justify-center sm:justify-start gap-2 flex-wrap sm:gap-6">
               <a
@@ -24,7 +25,7 @@ export default function AboutHeader() {
               </a>
               <a
                 className="text-blue-500 text-lg hover:text-black transition dark:hover:text-white dark:text-dark-300"
-                href={"https://t.me/"}
+                href="mailto:estate.valuation.tech@gmail.com"
               >
                 почта
               </a>

@@ -5,7 +5,10 @@ export default function Header() {
   return (
     <header className="flex flex-col gap-6 items-center mt-12">
       <QrBlock
-        text="Получите оценку квартиры прямо в телеграм"
+        text="При помощи нашего сервиса вы сможете оценить и получить прогноз на
+        стоимость объектов недвижимости, вывести аналитику по рынку
+        недвижимости и собственному портфелю, а также произвести оценку
+        рисков и подбор похожих объектов"
         heading="Наш телеграм бот"
         img={qr}
         link="https://t.me/estate_valuationbot"

@@ -7,7 +7,7 @@ import victor from "../../public/imgs/contacts/victor.jpg";
 export const contactsData = [
   {
     name: "Игитов Максим",
-    status: "frontend-разработчик",
+    status: "Data Scientist / Team Lead",
     img: maxi,
     telegram: "@MaksIgitov",
     github: "#",
@@ -15,7 +15,7 @@ export const contactsData = [
   },
   {
     name: "Даутов Максим",
-    status: "frontend-разработчик",
+    status: "product manager / business analyst",
     img: maxn,
     telegram: "@maxd",
     github: "#",
@@ -40,18 +40,18 @@ export const contactsData = [
   },
   {
     name: "Виноградов Иван",
-    status: "frontend-разработчик",
+    status: "ML - developer / Data scientist",
     img: ivan,
     telegram: "@Rollersman",
-    github: "#",
+    github: "https://github.com/Guettoman",
     university: "НИУ МФТИ",
   },
   {
     name: "Ратков Виктор",
-    status: "frontend-разработчик",
+    status: "ml/dl",
     img: victor,
     telegram: "@physnomath",
-    github: "#",
+    github: "https://github.com/VirusTI",
     university: "НИУ МФТИ",
   },
 ];

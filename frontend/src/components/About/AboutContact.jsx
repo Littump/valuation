@@ -3,9 +3,13 @@ import Heading from "../UI/Heading/Heading";
 
 export default function AboutContact({ props }) {
   return (
-    <div className=" dark:bg-dark-600 rounded-lg overflow-hidden shadow-sm h-full flex flex-col justify-start">
+    <div className=" dark:bg-dark-600 rounded-lg shadow-sm h-full flex flex-col justify-start">
       <div>
-        <img src={props.img} alt="" className="h-52 w-full bg-cover" />
+        <img
+          src={props.img}
+          alt=""
+          className="h-52 w-full bg-cover rounded-tr-lg rounded-tl-lg"
+        />
       </div>
       <div className="pt-4 pb-8 px-6 flex gap-3 flex-col h-full dark:border-0 border-blue-400 border rounded-bl-lg rounded-br-lg border-t-0">
         <div className="w-32">

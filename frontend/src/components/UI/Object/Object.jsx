@@ -116,8 +116,13 @@ export default function Object({
           <button
             type="button"
             onClick={() => {
-              mutate(buildingInfo.id);
-              dispatch({ type: "myObjects/deleteObject", id: buildingInfo.id });
+              if (confirm("Вы действительно хотите удалить этот объект")) {
+                mutate(buildingInfo.id);
+                dispatch({
+                  type: "myObjects/deleteObject",
+                  id: buildingInfo.id,
+                });
+              }
             }}
           >
             <svg

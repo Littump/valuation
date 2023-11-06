@@ -12,7 +12,7 @@ import {
 
 export default function HouseFilters({ values, errors, touched }) {
   return (
-    <div className="flex flex-col gap-4 w-11/12 xs:w-11/12 sm:pl-10 lg:pl-0 sm:w-auto text-center sm:text-start">
+    <div className="flex flex-col gap-4 w-11/12 xs:w-11/12 sm:pl-10 lg:pl-0 sm:w-auto text-center mt-14 lg:mt-0 sm:text-start">
       <div className="flex gap-4 xl:gap-6 flex-col sm:flex-row">
         <div className="flex flex-col gap-4">
           <LightHeading>Данные о доме</LightHeading>
