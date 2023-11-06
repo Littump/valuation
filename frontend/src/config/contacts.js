@@ -17,7 +17,7 @@ export const contactsData = [
     name: "Даутов Максим",
     status: "product manager / business analyst",
     img: maxn,
-    telegram: "@maxd",
+    telegram: "@DautMM",
     github: "#",
     university: "НИУ ИТМО",
   },
