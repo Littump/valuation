@@ -179,7 +179,7 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
                   {isLoading ? (
                     <Loading />
                   ) : (
-                    <button type="submit" className="w-full h-full">
+                    <button type="submit" className="w-52 h-full">
                       Применить
                     </button>
                   )}

@@ -66,11 +66,7 @@ export const getPriceHook = () => {
       navigate("/analysis");
     },
     onError: () => {
-      dispatch({
-        type: "analysis/setCost",
-        cost: "неизвестно",
-      });
-      navigate("/analysis");
+      alert("Ошибка на сервере, попробуйте ещё раз:)");
     },
   });
 };

@@ -58,7 +58,7 @@ export function FiltersWrapper() {
           .required("Введите стоимость"),
     }),
   });
-
+  console.log(getPriceMutation);
   return (
     <Formik
       initialValues={{
@@ -147,18 +147,16 @@ export function FiltersWrapper() {
                   max="500"
                 />
               </div>
-              <PurpleButton variant="light">
-                <button
-                  className="w-full h-full xs:px-10 flex justify-center items-center"
-                  type="submit"
-                >
-                  {getPriceMutation.isLoading ? (
-                    <Loading />
-                  ) : (
-                    "Рассчитать стоимость"
-                  )}
-                </button>
-              </PurpleButton>
+              <button
+                className="button text-white font-semibold dark:text-dark-200 dark:hover:text-dark-100 bg-blue-500 dark:bg-dark-500 hover:bg-blue-400 dark:hover:bg-dark-800 w-full h-full xs:px-10 flex justify-center items-center"
+                type="submit"
+              >
+                {getPriceMutation.isLoading ? (
+                  <Loading />
+                ) : (
+                  "Рассчитать стоимость"
+                )}
+              </button>
             </div>
           </Form>
         );
