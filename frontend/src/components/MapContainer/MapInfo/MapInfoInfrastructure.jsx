@@ -5,11 +5,24 @@ import LightHeading from "../../UI/LightHeading/LightHeading.jsx";
 export default function MapInfoInfrastructure() {
   const infrastructure = useSelector((state) => state.building.infrastructure);
   const infrastructureKeys = Object.keys(infrastructure);
+  const colors = [
+    "text-mark-red",
+    "text-mark-blue",
+    "text-mark-orange",
+    "text-mark-yellow",
+    "text-mark-green",
+    "text-mark-purple",
+    "text-mark-violet",
+    "text-mark-brown",
+    "text-mark-pink",
+  ];
+  let i = -1;
   const infrastructureObjects = infrastructureKeys.map((key) => {
+    i += 1;
     if (infrastructure[key].count === 0) return null;
     return (
       <div key={infrastructure[key].items[0].name}>
-        <LightHeading>{key}</LightHeading>
+        <span className={`text-md font-bold ${colors[i]}`}>{key}</span>
         {infrastructure[key]?.items
           .map((item) => {
             return (

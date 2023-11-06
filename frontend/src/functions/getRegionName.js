@@ -3,7 +3,7 @@ export default function getRegionName(region) {
     ekb: "Екатеринбург",
     kzn: "Казань",
     msc: "Москва",
-    nng: "Нефтьюганск",
+    nng: "Нижний Новгород",
     nsk: "Новосибирск",
     spb: "Санкт-Петербург",
   };

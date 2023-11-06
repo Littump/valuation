@@ -17,13 +17,29 @@ export default function MapComponent() {
 
   const infrastructure = useSelector((state) => state.building.infrastructure);
   const infrastructurePositions = [];
-
+  const colors = [
+    "red",
+    "blue",
+    "orange",
+    "yellow",
+    "green",
+    "purple",
+    "violet",
+    "brown",
+    "pink",
+  ];
+  let i = 0;
   for (var key1 in infrastructure) {
     if (infrastructure[key1].count !== 0) {
       infrastructure[key1].items.forEach((el) => {
-        infrastructurePositions.push({ center: el.point, id: -2 });
+        infrastructurePositions.push({
+          center: el.point,
+          id: -2,
+          color: colors[i],
+        });
       });
     }
+    i++;
   }
   return (
     <div className="w-full h-full">
@@ -43,6 +59,7 @@ export default function MapComponent() {
             : 14
         }
         isMarksLink={activeFilter === "Похожие дома" ? true : false}
+        isDifferentColors={activeFilter === "Инфраструктура" ? true : false}
       />
     </div>
   );

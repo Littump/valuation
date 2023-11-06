@@ -10,6 +10,7 @@ import getRegionName from "../../functions/getRegionName.js";
 import getHouseMaterialReversed from "../../functions/getHouseMaterialReversed.js";
 import getObjectTypeReversed from "../../functions/getObjectTypeReversed.js";
 import getRepairName from "../../functions/getRepairName.js";
+import getRoomsNumberReversed from "../../functions/getRoomsNumberReversed.js";
 Chart.register(...registerables);
 
 export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
@@ -99,6 +100,8 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
           labels = labels.map((el) => getHouseMaterialReversed(el));
         } else if (values.axiosColumn === "тип квартиры") {
           labels = labels.map((el) => getObjectTypeReversed(el));
+        } else if (values.axiosColumn === "кол-во комнат") {
+          labels = labels.map((el) => getRoomsNumberReversed(el));
         } else if (values.axiosColumn === "ремонт") {
           labels = labels.map((el) => {
             return getRepairName(parseInt(el[2]), parseInt(el[0]));
@@ -175,15 +178,16 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
                 theme={num === 1 ? "primary" : "error"}
               />
               <div className="w-52 text-center">
-                <BlackButton>
-                  {isLoading ? (
+                {isLoading ? (
+                  <BlackButton>
                     <Loading />
-                  ) : (
-                    <button type="submit" className="w-52 h-full">
-                      Применить
-                    </button>
-                  )}
-                </BlackButton>
+                  </BlackButton>
+                ) : (
+                  <button type="submit" className="w-full text-center h-full">
+                    <BlackButton>Применить</BlackButton>
+                  </button>
+                )}
+
                 <Button>
                   <button
                     type="button"

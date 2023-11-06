@@ -49,7 +49,7 @@ export default function DropComponent() {
           >
             <img src={paperclip} alt="" />
             <Heading>
-              <div className="o">{fileName.substring(0, 10)}</div>
+              <div className="o">{fileName.substring(0, 7)}...</div>
             </Heading>
             <button
               className="close ml-auto "
