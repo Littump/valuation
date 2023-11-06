@@ -7,7 +7,6 @@ export default function MapInfoHouse() {
     (state) => state.building.buildingInfoResponse
   );
   let houseInfo = useSelector((state) => state.building.buildingInfo);
-  console.log(houseInfo);
   let responseElements = [
     { heading: "Газ", text: houseInfoResponse.gas },
     { heading: "Год", text: houseInfoResponse.year },

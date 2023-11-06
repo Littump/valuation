@@ -21,13 +21,13 @@ export default function DesktopMenu() {
             <NavLink text="Аналитика" href="/analytics" />
           </li>
           <li>
-            <NavLink text="Оценка рисков" href="/info" />
+            <NavLink text="Портфель" href="/info" />
           </li>
         </>
       )}
       {cost === "" || cost === null || cost === undefined ? null : (
         <li>
-          <NavLink href="/analysis" text="Анализ" />
+          <NavLink href="/analysis" text="Оценка" />
         </li>
       )}
     </ul>
