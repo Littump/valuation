@@ -6,7 +6,7 @@ export default function QrBlock({ heading, text, img, link }) {
   return (
     <div className="w-full">
       <BorderLayout>
-        <div className="flex sm:gap-10 flex-col py-7 sm:py-0 gap-3 sm:flex-row items-center text-center sm:text-start">
+        <div className="px-6 sm:px-0 flex sm:gap-10 flex-col py-7 sm:py-0 gap-3 sm:flex-row items-center text-center sm:text-start">
           <div className="w-36 h-36 bg-blue-300 rounded-xl flex justify-center items-center">
             <a
               href={link}
