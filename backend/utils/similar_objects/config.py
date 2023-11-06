@@ -49,5 +49,12 @@ area_borders: Dict[str, float] = {
     'max': 1.25
 }
 
-rad: float = 3.5
+rad: Dict[str, float] = {
+    'msc': 4.0,
+    'spb': 3.0,
+    'ekb': 2.4,
+    'kzn': 2.4,
+    'nng': 2.4,
+    'nsk': 2.4,
+}
 flats_to_show: int = 5
