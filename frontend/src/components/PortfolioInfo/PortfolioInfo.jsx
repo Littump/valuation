@@ -21,7 +21,7 @@ export default function PortfolioInfo() {
       />
       <PortfolioInfoCard
         cost={fullSumThen}
-        heading={"Общая стоимость объектов портфеля при покупки"}
+        heading={"Общая стоимость объектов портфеля при покупкe"}
         color={"red"}
       />
     </div>
