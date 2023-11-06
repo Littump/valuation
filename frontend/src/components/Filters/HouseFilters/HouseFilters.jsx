@@ -205,6 +205,48 @@ export default function HouseFilters({ values, errors, touched }) {
             name={"parkingType"}
           />
         </div>
+        <div className="w-full sm:w-auto flex flex-col items-center sm:items-start">
+          <label className="label cursor-pointer flex flex-col gap-2 items-start w-52">
+            <div className="flex gap-4">
+              <Field
+                type="checkbox"
+                name="setCoordinates"
+                className="checkbox ml-0 border-black dark:border-dark-200"
+              />
+              <span className="label-text font-semibold text-black dark:text-dark-100">
+                Ввести координаты
+              </span>
+            </div>
+          </label>
+          <div className="mt-2 flex gap-4">
+            <Field
+              name="coordinatesX"
+              type="number"
+              placeholder="широта"
+              className={
+                "myInput w-24 number " +
+                (!values.setCoordinates && "hidden") +
+                (errors.coordinatesX && touched.coordinatesX
+                  ? " border border-red dark:border-red"
+                  : "")
+              }
+              size="3"
+            />
+            <Field
+              name="coordinatesY"
+              type="number"
+              placeholder="долгота"
+              className={
+                "myInput  w-24 number " +
+                (!values.setCoordinates && "hidden") +
+                (errors.coordinatesY && touched.coordinatesY
+                  ? " border border-red dark:border-red"
+                  : "")
+              }
+              size="3"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

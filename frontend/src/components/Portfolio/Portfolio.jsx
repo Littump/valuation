@@ -5,7 +5,7 @@ import { PortfolioObjects } from "../PortfolioObjects/PortfolioObjects.jsx";
 
 export function Portfolio() {
   const auth_token = localStorage.getItem("auth_token");
-  if (auth_token === null) return <></>;
+  if (!auth_token === null) return <></>;
   return (
     <div className="py-10 xs:px-8 md:px-0">
       <div className="flex flex-col text-center items-center gap-20">
