@@ -18,7 +18,7 @@ export default function HouseFilters({ values, errors, touched }) {
           <LightHeading>Данные о доме</LightHeading>
           <Field
             name="address"
-            placeholder="Введите адрес"
+            placeholder="Москва, улица Профсоюзная, 42"
             className={
               "myInput " +
               (errors.address && touched.address
