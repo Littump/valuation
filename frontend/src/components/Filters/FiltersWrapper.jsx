@@ -21,6 +21,7 @@ export function FiltersWrapper() {
 
   const validationsSchema = yup.object().shape({
     addBuilding: yup.boolean(),
+    setCoordinates: yup.boolean(),
     address: yup
       .string()
       .typeError("Должно быть строкой")
@@ -57,6 +58,22 @@ export function FiltersWrapper() {
           .typeError("Должно быть строкой")
           .required("Введите стоимость"),
     }),
+    coordinatesX: yup.string().when("setCoordinates", {
+      is: true,
+      then: () =>
+        yup
+          .string()
+          .typeError("Должно быть строкой")
+          .required("Введите координаты"),
+    }),
+    coordinatesY: yup.string().when("setCoordinates", {
+      is: true,
+      then: () =>
+        yup
+          .string()
+          .typeError("Должно быть строкой")
+          .required("Введите координаты"),
+    }),
   });
   return (
     <Formik
@@ -74,7 +91,10 @@ export function FiltersWrapper() {
         renovationType: "",
         renovationTypePicked: "",
         addBuilding: false,
+        setCoordinates: false,
         isDrop: true,
+        coordinatesX: "",
+        coordinatesY: "",
         price: "",
       }}
       validationSchema={validationsSchema}
@@ -88,6 +108,8 @@ export function FiltersWrapper() {
           flatType: values.flatType,
           square: values.square,
           roomsNumber: values.roomsNumber,
+          setCoordinates: values.setCoordinates,
+          coordinates: [values.coordinatesX, values.coordinatesY],
           floor: values.floor,
           floors: values.floors,
           repair: !values.isDrop
@@ -124,7 +146,7 @@ export function FiltersWrapper() {
                       name="addBuilding"
                       className="checkbox ml-0 border-black dark:border-dark-200"
                     />
-                    <span className="label-text font-semibold text-black">
+                    <span className="label-text font-semibold text-black dark:text-dark-100">
                       Добавить квартиру в портфель
                     </span>
                   </label>

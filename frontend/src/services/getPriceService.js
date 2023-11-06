@@ -20,6 +20,7 @@ class getPriceService {
         has_lift: buildingInfo?.hasLift ? 1 : 0,
         parking_type: getParkingType(buildingInfo?.parkingType.toString()),
         text: buildingInfo.text.toString(),
+        //coordinats: !buildingInfo.setCoordinates ? "none" : {x:building.info.coordinates[0],y:building.info.coordinates[1] }
       })
       .then((res) => {
         if (res.status === 200) {
