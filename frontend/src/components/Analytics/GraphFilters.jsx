@@ -128,7 +128,7 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       <LightHeading>Зависимость</LightHeading>
 
       {values.isColumn ? (
-        <div className="flex w-full">
+        <div className="flex w-full justify-center">
           <GraphFilterDropdown
             value={values.axiosColumn}
             name="axiosColumn"
