@@ -10,7 +10,7 @@ export const contactsData = [
     status: "Data Scientist / Team Lead",
     img: maxi,
     telegram: "@MaksIgitov",
-    github: "#",
+    github: "https://github.com/MaximIgitov",
     university: "НИУ ИТМО",
   },
   {
