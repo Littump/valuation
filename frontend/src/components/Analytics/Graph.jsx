@@ -101,10 +101,10 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
         } else if (values.axiosColumn === "тип квартиры") {
           labels = labels.map((el) => getObjectTypeReversed(el));
         } else if (values.axiosColumn === "кол-во комнат") {
-          labels = labels.map((el) => getRoomsNumberReversed(el));
+          labels = labels.map((el) => getRoomsNumberReversed(parseInt(el)));
         } else if (values.axiosColumn === "ремонт") {
           labels = labels.map((el) => {
-            return getRepairName(parseInt(el[2]), parseInt(el[0]));
+            return getRepairName(parseInt(el[0]), parseInt(el[2]));
           });
         }
         return (
