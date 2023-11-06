@@ -21,8 +21,6 @@ from time import sleep
 from scipy.spatial import cKDTree
 import geopy.distance
 import joblib
-nltk.download('punkt')
-nltk.download('stopwords')
 import numpy as np
 
 _punctuation = list(punctuation)

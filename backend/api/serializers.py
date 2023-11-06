@@ -35,6 +35,7 @@ class PropertySerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
         fields = (
+            "id",
             "address",
             "house_material",
             "text",
@@ -66,8 +67,8 @@ class PropertySerializer(serializers.ModelSerializer):
         validated_data['house_year'] = house_info['house_year']
         validated_data['metro_min'] = house_info['metro_min']
         validated_data['author'] = self.context.get("request").user
-        property = Property.objects.create(**validated_data)
-        return property
+        propert = Property.objects.create(**validated_data)
+        return propert
 
 
 class PhotoUploadSerializer(serializers.Serializer):
