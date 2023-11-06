@@ -80,7 +80,7 @@ jobs:
             sudo docker exec site-backend-1 python manage.py migrate
             sudo docker exec site-backend-1 python manage.py loadcsv
             sudo docker exec site-backend-1 python -m nltk.downloader punkt
-            sudo docker exec site-backend-1 python -m nltk.downloader punkt
+            sudo docker exec site-backend-1 python -m nltk.downloader stopwords
             sudo docker cp /root/site/real_estate.csv site-backend-1:/app/utils/similar_objects
 
   send_message_telegram:
