@@ -5,6 +5,8 @@ const initialState = {
   firstGraphFilters: {
     axiosX: "площадь",
     axiosY: "цена",
+    axiosColumn: "регион",
+    isColumn: false,
     floor: {
       min: 1,
       max: 200,
@@ -43,6 +45,8 @@ const initialState = {
   secondGraphFilters: {
     axiosX: "площадь",
     axiosY: "цена",
+    axiosColumn: "регион",
+    isColumn: false,
     floor: {
       min: 1,
       max: 200,
@@ -101,10 +105,26 @@ export default createReducer(initialState, (builder) => {
       }
     })
     .addCase(setGraphData, (state, action) => {
-      if (action.number === 1) {
-        state.firstGraphData = [...action.objects];
+      if (action.chart === 1) {
+        if (action.number === 1) {
+          let new_data = [];
+          for (var key in action.data) {
+            new_data.push({ label: key, value: action.data[key] });
+          }
+          state.firstGraphData = [...new_data];
+        } else {
+          let new_data = [];
+          for (var key in action.data) {
+            new_data.push({ label: key, value: action.data[key] });
+          }
+          state.secondGraphData = [...new_data];
+        }
       } else {
-        state.secondGraphData = [...action.objects];
+        if (action.number === 1) {
+          state.firstGraphData = [...action.data];
+        } else {
+          state.secondGraphData = [...action.data];
+        }
       }
     });
 });

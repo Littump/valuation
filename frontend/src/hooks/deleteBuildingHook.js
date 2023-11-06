@@ -3,9 +3,7 @@ import userBuildingsService from "../services/userBuildingsService";
 
 export const deleteBuildingHook = () => {
   return useMutation({
-    mutationFn: (address) => userBuildingsService.deleteBuilding(address),
-    onSuccess: (data) => {
-      console.log(data);
-    },
+    mutationFn: (id) => userBuildingsService.deleteBuilding(id),
+    onSuccess: (data) => {},
   });
 };

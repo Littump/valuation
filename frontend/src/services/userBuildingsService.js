@@ -7,14 +7,18 @@ import getRoomsNumber from "../functions/getRoomsNumber";
 
 class userBuildingsService {
   async getBuildings() {
-    return axios.get(`${URL}/api/property/`, {
+    return axios.get(`${URL}/api/property?author=1`, {
       headers: {
         Authorization: "Token " + localStorage.getItem("auth_token"),
       },
     });
   }
   async deleteBuilding(id) {
-    return axios.delete(`${URL}/api/property/${id}`);
+    return axios.delete(`${URL}/api/property/${id}/`, {
+      headers: {
+        Authorization: "Token " + localStorage.getItem("auth_token"),
+      },
+    });
   }
   async addBuilding({ buildingInfo, price }) {
     return axios.post(

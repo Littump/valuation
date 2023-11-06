@@ -16,9 +16,9 @@ export default function ObjectCollapsedInfo({ buildingInfo }) {
     {
       heading: "Ремонт",
       text:
-        buildingInfo.repair === undefined
+        buildingInfo?.repair === undefined || buildingInfo.repair === null
           ? undefined
-          : buildingInfo.repair.join(" "),
+          : buildingInfo?.repair.join(" "),
     },
     { heading: "Материал", text: buildingInfo.house_material },
     { heading: "Парковка", text: buildingInfo.parking_type },

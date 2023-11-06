@@ -31,27 +31,27 @@ export default function PhoneMenu({ menuIsShown, setMenuIsShown }) {
         </svg>
       </button>
       <ul className="flex flex-col gap-6 w-full justify-center text-end">
-        <li onClick={() => setMenuIsShown((prev) => !prev)}>
+        <li>
           <NavLink text="Оценка стоимости квартиры" href="/" />
         </li>
-        <li onClick={() => setMenuIsShown((prev) => !prev)}>
+        <li>
           <NavLink text="О нас" href="/about" />
         </li>
         {token === null ? (
           <></>
         ) : (
           <>
-            <li onClick={() => setMenuIsShown((prev) => !prev)}>
+            <li>
               <NavLink text="Аналитика" href="/analytics" />
             </li>
-            <li onClick={() => setMenuIsShown((prev) => !prev)}>
+            <li>
               <NavLink text="Оценка рисков" href="/info" />
             </li>
           </>
         )}
 
         {address === "" || address === null || address === undefined ? null : (
-          <li onClick={() => setMenuIsShown((prev) => !prev)}>
+          <li>
             <NavLink href="/analysis" text="Анализ" />
           </li>
         )}

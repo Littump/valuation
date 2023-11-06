@@ -3,24 +3,27 @@ import PortfolioInfoCard from "./PortfolioInfoCard/PortfolioInfoCard.jsx";
 
 export default function PortfolioInfo() {
   let objects = useSelector((state) => state.myObjects.objects);
-  let fullSum = objects.reduce((sum, el) => +(sum + +el.cost).toFixed(2), 0);
-  let portfolioData = [
-    { heading: "Динамика за последние полгода", cost: 2.5 },
-    { heading: "Динамика за последний год", cost: -3 },
-    { heading: "Динамика за последние 5 лет", cost: 20 },
-  ];
-  let portfolioInfoCards = portfolioData.map((info) => (
-    <PortfolioInfoCard
-      key={info.heading + info.cost}
-      cost={info.cost}
-      heading={info.heading}
-      color={info.cost >= 0 ? "green" : "red"}
-    />
-  ));
+  let fullSumNow = objects.reduce(
+    (sum, el) => +(sum + +el.marketCost).toFixed(2),
+    0
+  );
+  let fullSumThen = objects.reduce(
+    (sum, el) => +(sum + +el.realCost).toFixed(2),
+    0
+  );
+
   return (
-    <div className="grid md:grid-cols-2 gap-6 ">
-      <PortfolioInfoCard cost={fullSum} heading={"Общая стоимость портфеля"} />
-      {portfolioInfoCards}
+    <div className="grid md:grid-cols-2 gap-6 h-full">
+      <PortfolioInfoCard
+        cost={fullSumNow}
+        heading={"Общая стоимость портфеля"}
+        color={"green"}
+      />
+      <PortfolioInfoCard
+        cost={fullSumThen}
+        heading={"Общая стоимость объектов портфеля при покупки"}
+        color={"red"}
+      />
     </div>
   );
 }

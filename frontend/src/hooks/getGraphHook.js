@@ -8,18 +8,38 @@ export const getGraphHook = (num) => {
   return useMutation({
     mutationFn: (values) => graphsService.getGraphData(values),
     onSuccess: (data) => {
-      if (num === 1) {
-        dispatch({
-          type: "graphs/setGraphData",
-          objects: data.data,
-          number: 1,
-        });
+      if (data?.data?.result?.length >= 1) {
+        if (num === 1) {
+          dispatch({
+            type: "graphs/setGraphData",
+            data: data.data.result,
+            number: 1,
+            chart: 0,
+          });
+        } else {
+          dispatch({
+            type: "graphs/setGraphData",
+            data: data.data.result,
+            number: 2,
+            chart: 0,
+          });
+        }
       } else {
-        dispatch({
-          type: "graphs/setGraphData",
-          objects: data.data,
-          number: 2,
-        });
+        if (num === 1) {
+          dispatch({
+            type: "graphs/setGraphData",
+            data: data.data,
+            number: 1,
+            chart: 1,
+          });
+        } else {
+          dispatch({
+            type: "graphs/setGraphData",
+            data: data.data,
+            number: 2,
+            chart: 1,
+          });
+        }
       }
     },
   });

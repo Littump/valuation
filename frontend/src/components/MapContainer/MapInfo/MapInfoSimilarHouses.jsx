@@ -5,7 +5,7 @@ export default function MapInfoSimilarHouses() {
   let houses = useSelector((state) => state.similarBuildings.buildings);
   houses = houses.map((el) => el.address);
   return (
-    <div className="flex flex-col items-center xs:items-start gap-4 scroll">
+    <div className="flex flex-col items-center xs:items-start gap-6 scroll">
       <MainHeading>Информация о доме</MainHeading>
       <div className="max-h-72 overflow-y-scroll flex flex-col gap-4">
         {houses.map((el) => (

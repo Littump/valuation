@@ -35,20 +35,10 @@ export default function Analytics() {
       </div>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 max-w-[80vw] lg:max-w-full mx-auto">
         <div>
-          <Graph
-            bgColor={"rgba(56,144,200,0.3)"}
-            borderColor={"rgba(56,144,200,1)"}
-            num={1}
-            type={isAll}
-          />
+          <Graph bgColor={"rgba(56,144,200,1)"} num={1} type={isAll} />
         </div>
         <div className="hidden lg:block">
-          <Graph
-            bgColor={"rgba(200,0,4,0.3)"}
-            borderColor={"rgba(200,0,4,1)"}
-            num={2}
-            type={isAll}
-          />
+          <Graph bgColor={"rgba(200,0,4,1)"} num={2} type={isAll} />
         </div>
       </div>
     </div>

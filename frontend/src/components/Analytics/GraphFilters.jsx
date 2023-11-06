@@ -7,6 +7,7 @@ import {
   houseTypes,
   region,
   repairTypes,
+  axiosColumn,
 } from "../../config/graph.js";
 import { Field } from "formik";
 import MainHeading from "../UI/MainHeading/MainHeading.jsx";
@@ -126,16 +127,26 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       <MainHeading>Данные о доме</MainHeading>
       <LightHeading>Зависимость</LightHeading>
       <div className="flex gap-4 flex-row items-center mb-6">
-        <GraphFilterDropdown
-          value={values.axiosX}
-          name="axiosX"
-          options={axios}
-        />
-        <GraphFilterDropdown
-          value={values.axiosY}
-          name="axiosY"
-          options={axios}
-        />
+        {values.isColumn ? (
+          <GraphFilterDropdown
+            value={values.axiosColumn}
+            name="axiosColumn"
+            options={axiosColumn}
+          />
+        ) : (
+          <>
+            <GraphFilterDropdown
+              value={values.axiosX}
+              name="axiosX"
+              options={axios}
+            />
+            <GraphFilterDropdown
+              value={values.axiosY}
+              name="axiosY"
+              options={axios}
+            />
+          </>
+        )}
       </div>
       <div className="flex flex-wrap gap-4 flex-row items-center justify-center">
         {dropdownFilters}

@@ -6,8 +6,14 @@ import { Button } from "../Button/Button.jsx";
 import { deleteBuildingHook } from "../../../hooks/deleteBuildingHook";
 import ObjectCollapsed from "./ObjectCollapsed.jsx";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
-export default function Object({ buildingInfo, hasDelete = true, name }) {
+export default function Object({
+  buildingInfo,
+  hasDelete = true,
+  name,
+  openFunctionAction = "similarBuildings/setIsOpen",
+}) {
   const dispatch = useDispatch();
   const { mutate } = deleteBuildingHook();
   let getLiquidityImg = (realCost, marketCost) => {
@@ -23,7 +29,7 @@ export default function Object({ buildingInfo, hasDelete = true, name }) {
   return (
     <div
       className={
-        "collapse collapse-arrow bg-light-gray rounded-xl dark:bg-dark-600 md:pr-6 " +
+        " collapse collapse-arrow bg-light-gray rounded-xl dark:bg-dark-600 md:pr-6 " +
         (buildingInfo.isOpen ? "collapse-open" : "")
       }
       name={name}
@@ -31,7 +37,7 @@ export default function Object({ buildingInfo, hasDelete = true, name }) {
       <div
         className="collapse-title text-xl font-medium flex flex-col md:flex-row md:items-center justify-start py-3 gap-2 sm:pl-6 "
         onClick={() =>
-          dispatch({ type: "similarBuildings/setIsOpen", id: buildingInfo.id })
+          dispatch({ type: openFunctionAction, id: buildingInfo.id })
         }
       >
         {!hasDelete ? (
@@ -47,7 +53,7 @@ export default function Object({ buildingInfo, hasDelete = true, name }) {
           />
         )}
 
-        <div className="items-start md:ml-2 max-w-3xl">
+        <div className="flex flex-col items-start md:ml-2 max-w-3xl">
           <span className="text-sm dark:text-dark-100">
             ID: {buildingInfo.id}
           </span>
@@ -91,10 +97,15 @@ export default function Object({ buildingInfo, hasDelete = true, name }) {
                   className={
                     " text-xl font-bold lg:ml-auto mr-2 " +
                     "text-" +
-                    getColor(buildingInfo.realCost, buildingInfo.marketCost)
+                    (hasDelete
+                      ? "green"
+                      : getColor(
+                          buildingInfo.realCost,
+                          buildingInfo.marketCost
+                        ))
                   }
                 >
-                  {buildingInfo.price + " млн Р"}
+                  {buildingInfo.marketCost + " млн Р"}
                 </span>
               </div>
             </>
@@ -105,7 +116,8 @@ export default function Object({ buildingInfo, hasDelete = true, name }) {
           <button
             type="button"
             onClick={() => {
-              mutate(buildingInfo.address);
+              mutate(buildingInfo.id);
+              dispatch({ type: "myObjects/deleteObject", id: buildingInfo.id });
             }}
           >
             <svg

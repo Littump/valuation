@@ -18,6 +18,9 @@ export default function getRepairName(num1, num2) {
       ["С ремонтом и мебелью", "старый ремонт"],
     ],
   ];
-
-  return repairQualdata[num1][num2];
+  if (num1 <= 3 && num2 <= 3 && num1 >= 0 && num2 >= 0) {
+    return repairQualdata[num1][num2];
+  } else {
+    return null;
+  }
 }

@@ -16,7 +16,6 @@ export const getPriceHook = () => {
       return getPriceService.getPrice(buildingInfo);
     },
     onSuccess: (data) => {
-      console.log(data);
       dispatch({
         type: "analysis/setCost",
         cost: Math.round(data?.data?.price) / 1000000,
@@ -41,14 +40,14 @@ export const getPriceHook = () => {
       similarObjects.forEach((buildingInfo) => {
         let objectInfo = {
           house_material: getHouseMaterialReversed(buildingInfo.house_material),
-          object_type: getObjectTypeReversed("первичка"),
+          object_type: getObjectTypeReversed(buildingInfo.object_type),
           repair: getRepairName(buildingInfo.repair[0], buildingInfo.repair[2]),
           has_lift: !!buildingInfo.has_lift,
           parking_type: getParkingTypeReversed(buildingInfo.parking_type),
           address: buildingInfo.address,
           floor: buildingInfo.floor,
           cnt_rooms: buildingInfo.cnt_rooms,
-          floors: buildingInfo.rooms,
+          floors: buildingInfo.floors,
           area: buildingInfo.area,
           coordinates: [buildingInfo.latitude, buildingInfo.longitude], //todo
           isOpen: false,

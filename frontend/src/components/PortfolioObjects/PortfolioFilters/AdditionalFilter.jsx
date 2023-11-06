@@ -17,7 +17,7 @@ export default function AdditionalFilter({ filter }) {
           className="hidden"
           onClick={() => setFilter("низкая")}
         />
-        <Tag active={filter.indexOf("низкая") !== -1}>низкая ликвидность</Tag>
+        <Tag active={filter.indexOf("низкая") !== -1}>отрицательный рост</Tag>
       </label>
       <label>
         <Field
@@ -27,7 +27,7 @@ export default function AdditionalFilter({ filter }) {
           className="hidden"
           onClick={() => setFilter("средняя")}
         />
-        <Tag active={filter.indexOf("средняя") !== -1}>средняя ликвидность</Tag>
+        <Tag active={filter.indexOf("средняя") !== -1}>нормальная цена</Tag>
       </label>
       <label>
         <Field
@@ -37,7 +37,7 @@ export default function AdditionalFilter({ filter }) {
           value="высокая"
           className="hidden"
         />
-        <Tag active={filter.indexOf("высокая") !== -1}>высокая ликвидность</Tag>
+        <Tag active={filter.indexOf("высокая") !== -1}>положительный рост</Tag>
       </label>
     </div>
   );
