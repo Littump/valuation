@@ -5,8 +5,7 @@ import Heading from "../Heading/Heading.jsx";
 import { Button } from "../Button/Button.jsx";
 import { deleteBuildingHook } from "../../../hooks/deleteBuildingHook";
 import ObjectCollapsed from "./ObjectCollapsed.jsx";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Object({
   buildingInfo,
@@ -16,6 +15,7 @@ export default function Object({
 }) {
   const dispatch = useDispatch();
   const { mutate } = deleteBuildingHook();
+  let object_price = useSelector((state) => state.building.marketCost);
   let getLiquidityImg = (realCost, marketCost) => {
     if (realCost / marketCost >= 1.05) return low;
     else if (realCost / marketCost <= 0.95) return high;
@@ -69,11 +69,11 @@ export default function Object({
                 className={
                   " text-xl font-bold lg:ml-auto mr-2 " +
                   "text-" +
-                  (Math.floor(buildingInfo.price) % 3 === 0
+                  (buildingInfo.price / object_price >= 1.05
                     ? "red"
-                    : Math.floor(buildingInfo.price) % 3 === 1
-                    ? "blue-500"
-                    : "green")
+                    : buildingInfo.price / object_price <= 0.95
+                    ? "green"
+                    : "blue-500")
                 }
               >
                 {buildingInfo.price + " млн Р"}

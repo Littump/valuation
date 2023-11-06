@@ -22,12 +22,9 @@ export default function AboutHeader() {
               >
                 телеграм
               </a>
-              <a
-                className="text-blue-500 text-lg hover:text-black transition dark:hover:text-white dark:text-dark-300"
-                href="mailto:estate.valuation.tech@gmail.com"
-              >
-                почта
-              </a>
+              <div className="text-blue-500 text-lg hover:text-black transition dark:hover:text-white dark:text-dark-300">
+                почтаestate.valuation.tech@gmail.com
+              </div>
               <a
                 className="text-blue-500 text-lg hover:text-black transition dark:hover:text-white dark:text-dark-300"
                 href={presentation}

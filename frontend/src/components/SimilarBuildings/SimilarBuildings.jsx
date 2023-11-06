@@ -18,9 +18,6 @@ export function SimilarBuildings() {
         <MainHeading>Похожие квартиры</MainHeading>
       </div>
       <div className="flex flex-col gap-4">{buildingsComponent}</div>
-      {/* <div className="flex justify-start">
-                <PurpleButton><div className="px-4">Показать больше вариантов</div></PurpleButton>
-            </div> */}
     </div>
   );
 }

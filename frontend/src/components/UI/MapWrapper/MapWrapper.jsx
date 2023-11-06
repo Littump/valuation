@@ -5,12 +5,48 @@ import {
   ZoomControl,
 } from "@pbe/react-yandex-maps";
 import mark from "../../../../public/imgs/place.svg";
+import redMark from "../../../../public/imgs/marks/redMark.svg";
+import blueMark from "../../../../public/imgs/marks/blueMark.svg";
+import yellowMark from "../../../../public/imgs/marks/yellowMark.svg";
+import greenMark from "../../../../public/imgs/marks/greenMark.svg";
+import violetMark from "../../../../public/imgs/marks/violetMark.svg";
+import purpleMark from "../../../../public/imgs/marks/purpleMark.svg";
+import orangeMark from "../../../../public/imgs/marks/orangeMark.svg";
+import brownMark from "../../../../public/imgs/marks/brownMark.svg";
+import pinkMark from "../../../../public/imgs/marks/pinkMark.svg";
 import { useDispatch } from "react-redux";
 import { animateScroll as scroll } from "react-scroll";
 
-export default function MapWrapper({ buildings, isMarksLink, zoom = 16 }) {
+export default function MapWrapper({
+  buildings,
+  isMarksLink,
+  zoom = 16,
+  isDifferentColors = false,
+}) {
+  let diffirentColorMarks = {
+    red: redMark,
+    blue: blueMark,
+    orange: orangeMark,
+    yellow: yellowMark,
+    green: greenMark,
+    purple: purpleMark,
+    violet: violetMark,
+    brown: brownMark,
+    pink: pinkMark,
+  };
   let dispatch = useDispatch();
   let placemarks = buildings.map((building) => {
+    if (isDifferentColors)
+      return (
+        <Placemark
+          key={building?.center?.toString() + building.id}
+          geometry={building.center}
+          options={{
+            iconLayout: "default#image",
+            iconImageHref: diffirentColorMarks[building?.color],
+          }}
+        />
+      );
     return (
       <Placemark
         key={building?.center?.toString() + building.id}

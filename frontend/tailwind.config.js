@@ -48,6 +48,17 @@ export default {
         800: "",
         900: "#333c4d",
       },
+      mark: {
+        red: "#E55C5C",
+        blue: "#476BF0",
+        orange: "#FA8200",
+        yellow: "#F1DD25",
+        green: "#6A9F48",
+        purple: "#9931D8",
+        violet: "#7364E3",
+        brown: "#73360A",
+        pink: "#FFBBBB",
+      },
       dark: {
         100: "#e2e2e9",
         200: "#bdc5db",
