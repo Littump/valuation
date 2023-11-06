@@ -57,4 +57,5 @@ rad: Dict[str, float] = {
     'nng': 2.4,
     'nsk': 2.4,
 }
+
 flats_to_show: int = 5
