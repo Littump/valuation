@@ -49,5 +49,5 @@ area_borders: Dict[str, float] = {
     'max': 1.25
 }
 
-rad: float = 4.0
+rad: float = 3.5
 flats_to_show: int = 5
