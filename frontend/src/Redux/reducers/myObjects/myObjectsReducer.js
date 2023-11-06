@@ -8,23 +8,7 @@ import {
 } from "./myObjectsAction.js";
 
 const initialState = {
-  objects: [
-    {
-      tag: null,
-      address: null,
-      houseType: null,
-      description: null,
-      flatType: null,
-      square: null,
-      roomsNumber: null,
-      floor: null,
-      id: null,
-      renovationType: null,
-      renovationTypePicked: null,
-      cost: null,
-      liquidity: null,
-    },
-  ],
+  objects: [],
   mainFilter: "",
   additionalFilter: ["низкая", "средняя", "высокая"],
 };

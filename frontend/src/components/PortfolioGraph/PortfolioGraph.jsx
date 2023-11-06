@@ -1,6 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { useSelector } from "react-redux";
+import Heading from "../UI/Heading/Heading";
 
 export default function PortfolioGraph() {
   let objects = useSelector((state) => state.myObjects.objects);
@@ -32,7 +33,13 @@ export default function PortfolioGraph() {
       },
     ],
   };
-
+  if (objects.length === 0) {
+    return (
+      <div className="h-full px-20 bg-light-gray rounded-xl overflow-hidden flex flex-col justify-center py-8 items-center dark:bg-dark-600">
+        <Heading>Добавьте в портфель объекты, чтобы увидеть аналитику</Heading>
+      </div>
+    );
+  }
   return (
     <div className="h-full bg-light-gray rounded-xl overflow-hidden flex flex-col justify-between py-8 items-center dark:bg-dark-600">
       <div className="text-xl text-black font-semibold mt-4 dark:text-dark-100">

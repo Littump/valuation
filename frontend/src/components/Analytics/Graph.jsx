@@ -6,7 +6,6 @@ import { Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getGraphHook } from "../../hooks/getGraphHook.js";
 import Loading from "../UI/Loading/Loading.jsx";
-import FormObserver from "./FormObserver.jsx";
 import getRegionName from "../../functions/getRegionName.js";
 import getHouseMaterialReversed from "../../functions/getHouseMaterialReversed.js";
 import getObjectTypeReversed from "../../functions/getObjectTypeReversed.js";
@@ -89,6 +88,7 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
       }}
       onSubmit={(values) => {
         mutate({ values, type }); //all || user
+        dispatch({ type: "graphs/setFilters", number: num, filters: values });
       }}
     >
       {({ values, setFieldValue, setValues }) => {
@@ -106,7 +106,6 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
         }
         return (
           <Form className="flex flex-col gap-8 my-10 items-center">
-            <FormObserver values={values} number={num} />
             <div className="bg-light-gray p-10 rounded-xl flex flex-col items-center gap-6 dark:bg-dark-400 dark:border dark:border-dark-300">
               <div className="w-full">
                 {values.isColumn ? (

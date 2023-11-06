@@ -16,7 +16,7 @@ export default function Login() {
   return (
     <>
       {auth_token === null ? (
-        <div className=" bg-white w-full h-[100vh] flex flex-col gap-3 justify-center items-center dark:bg-dark-600">
+        <div className=" bg-gradient-to-tr from-white dark:from-dark-gray-600 from-70% to-blue-500 dark:to-dark-gray-600 w-full h-[100vh] flex flex-col gap-3 justify-center items-center ">
           <Formik
             initialValues={{ username: "", password: "" }}
             validationSchema={loginSchema}

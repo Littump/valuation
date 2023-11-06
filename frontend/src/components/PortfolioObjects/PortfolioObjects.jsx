@@ -16,7 +16,6 @@ export function PortfolioObjects() {
   const additionalFilter = useSelector(
     (state) => state.myObjects.additionalFilter
   );
-  console.log(additionalFilter);
   const { data, isLoading, isSuccess } = getBuildingsHook();
   useEffect(() => {
     if (isSuccess) {

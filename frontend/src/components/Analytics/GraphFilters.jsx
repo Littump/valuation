@@ -126,28 +126,30 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
     <div className="flex flex-col items-center gap-4 mt-4">
       <MainHeading>Данные о доме</MainHeading>
       <LightHeading>Зависимость</LightHeading>
-      <div className="flex gap-4 flex-row items-center mb-6">
-        {values.isColumn ? (
+
+      {values.isColumn ? (
+        <div className="flex w-full">
           <GraphFilterDropdown
             value={values.axiosColumn}
             name="axiosColumn"
             options={axiosColumn}
           />
-        ) : (
-          <>
-            <GraphFilterDropdown
-              value={values.axiosX}
-              name="axiosX"
-              options={axios}
-            />
-            <GraphFilterDropdown
-              value={values.axiosY}
-              name="axiosY"
-              options={axios}
-            />
-          </>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="flex gap-4 flex-row items-center mb-6">
+          <GraphFilterDropdown
+            value={values.axiosX}
+            name="axiosX"
+            options={axios}
+          />
+          <GraphFilterDropdown
+            value={values.axiosY}
+            name="axiosY"
+            options={axios}
+          />
+        </div>
+      )}
+
       <div className="flex flex-wrap gap-4 flex-row items-center justify-center">
         {dropdownFilters}
         {fieldFilters}
