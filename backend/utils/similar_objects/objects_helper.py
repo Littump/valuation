@@ -48,7 +48,7 @@ class ObjectsHelper:
         near_flats: List[int] = []
         for ind in cut_flat_df.index:
             flat_from_df_point = (cut_flat_df.loc[ind, "latitude"], cut_flat_df.loc[ind, "longitude"])
-            if geodesic(flat_from_df_point, target_flat_point).km < rad:
+            if geodesic(flat_from_df_point, target_flat_point).km < rad[target_flat_info["region"]]:
                 near_flats.append(ind)
         cut_flat_df = cut_flat_df.loc[near_flats, :]
         mas: List[tuple[int, float]] = self.distance_multi(cut_flat_df, target_flat_info)
