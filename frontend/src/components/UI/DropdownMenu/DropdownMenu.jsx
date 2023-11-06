@@ -38,7 +38,7 @@ export default function DropdownMenu({ options, value, name, error }) {
       <div
         onClick={() => setMenuIsShown(false)}
         className={
-          "w-full z-10 grid rounded-lg bg-white dark:bg-dark-600 max-h-32 overflow-x-hidden overflow-y-scroll border border-gray dark:border-dark-700 absolute transition " +
+          "w-full mt-1 z-10 grid rounded-lg bg-white dark:bg-dark-600 max-h-32 overflow-x-hidden overflow-y-scroll border border-gray dark:border-dark-700 absolute transition " +
           (!menuIsShown && "invisible")
         }
       >
