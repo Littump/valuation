@@ -8,9 +8,9 @@ export default function Analysis() {
   const buildingInfo = useSelector((state) => state.building.buildingInfo);
 
   if (
-    buildingInfo.address === "" ||
-    buildingInfo.address === null ||
-    buildingInfo.address === undefined
+    buildingInfo.marketPrice === "" ||
+    buildingInfo.marketPrice === null ||
+    buildingInfo.marketPrice === undefined
   ) {
     return (
       <div className="w-full h-full flex justify-center items-center mt-40 flex-col gap-4">
