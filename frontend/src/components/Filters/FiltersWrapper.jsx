@@ -124,7 +124,7 @@ export function FiltersWrapper() {
                       name="addBuilding"
                       className="checkbox ml-0 border-black dark:border-dark-200"
                     />
-                    <span className="label-text font-semibold">
+                    <span className="label-text font-semibold text-dark-100">
                       Добавить квартиру в портфель
                     </span>
                   </label>
