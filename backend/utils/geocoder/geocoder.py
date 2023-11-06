@@ -16,6 +16,19 @@ def get_coordinates(address: str):
         data = response.json()
         if data['meta']['code'] == 200:
             break
+    cities = [
+        'Москва',
+        'Санкт-Петербург',
+        'Нижний Новгород',
+        'Казань',
+        'Новосибирск',
+        'Екатеринбург',
+    ]
+    for elem in data['result']['items']:
+        for city in cities:
+            if city in elem['full_name']:
+                point = elem['point']
+                return point['lat'], point['lon'], elem['full_name']
     point = data['result']['items'][0]['point']
     full_name = data['result']['items'][0]['full_name']
     return point['lat'], point['lon'], full_name
