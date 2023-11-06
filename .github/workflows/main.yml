@@ -76,11 +76,11 @@ jobs:
             sudo docker compose pull
             sudo docker compose down
             sudo docker compose up -d
-            sudo docker compose exec backend python manage.py makemigrations
-            sudo docker compose exec backend python manage.py migrate
-            sudo docker compose exec backend python manage.py loadcsv
-            sudo docker compose exec backend python -m nltk.downloader punkt
-            sudo docker compose exec backend python -m nltk.downloader stopwords
+            sudo docker exec site-backend-1 python manage.py makemigrations
+            sudo docker exec site-backend-1 python manage.py migrate
+            sudo docker exec site-backend-1 python manage.py loadcsv
+            sudo docker exec site-backend-1 python -m nltk.downloader punkt
+            sudo docker exec site-backend-1 python -m nltk.downloader punkt
             sudo docker cp /root/site/real_estate.csv site-backend-1:/app/utils/similar_objects
 
   send_message_telegram:
