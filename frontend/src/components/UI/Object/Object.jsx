@@ -82,8 +82,8 @@ export default function Object({
           ) : (
             <>
               <div className="flex flex-col mr-6">
-                <span className="text-xs text-dark-gray-400 dark:text-dark-200">
-                  Вероятный рост цены за полгода
+                <span className="text-xs max-w-[100px] text-dark-gray-400 dark:text-dark-200">
+                  Вероятный рост цены (за полгода)
                 </span>
                 <span
                   className={`text-sm font-bold lg:ml-auto mr-2 ${

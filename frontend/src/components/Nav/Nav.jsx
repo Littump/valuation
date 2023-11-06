@@ -1,14 +1,16 @@
 import { BlackButton } from "../UI/Button/Button.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import DesktopMenu from "./DesktopMenu.jsx";
 import PhoneMenu from "./PhoneMenu.jsx";
 import { useDetectClickOutside } from "react-detect-click-outside";
+
 export default function Nav() {
   let [menuIsShown, setMenuIsShown] = useState(false);
   const auth_token = localStorage.getItem("auth_token");
   let dispatch = useDispatch();
+  const navigate = useNavigate();
   const ref = useDetectClickOutside({
     onTriggered: () => setMenuIsShown(false),
   });
@@ -88,6 +90,7 @@ export default function Nav() {
                   type="button"
                   onClick={() => {
                     localStorage.removeItem("auth_token");
+                    navigate("/");
                   }}
                 >
                   Выйти
