@@ -81,6 +81,7 @@ jobs:
             sudo docker compose exec backend python manage.py loadcsv
             sudo docker compose exec backend python -m nltk.downloader punkt
             sudo docker compose exec backend python -m nltk.downloader stopwords
+            sudo docker cp /root/site/real_estate.csv site-backend-1:/app/utils/similar_objects
 
   send_message_telegram:
     name: message in tg
@@ -93,3 +94,33 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: Деплой valuation успешно выполнен!
+      - name: sms
+        uses: appleboy/telegram-action@master
+        with:
+          to: 1967800119
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: Деплой valuation успешно выполнен!
+      - name: sms
+        uses: appleboy/telegram-action@master
+        with:
+          to: 970231975
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: Деплой valuation успешно выполнен!
+      - name: sms
+        uses: appleboy/telegram-action@master
+        with:
+          to: 826341520
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: Деплой valuation успешно выполнен!
+      - name: sms
+        uses: appleboy/telegram-action@master
+        with:
+          to: 949454025
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: Деплой valuation успешно выполнен!
+      # - name: sms
+      #   uses: appleboy/telegram-action@master
+      #   with:
+      #     to: 995262335
+      #     token: ${{ secrets.TELEGRAM_TOKEN }}
+      #     message: Деплой valuation успешно выполнен!
