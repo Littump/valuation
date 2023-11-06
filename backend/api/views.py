@@ -122,9 +122,9 @@ class PropertyViewSet(viewsets.ModelViewSet):
             field_2 = params['field2']
             if field_2 == 'price':
                 if 'author' in params:
-                    field_1 = 'price_buy'
+                    field_2 = 'price_buy'
                 else:
-                    field_1 = 'price_sell'
+                    field_2 = 'price_sell'
             cnt = 0
             result = []
             queryset_list = list(queryset)
@@ -159,6 +159,8 @@ class PropertyViewSet(viewsets.ModelViewSet):
         return Response(serialized_property)
 
     def get_queryset(self):
+        if self.request.method != 'GET' or self.action == 'retrieve':
+            return self.queryset
         user = self.request.user
         params = self.request.query_params
         if 'author' in params:

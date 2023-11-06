@@ -1,4 +1,3 @@
 venv
 .DS_Store
 backend/utils/similar_objects/real_estate.csv
-backend/api/management/commands/data.csv
