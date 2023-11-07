@@ -205,6 +205,8 @@ export default function HouseFilters({ values, errors, touched }) {
             name={"parkingType"}
           />
         </div>
+        {/*
+          
         <div className="w-full sm:w-auto flex flex-col items-center sm:items-start">
           <label className="label cursor-pointer flex flex-col gap-2 items-start w-52">
             <div className="flex gap-4">
@@ -246,7 +248,7 @@ export default function HouseFilters({ values, errors, touched }) {
               size="3"
             />
           </div>
-        </div>
+        </div>*/}
       </div>
     </div>
   );
