@@ -13,7 +13,7 @@ export default function MapButtons() {
   }
   let filters =["Этот дом"];
   if(similar_objects.length !== 0){
-    filters.push("Похожие дома");
+    filters.push("Похожие квартиры");
   }
   if(infrastructure_sum !== 0){
     filters.push("Инфраструктура");

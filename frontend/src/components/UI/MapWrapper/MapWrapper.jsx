@@ -23,7 +23,8 @@ export default function MapWrapper({
   zoom = 16,
   isDifferentColors = false,
 }) {
-  let diffirentColorMarks = {
+  const date = new Date();
+  const diffirentColorMarks = {
     red: redMark,
     blue: blueMark,
     orange: orangeMark,
@@ -39,8 +40,8 @@ export default function MapWrapper({
     if (isDifferentColors)
       return (
         <Placemark
-          key={building?.center?.toString() + building.id}
-          geometry={building.center}
+          key={building?.center?.toString() + building.id}  
+          geometry={building.center} 
           options={{
             iconLayout: "default#image",
             iconImageHref: diffirentColorMarks[building?.color],

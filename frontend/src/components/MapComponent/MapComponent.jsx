@@ -16,7 +16,7 @@ export default function MapComponent() {
   }));
 
   const infrastructure = useSelector((state) => state.building.infrastructure);
-  const infrastructurePositions = [];
+  const infrastructurePositions = new Set();
   const colors = [
     "red",
     "blue",
@@ -28,37 +28,40 @@ export default function MapComponent() {
     "brown",
     "pink",
   ];
+
+  let j = 0;
   let i = 0;
   for (var key1 in infrastructure) {
     if (infrastructure[key1].count !== 0) {
       infrastructure[key1].items.forEach((el) => {
-        infrastructurePositions.push({
+        infrastructurePositions.add({
           center: el.point,
-          id: -2,
+          id: j,
           color: colors[i],
         });
+        j++;
       });
     }
-    i++;
+    i++
   }
   return (
     <div className="w-full h-full">
       <MapWrapper
         buildings={
-          activeFilter === "Похожие дома"
+          activeFilter === "Похожие квартиры"
             ? similarBuildingsPositions
             : activeFilter === "Этот дом"
             ? [{ center: houseCoordinates, id: -1 }]
-            : infrastructurePositions
+            : [...infrastructurePositions]
         }
         zoom={
-          activeFilter === "Похожие дома"
+          activeFilter === "Похожие квартиры"
             ? 11
             : activeFilter === "Этот дом"
             ? 16
             : 14
         }
-        isMarksLink={activeFilter === "Похожие дома" ? true : false}
+        isMarksLink={activeFilter === "Похожие квартиры" ? true : false}
         isDifferentColors={activeFilter === "Инфраструктура" ? true : false}
       />
     </div>

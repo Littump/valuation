@@ -9,7 +9,7 @@ export default function MapContainer() {
   let activeFilter = useSelector((state) => state.maps.activeFilter);
   let MapInfoObjects = {
     "Этот дом": <MapInfoHouse />,
-    "Похожие дома": <MapInfoSimilarHouses />,
+    "Похожие квартиры": <MapInfoSimilarHouses />,
     Инфраструктура: <MapInfoInfrastructure />,
   };
   return (
