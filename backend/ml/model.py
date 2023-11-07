@@ -437,7 +437,7 @@ class PriceEstimator:
                     embeddings = x2.cpu()
                 else:
                     iter_estims = torch.concat((iter_estims, x.cpu()))
-                    embeddings = torch.concat((embeddings, x2.cpu(parking_type)))
+                    embeddings = torch.concat((embeddings, x2.cpu()))
 
         interior_style, interior_qual = iter_estims.mean(axis=0).numpy()
         embeddings = embeddings.mean(axis=0).numpy()
