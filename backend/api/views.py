@@ -112,6 +112,8 @@ class PropertyViewSet(viewsets.ModelViewSet):
                 value = getattr(propert, field)
                 if value:
                     result[value] += 1
+            if field in ['parking_type', 'house_material']:
+                del result['0']
             return Response(result)
         if params['type_analytics'] == 'cloud':
             field_1 = params['field1']
