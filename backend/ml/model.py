@@ -22,6 +22,9 @@ from scipy.spatial import cKDTree
 import geopy.distance
 import joblib
 import numpy as np
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
 
 _punctuation = list(punctuation)
 
