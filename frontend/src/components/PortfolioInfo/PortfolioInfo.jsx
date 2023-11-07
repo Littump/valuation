@@ -16,6 +16,10 @@ export default function PortfolioInfo() {
   );
   let raise_num = (fullSumNow-fullSumThen).toFixed(2);
   let raise_percent=((fullSumNow / fullSumThen) - 1).toFixed(2)
+  if(fullSumThen === 0){
+    raise_percent=0;
+  }
+  
 
   return (
     <div className="grid md:grid-cols-2 gap-6 h-full">

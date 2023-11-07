@@ -72,7 +72,7 @@ const initialState = {
       max: 60,
     },
     roomsNumber: {
-      min: 1,
+      min: 0,
       max: 20,
     },
     region: "Любой",

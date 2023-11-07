@@ -37,7 +37,7 @@ class graphsService {
       }&floor=${values.floor.min + "," + values.floor.max}&price=${
         values.price.min * 1000000 + "," + values.price.max * 1000000
       }&cnt_rooms=${
-        values.roomsNumber.min + "," + values.roomsNumber.max
+        (values.roomsNumber.min === 1 ? 0 : values.roomsNumber.min) + "," + values.roomsNumber.max
       }&floors=${values.floors.min + "," + values.floors.max}&area=${
         values.area.min + "," + values.area.max
       }&house_year=${values.date.min + "," + values.date.max}&metro_min=${

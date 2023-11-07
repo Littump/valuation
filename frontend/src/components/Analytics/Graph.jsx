@@ -76,7 +76,7 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
           max: 60,
         },
         roomsNumber: {
-          min: 1,
+          min: 0,
           max: 20,
         },
         region: "Любой",

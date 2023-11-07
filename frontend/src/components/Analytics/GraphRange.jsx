@@ -31,7 +31,7 @@ export function GraphRange({ values, min, max, name, text }) {
           (!isShown ? " hidden translate-y-[212%]" : " ")
         }
       >
-        <div className="transition flex justify-center w-36 dark:bg-dark-600 rounded-lg py-2 ">
+        <div className="transition flex justify-center w-36 dark:bg-dark-600 bg-dark-gray-500 rounded-lg py-2 ">
           <div className="flex flex-col gap-4">
             <Field
               type="number"

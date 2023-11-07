@@ -19,7 +19,7 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
       text: "Всего комнат",
       value: values.roomsNumber,
       name: "roomsNumber",
-      min: 1,
+      min: 0,
       max: 60,
     },
     {
@@ -113,7 +113,7 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
   ];
 
   let fieldFilters = fieldFiltersData.map((el) => (
-    <div className="flex flex-col gap-2 mr-auto" key={el.name}>
+    <div className="flex flex-col gap-2 " key={el.name}>
       <Heading>{el.text}</Heading>
       <Field
         name={el.name}
@@ -150,7 +150,7 @@ export default function GraphFilters({ values, setFieldValue, theme }) {
         </div>
       )}
 
-      <div className="flex flex-wrap gap-4 flex-row items-center justify-center">
+      <div className="grid grid-cols-2 gap-4 items-center justify-center">
         {dropdownFilters}
         {fieldFilters}
       </div>
