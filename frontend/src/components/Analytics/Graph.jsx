@@ -220,7 +220,6 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
                   </button>
               </div>
             </div>
-            {JSON.stringify(otherFilters, null, 2)}
           </Form>
         );
       }}
