@@ -18,7 +18,7 @@ export default function AboutHeader() {
             <div className="flex justify-center sm:justify-start gap-2 flex-wrap sm:gap-6">
               <a
                 className="text-blue-500 text-lg hover:text-black transition dark:hover:text-white dark:text-dark-300"
-                href={"https://t.me/estate_valuationbot"}
+                href={"https://t.me/MaksIgitov"}
               >
                 телеграм
               </a>
