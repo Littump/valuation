@@ -11,6 +11,7 @@ import getHouseMaterialReversed from "../../functions/getHouseMaterialReversed.j
 import getObjectTypeReversed from "../../functions/getObjectTypeReversed.js";
 import getRepairName from "../../functions/getRepairName.js";
 import getRoomsNumberReversed from "../../functions/getRoomsNumberReversed.js";
+import { useEffect } from "react";
 Chart.register(...registerables);
 
 export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
@@ -94,21 +95,25 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
     >
       {({ values, setFieldValue, setValues }) => {
         let labels = graphData.map((el) => el.label);
-        if (values.axiosColumn === "регион") {
+        if (graphData[0].label = 'msc') {
           labels = labels.map((el) => getRegionName(el));
-        } else if (values.axiosColumn === "материал дома") {
+        } else if (graphData[0].label = 'brc') {
           labels = labels.map((el) => getHouseMaterialReversed(el));
-        } else if (values.axiosColumn === "тип квартиры") {
+        } else if (graphData[0].label = '1') {
           labels = labels.map((el) => getObjectTypeReversed(el));
-        } else if (values.axiosColumn === "кол-во комнат") {
+        } else if (graphData[0].label = '0.7') {
           labels = labels.map((el) => getRoomsNumberReversed(parseInt(el)));
-        } else if (values.axiosColumn === "ремонт") {
+        } else if (graphData[0].label = '0;0') {
           labels = labels.map((el) => {
             return getRepairName(parseInt(el[0]), parseInt(el[2]));
           });
         }
+        useEffect(() => {
+          dispatch({ type: "graphs/setFilters", number: num, filters: values });
+       }, [values]);
         return (
           <Form className="flex flex-col gap-8 my-10 items-center">
+             {/* <FormObserver values={values} number={num} /> */}
             <div className="bg-light-gray p-10 rounded-xl flex flex-col items-center gap-6 dark:bg-dark-400 dark:border dark:border-dark-300">
               <div className="w-full">
                 {values.isColumn ? (

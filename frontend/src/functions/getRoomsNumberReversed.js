@@ -1,6 +1,6 @@
 export default function getRoomsNumberReversed(roomsNumber) {
   let roomsNumberTypes = {
-    0: "студия",
+    "0.7": "студия",
     1: "1-комнатная",
     2: "2-комнатная",
     3: "3-комнатная",
