@@ -19,16 +19,16 @@ export default function TextComponent({ values }) {
   ];
   let variants = {
     "С ремонтом и мебелью": [
-      { name: "дизайнерский ремонт", img: img1 },
-      { name: "евроремонт", img: img2 },
-      { name: "косметический ремонт", img: img3 },
-      { name: "старый ремонт", img: img4 },
-    ],
-    "С ремонтом и без мебели": [
       { name: "дизайнерский ремонт", img: img5 },
       { name: "евроремонт", img: img6 },
       { name: "косметический ремонт", img: img7 },
       { name: "старый ремонт", img: img8 },
+    ],
+    "С ремонтом и без мебели": [
+      { name: "дизайнерский ремонт", img: img1 },
+      { name: "евроремонт", img: img2 },
+      { name: "косметический ремонт", img: img3 },
+      { name: "старый ремонт", img: img4 },
     ],
     "Без ремонта": [
       { name: "предчистовая отделка", img: img9 },
@@ -43,6 +43,7 @@ export default function TextComponent({ values }) {
           name={"renovationType"}
           value={values.renovationType}
           options={renovationTypes}
+          max_len={40}
         />
       </div>
       <div className="grid grid-cols-2 grid-rows-2 gap-2 lg:gap-4 py-4">

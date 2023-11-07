@@ -187,14 +187,11 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
                     <BlackButton>Применить</BlackButton>
                   </button>
                 )}
-
-                <Button>
                   <button
                     type="button"
                     className="w-full h-full"
                     onClick={() => {
                       copy(num);
-                      // formik values ставим тоже
                       setValues({
                         axiosX: otherFilters.axiosX,
                         axiosY: otherFilters.axiosY,
@@ -217,11 +214,13 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
                       });
                     }}
                   >
+                    <Button>
                     Скопировать {num === 1 ? "из 2" : "из 1"}
+                    </Button>
                   </button>
-                </Button>
               </div>
             </div>
+            {JSON.stringify(otherFilters, null, 2)}
           </Form>
         );
       }}

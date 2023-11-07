@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import arrow from "../../../../public/imgs/arrow.svg";
 
-export default function DropdownMenu({ options, value, name, error }) {
+export default function DropdownMenu({ options, value, name, error, max_len = 12}) {
   let [menuIsShown, setMenuIsShown] = useState(false);
   const ref = useDetectClickOutside({
     onTriggered: () => setMenuIsShown(false),
@@ -19,8 +19,8 @@ export default function DropdownMenu({ options, value, name, error }) {
       >
         {value === ""
           ? "выберите"
-          : value?.length >= 12
-          ? value.toString().substr(0, 9) + "..."
+          : value?.length >= max_len
+          ? value.toString().substr(0, max_len-3) + "..."
           : value}
         <span className="absolute right-2 sm:right-4">
           <img
