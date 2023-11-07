@@ -1,1 +1,1 @@
-export const URL = "http://estate-valuation.tech"; //http://localhost:80
+export const URL = "https://estate-valuation.tech"; //http://localhost:80
