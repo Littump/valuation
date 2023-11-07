@@ -20,6 +20,7 @@ from ml.utils import (
 from utils.geocoder.geocoder import get_coordinates
 from utils.info_house.get_info_house import ObjectInfo
 from utils.similar_objects.objects_helper import ObjectsHelper
+from utils.balancer_points.balancer import delete_deviations
 
 
 def get_user():
@@ -137,6 +138,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
                     cnt += 1
                 if cnt == 200:
                     break
+            result = delete_deviations(result)
             return Response({"result": result})
 
     def retrieve(self, request, *args, **kwargs):
