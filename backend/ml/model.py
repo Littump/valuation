@@ -24,6 +24,9 @@ import joblib
 nltk.download('punkt')
 nltk.download('stopwords')
 import numpy as np
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
 
 _punctuation = list(punctuation)
 
