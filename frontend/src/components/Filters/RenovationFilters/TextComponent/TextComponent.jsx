@@ -57,7 +57,7 @@ export default function TextComponent({ values }) {
                 <img
                   src={type.img}
                   alt=""
-                  className="rounded-tr-xl rounded-tl-xl"
+                  className="rounded-tr-xl w-full rounded-tl-xl"
                 />
                 <div className="bg-white p-2 h-16 lg:h-auto text-center font-semibold rounded-bl-lg rounded-br-lg dark:bg-dark-600 dark:text-dark-200">
                   {type.name}
