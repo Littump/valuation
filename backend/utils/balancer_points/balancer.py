@@ -19,4 +19,3 @@ def delete_deviations(values):
         if module_deviation(x[_], mu_x, sigma_x) < border and module_deviation(y[_], mu_y, sigma_y) < border:
             res.append([x[_], y[_]])
     return res
-
