@@ -111,7 +111,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
             for propert in queryset:
                 value = getattr(propert, field)
                 if value:
-                    result[int(value)] += 1
+                    result[value] += 1
             return Response(result)
         if params['type_analytics'] == 'cloud':
             field_1 = params['field1']
