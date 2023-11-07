@@ -16,6 +16,7 @@ export const getPriceHook = () => {
       return getPriceService.getPrice(buildingInfo);
     },
     onSuccess: (data) => {
+      console.log(data)
       dispatch({
         type: "analysis/setCost",
         cost: Math.round(data?.data?.price) / 1000000,

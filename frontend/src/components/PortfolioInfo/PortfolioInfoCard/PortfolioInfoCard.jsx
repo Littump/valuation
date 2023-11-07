@@ -3,7 +3,7 @@ import LightHeading from "../../UI/LightHeading/LightHeading.jsx";
 
 export default function PortfolioInfoCard({
   heading = "",
-  cost = "",
+  text = "",
   color = "blue-500",
 }) {
   return (
@@ -11,7 +11,7 @@ export default function PortfolioInfoCard({
       <LightHeading>{heading}</LightHeading>
       <MainHeading>
         <div className={"text-" + color}>
-          {cost > 0 ? "+" + cost : cost} млн Р
+          {text}
         </div>
       </MainHeading>
     </div>

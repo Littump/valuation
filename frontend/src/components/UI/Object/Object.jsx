@@ -16,14 +16,14 @@ export default function Object({
   const dispatch = useDispatch();
   const { mutate } = deleteBuildingHook();
   let object_price = useSelector((state) => state.building.marketCost);
-  let getLiquidityImg = (realCost, marketCost) => {
-    if (realCost / marketCost >= 1.05) return low;
-    else if (realCost / marketCost <= 0.95) return high;
+  let getLiquidityImg = (liquidity) => {
+    if (liquidity === 'низкая') return low;
+    else if (liquidity==='высокая') return high;
     else return normal;
   };
-  let getColor = (realCost, marketCost) => {
-    if (realCost / marketCost >= 1.05) return "red";
-    else if (realCost / marketCost <= 0.95) return "green";
+  let getColor = (liquidity) => {
+    if (liquidity === 'низкая') return "red";
+    else if (liquidity === 'высокая') return "green";
     else return "blue-500";
   };
   return (
@@ -45,8 +45,7 @@ export default function Object({
         ) : (
           <img
             src={getLiquidityImg(
-              buildingInfo?.realCost,
-              buildingInfo?.marketCost
+              buildingInfo.liquidity
             )}
             alt=""
             className="hidden md:block"
@@ -86,7 +85,7 @@ export default function Object({
                   Цена покупки
                 </span>
                 <span className="text-red text-sm font-bold lg:ml-auto mr-2 ">
-                  {buildingInfo.realCost + " млн Р"}
+                  {buildingInfo.marketCost + " млн Р"}
                 </span>
               </div>
               <div className="flex flex-col mr-6">
@@ -100,12 +99,11 @@ export default function Object({
                     (hasDelete
                       ? "green"
                       : getColor(
-                          buildingInfo.realCost,
-                          buildingInfo.marketCost
+                          buildingInfo.liquidity
                         ))
                   }
                 >
-                  {buildingInfo.marketCost + " млн Р"}
+                  {buildingInfo.realCost + " млн Р"}
                 </span>
               </div>
             </>

@@ -20,7 +20,9 @@ export function PortfolioObjects() {
   useEffect(() => {
     if (isSuccess) {
       dispatch({ type: "myObjects/deleteObjects" });
+      console.log(data)
       data.data.forEach((el) => {
+        let real_price = parseFloat((el.real_price / 1000000).toFixed(1))
         let objectInfo = {
           house_material: getHouseMaterialReversed(el.house_material),
           object_type: getObjectTypeReversed(el.object_type),
@@ -34,10 +36,11 @@ export function PortfolioObjects() {
           area: el.area,
           coordinates: [el.latitude, el.longitude],
           isOpen: false,
-          marketCost: el.price_buy,
-          realCost: parseFloat((el.real_price / 1000000).toFixed(1)),
+          marketCost: el.price_buy/1000000,
+          realCost:real_price,
           id: el.id,
           local_id: 1,
+          liquidity: (real_price / el.price_buy) >= 1.05 ? 'высокая' : (real_price / el.price_buy) <= 0.95 ? "низкая" : "средняя"
         };
 
         dispatch({ type: "myObjects/addObject", objectInfo: objectInfo });
@@ -46,10 +49,7 @@ export function PortfolioObjects() {
   }, [data]);
 
   let objectsComponent = objects.map((info) => {
-    let index = info.marketCost / info.realCost;
-    let costIndex =
-      index >= 1.05 ? "высокая" : index <= 0.95 ? "низкая" : "средняя";
-    if (additionalFilter.indexOf(costIndex) === -1) return <></>;
+    if (additionalFilter.indexOf(info.liquidity) === -1) return <></>;
     return (
       <Object
         hasDelete={true}

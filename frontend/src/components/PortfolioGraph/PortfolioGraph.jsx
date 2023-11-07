@@ -14,19 +14,18 @@ export default function PortfolioGraph() {
         backgroundColor: ["#E55C5C", "#476BF0", "#6A9F48"],
         data: [
           objects.reduce((sum, object) => {
-            return sum + +(object.marketCost / object.realCost <= 0.95);
+            return sum + +(object.liquidity === 'низкая');
           }, 0),
           objects.reduce((sum, object) => {
             return (
               sum +
               +(
-                object.marketCost / object.realCost >= 0.95 &&
-                object.marketCost / object.realCost < 1.05
+                object.liquidity === "средняя"
               )
             );
           }, 0),
           objects.reduce((sum, object) => {
-            return sum + +(object.marketCost / object.realCost >= 1.05);
+            return sum + +(object.liquidity === 'высокая');
           }, 0),
         ],
         borderWidth: 1,

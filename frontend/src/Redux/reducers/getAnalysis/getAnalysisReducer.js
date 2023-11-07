@@ -49,7 +49,7 @@ export default createReducer(initialState, (builder) => {
       state.realCost = (
         action.cost *
         (Math.random() * (0.98 - 0.95) + 0.95)
-      ).toFixed(1);
+      ).toFixed(2);
       state.marketCost = action.cost.toFixed(2);
     });
 });

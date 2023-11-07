@@ -5,7 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 export default function MapButtons() {
   const dispatch = useDispatch();
   const activeFilter = useSelector((state) => state.maps.activeFilter);
-  let filters = ["Этот дом", "Похожие дома", "Инфраструктура"];
+  const similar_objects = useSelector(state=>state.similarBuildings.buildings);
+  const infrastructure = useSelector(state=>state.building.infrastructure);
+  let infrastructure_sum = 0
+  for(var key in infrastructure){
+    infrastructure_sum += infrastructure[key].count
+  }
+  let filters =["Этот дом"];
+  if(similar_objects.length !== 0){
+    filters.push("Похожие дома");
+  }
+  if(infrastructure_sum !== 0){
+    filters.push("Инфраструктура");
+  }
   return (
     <div className="xs:flex xs:flex-col grid grid-cols-1 gap-2">
       <Formik
