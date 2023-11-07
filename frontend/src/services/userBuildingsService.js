@@ -35,7 +35,7 @@ class userBuildingsService {
         has_lift: buildingInfo?.hasLift ? 1 : 0,
         parking_type: getParkingType(buildingInfo?.parkingType.toString()),
         text: buildingInfo.text.toString(),
-        price_buy: price * 1000000,
+        price_buy: price>=500000?price:price * 1000000,
       },
       {
         headers: {
