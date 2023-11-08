@@ -40,7 +40,7 @@ export function PortfolioObjects() {
           realCost:real_price,
           id: el.id,
           local_id: 1,
-          liquidity: (real_price*1000000 / el.price_buy) >= 1.05 ? 'высокая' : (real_price / el.price_buy) <= 0.95 ? "низкая" : "средняя"
+          liquidity: (real_price*1000000 / el.price_buy) >= 1.05 ? 'высокая' : (real_price*1000000 / el.price_buy) <= 0.95 ? "низкая" : "средняя"
         };
 
         dispatch({ type: "myObjects/addObject", objectInfo: objectInfo });
