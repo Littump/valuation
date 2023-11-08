@@ -7,7 +7,7 @@ import getRoomsNumber from "../functions/getRoomsNumber";
 
 class userBuildingsService {
   async getBuildings() {
-    return axios.get(`${URL}/api/property?author=1`, {
+    return axios({method:'get', url:`${URL}/api/property?author=1`, 
       headers: {
         Authorization: "Token " + localStorage.getItem("auth_token"),
       },
