@@ -1,7 +1,7 @@
 export default function getObjectType(objectType) {
   let objectTypes = {
-    Первичка: 1,
-    Вторичка: 2,
+    первичка: 1,
+    вторичка: 2,
   };
   return objectTypes[objectType];
 }
