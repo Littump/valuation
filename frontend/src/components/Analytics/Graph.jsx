@@ -115,7 +115,7 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
           dispatch({ type: "graphs/setFilters", number: num, filters: values });
        }, [values]);
         return (
-          <Form className="flex flex-col gap-8 my-10 items-center">
+          <Form className="flex flex-col gap-8 pb-6 my-10 items-center">
              {/* <FormObserver values={values} number={num} /> */}
             <div className="bg-light-gray p-10 rounded-xl flex flex-col items-center gap-6 dark:bg-dark-400 dark:border dark:border-dark-300">
               <div className="w-full">
