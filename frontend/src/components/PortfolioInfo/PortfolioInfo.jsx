@@ -15,7 +15,7 @@ export default function PortfolioInfo() {
     0
   );
   let raise_num = (fullSumNow-fullSumThen).toFixed(2);
-  let raise_percent=((fullSumNow / fullSumThen) - 1).toFixed(2)
+  let raise_percent=(((fullSumNow / fullSumThen) - 1)*100).toFixed(2)
   if(fullSumThen === 0){
     raise_percent=0;
   }
