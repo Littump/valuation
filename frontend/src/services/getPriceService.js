@@ -11,7 +11,7 @@ class getPriceService {
       .post(`${URL}/api/property/get_price/`, {
         address: buildingInfo?.address.toString(),
         house_material: getHouseMaterial(buildingInfo?.houseType.toString()),
-        object_type: getObjectType(buildingInfo?.flatType.toString()),
+        object_type: getObjectType(buildingInfo?.flatType.toString().toLowerCase()),
         cnt_rooms: getRoomsNumber(buildingInfo?.roomsNumber),
         floor: parseInt(buildingInfo?.floor),
         floors: parseInt(buildingInfo?.floors),
