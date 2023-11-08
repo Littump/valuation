@@ -27,7 +27,7 @@ class graphsService {
       }${
         values.houseType === "Любой"
           ? ""
-          : "&object_type=" + getObjectType(values.houseType)
+          : "&object_type=" + getObjectType(values.houseType.toLowerCase())
       }${
         values.repairType === "Любой"
           ? ""
