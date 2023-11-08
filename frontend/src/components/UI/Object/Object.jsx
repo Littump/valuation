@@ -35,7 +35,7 @@ export default function Object({
       name={name}
     >
       <div
-        className="collapse-title text-xl font-medium flex flex-col md:flex-row md:items-center justify-start py-3 gap-1 sm:pl-6 "
+        className="collapse-title text-xl font-medium flex flex-col gap-3 md:gap-1 md:flex-row md:items-center justify-start py-3 sm:pl-6 "
         onClick={() =>
           dispatch({ type: openFunctionAction, id: buildingInfo.id })
         }
