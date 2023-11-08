@@ -32,6 +32,19 @@ export default function PortfolioGraph() {
       },
     ],
   };
+
+  const options = {
+    plugins:{
+      legend:{
+        labels:{
+          font: "'Proxima Nova', sans-serif",
+          color : "#000000",
+          weight:'600'
+        }
+      }
+    }
+  }
+
   if (objects.length === 0) {
     return (
       <div className="h-full px-20 bg-light-gray rounded-xl overflow-hidden flex flex-col justify-center py-8 items-center dark:bg-dark-600">
@@ -45,7 +58,7 @@ export default function PortfolioGraph() {
         Ликвидность объектов в портфеле
       </div>
       <div className="w-9/12 dark:text-dark-100">
-        <Doughnut data={data} />
+        <Doughnut data={data} options={options}/>
       </div>
     </div>
   );

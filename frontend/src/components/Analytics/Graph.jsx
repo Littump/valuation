@@ -10,9 +10,9 @@ import getRegionName from "../../functions/getRegionName.js";
 import getHouseMaterialReversed from "../../functions/getHouseMaterialReversed.js";
 import getObjectTypeReversed from "../../functions/getObjectTypeReversed.js";
 import getRepairName from "../../functions/getRepairName.js";
-import getRoomsNumberReversed from "../../functions/getRoomsNumberReversed.js";
 import { useEffect } from "react";
 import getParkingTypeReversed from "../../functions/getParkingTypeReversed.js";
+import getRoomsNumberGraph from "../../functions/getRoomsNumberGraph.js";
 Chart.register(...registerables);
 
 export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
@@ -25,6 +25,7 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
     if (num === 1) return state.graphs.firstGraphData;
     else return state.graphs.secondGraphData;
   });
+  console.log('graphData:', graphData)
   const dispatch = useDispatch();
 
   const chartOptions = {
@@ -34,6 +35,13 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
         position: "top",
       },
     },
+    scales: {
+      x: {
+        ticks: {
+          display:false
+        }
+      }
+    }
   };
   const scatterOptions = {
     responsive: true,
@@ -98,12 +106,13 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
         let labels = graphData.map((el) => el.label);
         if (graphData[0]?.label == 'msc') {
           labels = labels.map((el) => getRegionName(el));
-        } else if (graphData[0]?.label == 'mlc') {
+        } else if (graphData.findIndex(el=>el.label === 'mnl')  !== -1) {
           labels = labels.map((el) => getHouseMaterialReversed(el));
         } else if (graphData[0]?.label == '1') {
+          alert(1)
           labels = labels.map((el) => getObjectTypeReversed(el));
         } else if (graphData[0]?.label == '0.7') {
-          labels = labels.map((el) => getRoomsNumberReversed(parseInt(el)));
+          labels = labels.map((el) => getRoomsNumberGraph(el));
         } else if (graphData[0]?.label == 'mlt') {
           labels = labels.map((el) => getParkingTypeReversed(el));
         }else if (graphData[0]?.label == '2;2') {
@@ -156,7 +165,7 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
                     }}
                   />
                 )}
-                <div className="mt-4 w-40 sm:max-w-[80vw] flex sm:flex-row flex-col mx-auto lg:mx-0 gap-1 bg-white sm:w-fit p-1 rounded-lg border-gray dark:bg-dark-600 dark:text-dark-200">
+                <div className="mt-4 w-52 justify-between xs:max-w-[80vw] flex xs:flex-row flex-col mx-auto sm:mx-0 gap-1 bg-white sm:w-fit p-1 rounded-lg border-gray dark:bg-dark-600 dark:text-dark-200">
                   <div
                     className={
                       "h-full rounded-lg py-1 px-2 transition cursor-pointer " +
@@ -197,7 +206,7 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
                 )}
                   <button
                     type="button"
-                    className="w-full h-full"
+                    className="w-full h-full hidden lg:block"
                     onClick={() => {
                       copy(num);
                       setValues({

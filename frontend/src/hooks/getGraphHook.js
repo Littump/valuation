@@ -8,6 +8,7 @@ export const getGraphHook = (num) => {
   return useMutation({
     mutationFn: (values) => graphsService.getGraphData(values),
     onSuccess: (data) => {
+      console.log(data)
       if (data?.data?.result?.length >= 1) {
         if (num === 1) {
           dispatch({

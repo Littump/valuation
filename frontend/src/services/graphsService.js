@@ -5,6 +5,7 @@ import getHouseMaterial from "../functions/getHouseMaterial";
 import getRepairTypeForFullString from "../functions/getRepairTypeForFullString";
 import getAxiosType from "../functions/getAxiosType";
 import getAxiosColumnType from "../functions/getAxiosColumnType";
+import getRegionNameReversed from "../functions/getRegionNameReversed";
 
 class graphsService {
   async getGraphData({ values, type }) {
@@ -19,7 +20,7 @@ class graphsService {
             getAxiosType(values.axiosY)
           : "&field=" + getAxiosColumnType(values.axiosColumn)
       }${!type ? "&author=1" : ""}${
-        values.region === "Любой" ? "" : "&address=" + values.region
+        values.region === "Любой" ? "" : "&region=" + getRegionNameReversed(values.region)
       }${
         values.houseMaterial === "Любой"
           ? ""
