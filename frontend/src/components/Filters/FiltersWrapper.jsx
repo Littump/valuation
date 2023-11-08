@@ -169,7 +169,7 @@ export function FiltersWrapper() {
                   max="500"
                 />
                 <div
-                className=" top-24 -left-96 absolute lg:block hidden w-44 h-10 cursor-pointer font-semibold dark:text-dark-200 dark:hover:text-dark-100"
+                className=" top-20 -left-96 absolute lg:block hidden w-44 h-10 cursor-pointer font-semibold dark:text-dark-200 dark:hover:text-dark-100"
                 onClick={()=>{
                   setValues({
                     hasLift: false,
