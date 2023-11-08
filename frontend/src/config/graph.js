@@ -39,6 +39,7 @@ export const axiosColumn = [
   "метро",
   "регион",
   "кол-во комнат",
+  "тип парковки",
 ];
 export const repairTypes = [
   "Любой",

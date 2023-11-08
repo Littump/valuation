@@ -6,6 +6,7 @@ export default function getAxiosColumnType(axiosType) {
     метро: "metro_name",
     регион: "region",
     "кол-во комнат": "cnt_rooms",
+    "тип парковки": "parking_type",
   };
   return axiosTypes[axiosType];
 }

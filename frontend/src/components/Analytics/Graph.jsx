@@ -12,6 +12,7 @@ import getObjectTypeReversed from "../../functions/getObjectTypeReversed.js";
 import getRepairName from "../../functions/getRepairName.js";
 import getRoomsNumberReversed from "../../functions/getRoomsNumberReversed.js";
 import { useEffect } from "react";
+import getParkingTypeReversed from "../../functions/getParkingTypeReversed.js";
 Chart.register(...registerables);
 
 export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
@@ -95,15 +96,17 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
     >
       {({ values, setFieldValue, setValues }) => {
         let labels = graphData.map((el) => el.label);
-        if (graphData[0].label = 'msc') {
+        if (graphData[0]?.label == 'msc') {
           labels = labels.map((el) => getRegionName(el));
-        } else if (graphData[0].label = 'brc') {
+        } else if (graphData[0]?.label == 'mlc') {
           labels = labels.map((el) => getHouseMaterialReversed(el));
-        } else if (graphData[0].label = '1') {
+        } else if (graphData[0]?.label == '1') {
           labels = labels.map((el) => getObjectTypeReversed(el));
-        } else if (graphData[0].label = '0.7') {
+        } else if (graphData[0]?.label == '0.7') {
           labels = labels.map((el) => getRoomsNumberReversed(parseInt(el)));
-        } else if (graphData[0].label = '0;0') {
+        } else if (graphData[0]?.label == 'mlt') {
+          labels = labels.map((el) => getParkingTypeReversed(el));
+        }else if (graphData[0]?.label == '2;2') {
           labels = labels.map((el) => {
             return getRepairName(parseInt(el[0]), parseInt(el[2]));
           });
