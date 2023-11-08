@@ -2,5 +2,5 @@ import { useQuery } from "react-query";
 import userBuildingsService from "../services/userBuildingsService";
 
 export const getBuildingsHook = () => {
-  return useQuery(["getBuildings"], () => userBuildingsService.getBuildings());
+  return useQuery({queryKey["getBuildings"],queryFn: () => userBuildingsService.getBuildings(),retry:true });
 };
