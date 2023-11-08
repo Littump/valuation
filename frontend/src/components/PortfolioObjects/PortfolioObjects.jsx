@@ -17,6 +17,7 @@ export function PortfolioObjects() {
     (state) => state.myObjects.additionalFilter
   );
   const { data, isLoading, isSuccess } = getBuildingsHook();
+  console.log(data)
   useEffect(() => {
     if (isSuccess) {
       dispatch({ type: "myObjects/deleteObjects" });
