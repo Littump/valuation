@@ -179,7 +179,7 @@ export function FiltersWrapper() {
                     text: "Дом возле парка с видом на озеро, велодорожки и скейтпарк",
                     flatType: "первичка",
                     square: "65",
-                    roomsNumber: "3",
+                    roomsNumber: "3-комнатная",
                     floor: "11",
                     floors: "24",
                     renovationType: "С ремонтом и мебелью",
