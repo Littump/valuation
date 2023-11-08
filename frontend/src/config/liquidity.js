@@ -1,0 +1,1 @@
+export const liquidity_percent = 0.15;

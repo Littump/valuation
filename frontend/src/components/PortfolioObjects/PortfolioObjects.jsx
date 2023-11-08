@@ -9,6 +9,7 @@ import getHouseMaterialReversed from "../../functions/getHouseMaterialReversed.j
 import getObjectTypeReversed from "../../functions/getObjectTypeReversed.js";
 import getRepairName from "../../functions/getRepairName.js";
 import getParkingTypeReversed from "../../functions/getParkingTypeReversed.js";
+import {liquidity_percent} from "../../config/liquidity.js"
 
 export function PortfolioObjects() {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ export function PortfolioObjects() {
           realCost:real_price,
           id: el.id,
           local_id: 1,
-          liquidity: (real_price*1000000 / el.price_buy) >= 1.05 ? 'высокая' : (real_price*1000000 / el.price_buy) <= 0.95 ? "низкая" : "средняя"
+          liquidity: (real_price*1000000 / el.price_buy) >= 1 + liquidity_percent ? 'высокая' : (real_price*1000000 / el.price_buy) <= 1 - liquidity_percent ? "низкая" : "средняя"
         };
 
         dispatch({ type: "myObjects/addObject", objectInfo: objectInfo });

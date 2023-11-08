@@ -6,6 +6,7 @@ import { Button } from "../Button/Button.jsx";
 import { deleteBuildingHook } from "../../../hooks/deleteBuildingHook";
 import ObjectCollapsed from "./ObjectCollapsed.jsx";
 import { useDispatch, useSelector } from "react-redux";
+import { liquidity_percent } from "../../../config/liquidity.js";
 
 export default function Object({
   buildingInfo,
@@ -68,9 +69,9 @@ export default function Object({
                 className={
                   " text-xl font-bold lg:ml-auto mr-2 " +
                   "text-" +
-                  (buildingInfo.price / object_price >= 1.05
+                  (buildingInfo.price / object_price >= 1 + liquidity_percent
                     ? "red"
-                    : buildingInfo.price / object_price <= 0.95
+                    : buildingInfo.price / object_price <= 1 - liquidity_percent
                     ? "green"
                     : "blue-500")
                 }

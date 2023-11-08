@@ -172,7 +172,7 @@ export function FiltersWrapper() {
                 className=" top-20 -left-96 absolute lg:block hidden w-44 h-10 cursor-pointer font-semibold dark:text-dark-200 dark:hover:text-dark-100"
                 onClick={()=>{
                   setValues({
-                    hasLift: false,
+                    hasLift: true,
                     parkingType: "многоуровневая парковка",
                     address: "Москва, улица Профсоюзная, дом 42",
                     houseType: "монолитный",
@@ -184,12 +184,12 @@ export function FiltersWrapper() {
                     floors: "24",
                     renovationType: "С ремонтом и мебелью",
                     renovationTypePicked: "евроремонт",
-                    addBuilding: true,
+                    addBuilding: false,
                     setCoordinates: false,
-                    isDrop: true,
+                    isDrop: false,
                     coordinatesX: "",
                     coordinatesY: "",
-                    price: "7",
+                    price: "",
                       })}}
               >
                   пример
