@@ -6,6 +6,7 @@ export default function MapComponent() {
   let houseCoordinates = useSelector(
     (state) => state.building.coordinates //coordinates
   );
+  console.log(houseCoordinates)
   let similarBuildings = useSelector(
     (state) => state.similarBuildings.buildings
   );
