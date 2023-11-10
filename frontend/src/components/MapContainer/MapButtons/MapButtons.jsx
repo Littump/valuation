@@ -1,12 +1,16 @@
 import { Field, Form, Formik } from "formik";
 import LightHeading from "../../UI/LightHeading/LightHeading.jsx";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function MapButtons() {
   const dispatch = useDispatch();
   const activeFilter = useSelector((state) => state.maps.activeFilter);
   const similar_objects = useSelector(state=>state.similarBuildings.buildings);
   const infrastructure = useSelector(state=>state.building.infrastructure);
+  useEffect(()=>{
+    dispatch({ type: "maps/setFilter", filter: 'Этот дом' })
+  },[])
   let infrastructure_sum = 0
   for(var key in infrastructure){
     infrastructure_sum += infrastructure[key].count
