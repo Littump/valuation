@@ -110,7 +110,7 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
           labels = labels.map((el) => getHouseMaterialReversed(el));
         } else if (graphData[0]?.label == '1') {
           labels = labels.map((el) => getObjectTypeReversed(el));
-        } else if (graphData[0]?.label == '0.7') {
+        } else if (graphData.findIndex(el=>el.label === '0.7')  !== -1) {
           labels = labels.map((el) => getRoomsNumberGraph(el));
         } else if (graphData[0]?.label == 'mlt') {
           labels = labels.map((el) => getParkingTypeReversed(el));
