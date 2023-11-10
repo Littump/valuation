@@ -109,7 +109,6 @@ export default function Graph({ bgColor = "rgba(0,0,0,0.3)", num, type }) {
         } else if (graphData.findIndex(el=>el.label === 'mnl')  !== -1) {
           labels = labels.map((el) => getHouseMaterialReversed(el));
         } else if (graphData[0]?.label == '1') {
-          alert(1)
           labels = labels.map((el) => getObjectTypeReversed(el));
         } else if (graphData[0]?.label == '0.7') {
           labels = labels.map((el) => getRoomsNumberGraph(el));

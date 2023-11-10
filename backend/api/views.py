@@ -61,6 +61,15 @@ class PropertyViewSet(viewsets.ModelViewSet):
         house_info = self.object_info.get_info_house(address)
         infrastructure = get_infrastructure(address, latitude, longitude)
         similar_objects = self.objects_helper.get_flat_neighbors(serializer.validated_data)
+        for kind, info in infrastructure.items():
+            items = info['items']
+            delets = []
+            for item in items:
+                if not isinstance(item['name'], str):
+                    delets.append(item)
+            for item in delets:
+                items.remove(item)
+                info['count'] -= 1
         return Response({
             'price': price,
             'latitude': latitude,
