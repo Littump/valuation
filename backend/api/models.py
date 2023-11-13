@@ -4,6 +4,11 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
+class LimitToken(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    limit = models.IntegerField(default=5)
+
+
 class Property(models.Model):
     id = models.AutoField(primary_key=True)
 

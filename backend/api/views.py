@@ -5,7 +5,7 @@ from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from api.models import Property, User
+from api.models import Property, User, LimitToken
 from api.serializers import (
     PropertySerializer,
     PhotoUploadSerializer,
@@ -40,6 +40,18 @@ class PropertyViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     object_info = ObjectInfo()
     objects_helper = ObjectsHelper()
+
+    @action(detail=False, methods=['POST'],
+            permission_classes=[permissions.IsAuthenticated])
+    def get_price_property(self, request):
+        user = request.user
+        limit_token, created = LimitToken.objects.get_or_create(author=user, defaults={'limit': 5})
+        user_limit = limit_token.limit
+        if user_limit <= 0:
+            return Response({'error': 'The request limit was exceeded'})
+        limit_token.limit -= 1
+        limit_token.save()
+        return self.get_price(request)
 
     @action(detail=False, methods=['POST'],
             permission_classes=[permissions.AllowAny])
