@@ -1,0 +1,413 @@
+openapi: 3.0.3
+info:
+  title: Real Estate - OpenAPI 1.0
+  description: |-
+    Проект "Оценка стоимости недвижимости" представляет собой веб-приложение, разработанное для определения стоимости квартиры на основе различных входных параметров. В проекте используется искусственный интеллект (ИИ), который прогнозирует реальную стоимость квартиры на основе предоставленных данных.
+  contact:
+    url: https://t.me/littump
+  version: 1.0.0
+servers:
+  - url: https://estate-valuation.tech/api/
+tags:
+  - name: user
+    description: Operations about user
+  - name: property
+    description: Operations about property
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Create user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSerializer'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: theUser
+                  email:
+                    type: string 
+                    example: john@email.com
+                  id:
+                    type: integer
+                    example: 1
+  /auth/token/login/:
+    post:
+      tags: 
+        - user
+      summary: Get auth_token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: theUser
+                password:
+                  type: string
+                  example: '12345'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auth_token:
+                    type: string
+                    example: 418bg3f23cd99f9f4a226b83ed25a1e8e5df16b0
+  /property/get_price/:
+    post:
+      tags: 
+        - property
+      summary: Get price by parametrs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Property'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  price:
+                    type: integer
+                    example: 12000000
+                  latitude:
+                    type: number
+                    example: 37.421683
+                  longitude:
+                    type: number
+                    example: 51.582653
+                  house_info:
+                    $ref: '#/components/schemas/HouseInfo'
+                  infrastructure:
+                    type: object
+                    properties:
+                      продуктовый магазин:
+                        $ref: '#/components/schemas/TypeInfrastructure'
+                      достопримечательность:
+                        $ref: '#/components/schemas/TypeInfrastructure'
+                      кафе:
+                        $ref: '#/components/schemas/TypeInfrastructure'
+                      детский сад:
+                        $ref: '#/components/schemas/TypeInfrastructure'
+                      школа:
+                        $ref: '#/components/schemas/TypeInfrastructure'
+                      фитнес-клуб:
+                        $ref: '#/components/schemas/TypeInfrastructure'
+                      поликлиника:
+                        $ref: '#/components/schemas/TypeInfrastructure'
+                      тц:
+                        $ref: '#/components/schemas/TypeInfrastructure'
+                      кинотеатр:
+                        $ref: '#/components/schemas/TypeInfrastructure'
+                  similar_objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Property'
+  /property/calculate_repair/:
+    post:
+      tags: 
+        - property
+      summary: Get repair by photo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                photos:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  repair:
+                    type: string
+                    enum:
+                      - '0;0'
+                      - '1;0'
+                      - '2;0'
+                      - '0;1'
+                      - '1;1'
+                      - '2;1'
+                      - '3;1'
+                      - '0;2'
+                      - '1;2'
+                      - '2;2'
+                      - '3;2'
+                    example: '1;1'
+  /property/{pk}/:
+    parameters:
+      - name: pk
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - property
+      summary: Get property
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: pk
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyFull'
+    delete:
+      tags:
+        - property
+      summary: Delete property
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: pk
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Successful operation
+  /property/:
+    post:
+      tags:
+        - property
+      summary: Create property
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Property'
+                - type: object
+                  properties:
+                    price_buy:
+                      type: integer
+                      example: 10
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Property'
+                  - type: object
+                    properties:
+                      price_buy:
+                        type: integer
+                        example: 10
+      
+
+  
+components:
+  securitySchemes:
+    BearerAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      bearerFormat: JWT
+  schemas:
+    UserSerializer:
+      type: object
+      properties:
+        username:
+          type: string
+          example: theUser
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: James
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+    Property:
+      type: object
+      properties:
+        house_material:
+          type: string
+          enum:
+            - brc
+            - mnl
+            - pnl
+            - blc
+            - wdn
+            - stl
+            - brm
+          example: brc
+        object_type:
+          type: integer
+          enum:
+            - 1
+            - 2
+          example: 1
+        repair:
+          type: string
+          enum:
+            - '0;0'
+            - '1;0'
+            - '2;0'
+            - '0;1'
+            - '1;1'
+            - '2;1'
+            - '3;1'
+            - '0;2'
+            - '1;2'
+            - '2;2'
+            - '3;2'
+          example: '1;1'
+        has_lift:
+          type: integer
+          enum:
+            - 0
+            - 1
+          example: 1
+        parking_type:
+          type: string
+          enum:
+            - grn
+            - mlt
+            - und
+            - orf
+            - none
+          example: mlt
+        address:
+          type: string
+          example: "Москва, Ленинский проспект, 20"
+        floor:
+          type: integer
+          example: 4
+        cnt_rooms:
+          type: integer
+          example: 2
+        floors:
+          type: integer
+          example: 9
+        area:
+          type: number
+          example: 60.5
+        text:
+          type: string
+          example: "A spacious apartment with a great view."
+    PropertyFull:
+        allOf:
+          - $ref: '#/components/schemas/Property'
+          - type: object
+            properties:
+              id:
+                type: integer
+                example: 3
+              metro_how:
+                type: integer
+                example: 1
+              region:
+                type: string
+                example: msc
+              metro_name:
+                type: string
+                example: "Шаболовская"
+              house_year:
+                type: integer
+                example: 1940
+              metro_min:
+                type: number
+                example: 19
+              price_buy:
+                type: integer
+                example: 1
+              price_sell:
+                type: integer
+                example: 0
+              real_price:
+                type: number
+                example: 0.0
+              author:
+                type: integer
+                example: 1
+          
+    HouseInfo:
+      type: object
+      properties:
+        year:
+          type: integer
+          example: 1970
+        count_entrances:
+          type: integer
+          example: 2
+        gas:
+          type: string
+          example: Центральное
+        hot_water:
+          type: string
+          example: Полное снабжение
+    ElemTypeInfrastructure:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Перекрёсток, супермаркет
+        point:
+          type: array
+          items:
+            type: number
+            format: float
+          example: [55.241212, 37.481242]
+    TypeInfrastructure:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 3
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ElemTypeInfrastructure'
+    
