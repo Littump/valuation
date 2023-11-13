@@ -1,3 +1,4 @@
+
 openapi: 3.0.3
 info:
   title: Real Estate - OpenAPI 1.0
@@ -9,69 +10,10 @@ info:
 servers:
   - url: https://estate-valuation.tech/api/
 tags:
-  - name: user
-    description: Operations about user
   - name: property
     description: Operations about property
 paths:
-  /user:
-    post:
-      tags:
-        - user
-      summary: Create user
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserSerializer'
-        required: true
-      responses:
-        '201':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  username:
-                    type: string
-                    example: theUser
-                  email:
-                    type: string 
-                    example: john@email.com
-                  id:
-                    type: integer
-                    example: 1
-  /auth/token/login/:
-    post:
-      tags: 
-        - user
-      summary: Get auth_token
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                  example: theUser
-                password:
-                  type: string
-                  example: '12345'
-        required: true
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  auth_token:
-                    type: string
-                    example: 418bg3f23cd99f9f4a226b83ed25a1e8e5df16b0
-  /property/get_price/:
+  /property/get_price_property/:
     post:
       tags: 
         - property
@@ -133,14 +75,17 @@ paths:
         - property
       summary: Get repair by photo
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              type: array
-              items:
-                type: string
-                format: binary
-        required: true
+              type: object
+              properties:
+                photos:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
       responses:
         '200':
           description: Successful operation
@@ -163,83 +108,8 @@ paths:
                       - '1;2'
                       - '2;2'
                       - '3;2'
-                    example: '1;1'
-  /property/{pk}/:
-    parameters:
-      - name: pk
-        in: path
-        required: true
-        schema:
-          type: integer
-    get:
-      tags:
-        - property
-      summary: Get property
-      security:
-        - BearerAuth: []
-      parameters:
-        - name: pk
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PropertyFull'
-    delete:
-      tags:
-        - property
-      summary: Delete property
-      security:
-        - BearerAuth: []
-      parameters:
-        - name: pk
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Successful operation
-  /property/:
-    post:
-      tags:
-        - property
-      summary: Create property
-      security:
-        - BearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/Property'
-                - type: object
-                  properties:
-                    price_buy:
-                      type: integer
-                      example: 10
-        required: true
-      responses:
-        '201':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/Property'
-                  - type: object
-                    properties:
-                      price_buy:
-                        type: integer
-                        example: 10
-      
+                    example: '1;1'  
 
-  
 components:
   securitySchemes:
     BearerAuth:
@@ -248,24 +118,6 @@ components:
       name: Authorization
       bearerFormat: JWT
   schemas:
-    UserSerializer:
-      type: object
-      properties:
-        username:
-          type: string
-          example: theUser
-        first_name:
-          type: string
-          example: John
-        last_name:
-          type: string
-          example: James
-        email:
-          type: string
-          example: john@email.com
-        password:
-          type: string
-          example: '12345'
     Property:
       type: object
       properties:
@@ -334,42 +186,6 @@ components:
         text:
           type: string
           example: "A spacious apartment with a great view."
-    PropertyFull:
-        allOf:
-          - $ref: '#/components/schemas/Property'
-          - type: object
-            properties:
-              id:
-                type: integer
-                example: 3
-              metro_how:
-                type: integer
-                example: 1
-              region:
-                type: string
-                example: msc
-              metro_name:
-                type: string
-                example: "Шаболовская"
-              house_year:
-                type: integer
-                example: 1940
-              metro_min:
-                type: number
-                example: 19
-              price_buy:
-                type: integer
-                example: 1
-              price_sell:
-                type: integer
-                example: 0
-              real_price:
-                type: number
-                example: 0.0
-              author:
-                type: integer
-                example: 1
-          
     HouseInfo:
       type: object
       properties:
