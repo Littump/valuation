@@ -5,12 +5,12 @@ from catboost import CatBoostRegressor
 import pandas as pd
 import torch
 import torch.nn as nn
-import torchvision.transforms as transforms
-from torchvision import models
-from tensorflow.keras.applications.efficientnet import EfficientNetB0
-from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
-from tensorflow.keras.models import Model
-from tensorflow.keras.preprocessing.image import img_to_array
+# import torchvision.transforms as transforms
+# from torchvision import models
+# from tensorflow.keras.applications.efficientnet import EfficientNetB0
+# from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
+# from tensorflow.keras.models import Model
+# from tensorflow.keras.preprocessing.image import img_to_array
 import os
 from gensim.models import Word2Vec
 from nltk.stem.snowball import RussianStemmer
@@ -31,39 +31,39 @@ _punctuation = list(punctuation)
 
 class PriceEstimator:
     def _get_classifier(self, path):
-        base_model = EfficientNetB0(weights=None, include_top=False)
-        x = base_model.output
-        x = GlobalAveragePooling2D()(x)
-        x = Dense(200, activation='relu')(x)
-        predictions_of_photo_type = Dense(3, activation='softmax')(x)
-        model = Model(inputs=base_model.input,
-                      outputs=predictions_of_photo_type)
-        model.load_weights(path).expect_partial()
-        return model
+        # base_model = EfficientNetB0(weights=None, include_top=False)
+        # x = base_model.output
+        # x = GlobalAveragePooling2D()(x)
+        # x = Dense(200, activation='relu')(x)
+        # predictions_of_photo_type = Dense(3, activation='softmax')(x)
+        # model = Model(inputs=base_model.input,
+        #               outputs=predictions_of_photo_type)
+        # model.load_weights(path).expect_partial()
+        return None
 
     def _get_estimator(self, path):
-        model = models.efficientnet_b0(weights='IMAGENET1K_V1')
-        model.classifier = nn.Sequential(
-            nn.Linear(1280, 100),
-            nn.Dropout(0.1),
-            nn.ReLU(),
-            nn.Linear(100, 2, bias=True),
-        )
+        # model = models.efficientnet_b0(weights='IMAGENET1K_V1')
+        # model.classifier = nn.Sequential(
+        #     nn.Linear(1280, 100),
+        #     nn.Dropout(0.1),
+        #     nn.ReLU(),
+        #     nn.Linear(100, 2, bias=True),
+        # )
 
-        self.hook_info = {}
+        # self.hook_info = {}
 
-        def get_activation(name):
-            def hook(model, input, output):
-                self.hook_info[name] = output.detach()
-            return hook
+        # def get_activation(name):
+        #     def hook(model, input, output):
+        #         self.hook_info[name] = output.detach()
+        #     return hook
 
-        model.load_state_dict(torch.load(
-            path, map_location=torch.device('cpu')))
-        model.to(self.device)
-        model.eval()
+        # model.load_state_dict(torch.load(
+        #     path, map_location=torch.device('cpu')))
+        # model.to(self.device)
+        # model.eval()
 
-        model.classifier[1].register_forward_hook(get_activation('avgpool'))
-        return model
+        # model.classifier[1].register_forward_hook(get_activation('avgpool'))
+        return None
 
     def _load_heads(self):
         head_types = ['head_full', 'head_without_photo',
@@ -77,7 +77,7 @@ class PriceEstimator:
                 # with open(os.path.join(self.models_folder, "cat_cols_for_"+head_type+'.txt'), 'r', encoding='utf-8') as file:
                 #     for line in file:
                 #         _cat_features.append(line.strip())
-                with open(os.path.join(self.models_folder, "cols_order_for_"+region+"_"+head_type+'.txt'), 'r', encoding='utf-8') as file:
+                with open(os.path.join(self.models_folder, "cols_order_for_" + region + "_" + head_type + '.txt'), 'r', encoding='utf-8') as file:
                     for line in file:
                         cols_order.append(line.strip())
                 # cat_features=_cat_features)
@@ -90,12 +90,14 @@ class PriceEstimator:
         self.metro_trees = {}
         for city in self.regions:
             self.metro_trees[city] = cKDTree(
-                self.metro_df[self.metro_df.region == city][['x_coord', 'y_coord']])
+                self.metro_df[self.metro_df.region == city]
+                [['x_coord', 'y_coord']])
 
         self.infro_tree = {}
         for city in self.regions:
             self.infro_tree[city] = cKDTree(
-                self.infro_df[self.infro_df.city == city][['x_coord', 'y_coord']])
+                self.infro_df[self.infro_df.city == city]
+                [['x_coord', 'y_coord']])
 
         self.focus_trans_types = ['plane', 'train', 'bus']
         self.station_trees = {}
@@ -106,7 +108,8 @@ class PriceEstimator:
                 self.station_trees[city][type_] = cKDTree(
                     a[a.transport_type == type_][['x_coord', 'y_coord']])
 
-    def __init__(self, models_folder, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
+    def __init__(self, models_folder, device=torch.device(
+            "cuda" if torch.cuda.is_available() else "cpu")):
         self.city_centers = {"msc": (55.751999, 37.617734),
                              "nsk": (55.026498, 82.921457),
                              "ekb": (56.838060, 60.603651),
@@ -224,11 +227,11 @@ class PriceEstimator:
             text_query = neighbor['text_query']
             nearest_infro[text_query] += 1
         return nearest_infro
-    
+
     def _get_nearest_infro_names(self, decart_coords, city):
         nearest_infro = {}
         for infro_type in self.infro_types:
-            nearest_infro[infro_type] = {"count":0, "items": []}
+            nearest_infro[infro_type] = {"count": 0, "items": []}
         k_ns = 20
         max_one_type = 5
         close_range = 1
@@ -237,18 +240,19 @@ class PriceEstimator:
 
         processed = 0
         for neighbor_idx in neighbors:
-            if(processed>=k_ns):
+            if (processed >= k_ns):
                 break
             neighbor = self.infro_df[self.infro_df.city ==
-                                    city].iloc[neighbor_idx]
+                                     city].iloc[neighbor_idx]
             infro_type = neighbor['text_query']
             name = neighbor['name']
             lat, lng = neighbor['lat'], neighbor['lon']
-            if(max_one_type<=nearest_infro[infro_type]['count']):
+            if (max_one_type <= nearest_infro[infro_type]['count']):
                 continue
-            nearest_infro[infro_type]['count']+=1
-            nearest_infro[infro_type]['items'].append({'name':name, 'point':[lat, lng]})
-            processed+=1
+            nearest_infro[infro_type]['count'] += 1
+            nearest_infro[infro_type]['items'].append(
+                {'name': name, 'point': [lat, lng]})
+            processed += 1
         return nearest_infro
 
     def _get_station_info(self, decart_coords, city):
@@ -260,7 +264,7 @@ class PriceEstimator:
                 decart_coords, k=1, p=2)
             if (dist != np.Inf):
                 nearest_obj_dist = dist
-            nearest_stations['nearest_'+type_+'_dist'] = nearest_obj_dist
+            nearest_stations['nearest_' + type_ + '_dist'] = nearest_obj_dist
         return nearest_stations
 
     def _get_city_by_coords(self, point):
@@ -274,7 +278,7 @@ class PriceEstimator:
             - 'address': str
             - 'object_type': '1' | '2'
             - 'text': str
-            - 'house_material': str            
+            - 'house_material': str
             - 'cnt_rooms': int
             - 'floor': int
             - 'floors': int
@@ -304,11 +308,16 @@ class PriceEstimator:
 
         has_zhkh = True
         zhkh_id = get_zhkh_new(formated_adress, self.df_zhkh)
-        if (zhkh_id == None):
+        if (zhkh_id is None):
             has_zhkh = False
         else:
             zhkh_info = self.df_zhkh.drop(
-                columns=["Форматированный адрес", 'index', "Адрес", "Ссылка", ]).iloc[zhkh_id]
+                columns=[
+                    "Форматированный адрес",
+                    'index',
+                    "Адрес",
+                    "Ссылка",
+                ]).iloc[zhkh_id]
             for key in zhkh_info.keys():
                 request[key] = zhkh_info[key]
 
@@ -383,120 +392,3 @@ class PriceEstimator:
                 # print('head_without_photo_and_zhkh')
 
         return (np.exp(prediction) * request['area'])[0]
-
-    def get_repair(self, photos) -> dict:
-        '''
-        photos': list of PIL.Image objects
-        return: dict with keys:
-            - 'interior_style': int
-            - 'interior_qual': int
-            - 'embeddings': dict with keys:
-                - 'emb1': np.array
-                - 'emb2': np.array
-                - ...
-                - 'emb100': np.array
-        '''
-        input_shape = (224, 224)
-
-        image_array = np.zeros((len(photos), *input_shape, 3))
-
-        for i, pil_image in enumerate(photos):
-            # Преобразование PIL-изображения в массив NumPy
-            # Подгоняем изображение под размер модели
-            img = pil_image.resize(input_shape)
-            img_array = img_to_array(img)
-            # Нормализация пикселей (если модель ожидает значения от 0 до 1)
-            img_array /= 255.0
-            image_array[i] = img_array
-
-        predictions_of_photo_type = self.photo_classifier.predict(
-            image_array, verbose=0)
-        flat_thr = 0.8
-        outdoor_thr = 0.5
-        flats = np.array(range(predictions_of_photo_type.shape[0]))[
-            predictions_of_photo_type[:, 0] > flat_thr]
-
-        iter_estims = torch.tensor([])
-        embeddings = torch.tensor([])
-        transform1 = transforms.Compose([
-            transforms.Resize(224),
-            transforms.CenterCrop(224),
-            transforms.ToTensor(),
-        ])
-
-        with torch.no_grad():
-            for photo_id in flats:
-                image = photos[photo_id]
-                image = transform1(image)
-                data = image.to(self.device)
-                x = self.estimator(data.view(1, 3, 224, 224))
-                x = x.view(x.size(0), -1)
-                x2 = self.hook_info['avgpool'].reshape((1, 100))
-                if (iter_estims.shape[0] == 0):
-                    iter_estims = x.cpu()
-                    embeddings = x2.cpu()
-                else:
-                    iter_estims = torch.concat((iter_estims, x.cpu()))
-                    embeddings = torch.concat((embeddings, x2.cpu()))
-
-        interior_style, interior_qual = iter_estims.mean(axis=0).numpy()
-        embeddings = embeddings.mean(axis=0).numpy()
-        return {'interior_style': interior_style, 'interior_qual': interior_qual, 'embeddings': embeddings}
-    
-    def get_appart_info(self, address, lat, lon) -> dict:
-        '''
-        params: dict with keys:
-            - 'address': str
-        return: dict with keys:
-            - 'house_year': int
-            - 'metro_name': str
-            - 'metro_dist': float
-            - 'region': str
-        '''
-        res = {}
-        formated_adress = get_formated_adress(address)
-        latitude, longitude = lat, lon
-
-        city = self._get_city_by_coords((latitude, longitude))
-        res['region'] = city
-        zhkh_id = get_zhkh_new(formated_adress, self.df_zhkh)
-        if (zhkh_id == None):
-            res['house_year'] = 0
-        else:
-            info = self.df_zhkh.drop(
-                columns=["Форматированный адрес", 'index', "Адрес", "Ссылка", ]).iloc[zhkh_id]
-            res['house_year'] = info['Год постройки']
-        y, x = self._coordinates_to_distance_from_city_center(
-            (latitude, longitude), city)
-        res['metro_name'] = self._get_metro_info((x, y), city)['nearest_metro']
-        speed = 0.05
-        res['metro_min'] = self._get_metro_info(
-            (x, y), city)['nearest_metro_dist'] / speed        
-        return res
-    
-    def get_infrastructure(self, address, lat, lon):
-        '''
-        params: dict with keys:
-            - 'address': str
-        return: dict with keys:
-            - 'hospitals': {
-                    "count": "int",
-                    "items": [
-                        {
-                            "name": "str",
-                            "point": ["int", "int"]
-                        },
-                        {
-                            "name": "str",
-                            "point": ["int", "int"]
-                        },
-                        ...
-                    ]
-            - 'shops': ...
-            ...
-        '''
-        latitude, longitude = lat, lon
-        city = self._get_city_by_coords((latitude, longitude))
-        y, x = self._coordinates_to_distance_from_city_center(
-            (latitude, longitude), city)
-        return self._get_nearest_infro_names((x, y), city)
