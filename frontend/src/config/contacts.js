@@ -4,6 +4,7 @@ import roma from "../../public/imgs/contacts/Roma.jpg";
 import maxn from "../../public/imgs/contacts/maxNoName.jpg";
 import maxi from "../../public/imgs/contacts/maxIgitov.jpg";
 import victor from "../../public/imgs/contacts/victor.jpg";
+import gpbLogo from "../../public/imgs/gpbLogo.png";
 export const contactsData = [
   {
     name: "Игитов Максим",
@@ -53,5 +54,12 @@ export const contactsData = [
     telegram: "@physnomath",
     github: "https://github.com/VirusTI",
     university: "НИУ МФТИ",
+  },
+];
+
+export const partnerData = [
+  {
+    logo: gpbLogo,
+    name: "Газпромбанк",
   },
 ];

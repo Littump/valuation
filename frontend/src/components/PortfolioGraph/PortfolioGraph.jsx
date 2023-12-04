@@ -14,18 +14,13 @@ export default function PortfolioGraph() {
         backgroundColor: ["#E55C5C", "#476BF0", "#6A9F48"],
         data: [
           objects.reduce((sum, object) => {
-            return sum + +(object.liquidity === 'низкая');
+            return sum + +(object.liquidity === "низкая");
           }, 0),
           objects.reduce((sum, object) => {
-            return (
-              sum +
-              +(
-                object.liquidity === "средняя"
-              )
-            );
+            return sum + +(object.liquidity === "средняя");
           }, 0),
           objects.reduce((sum, object) => {
-            return sum + +(object.liquidity === 'высокая');
+            return sum + +(object.liquidity === "высокая");
           }, 0),
         ],
         borderWidth: 1,
@@ -34,16 +29,15 @@ export default function PortfolioGraph() {
   };
 
   const options = {
-    plugins:{
-      legend:{
-        labels:{
+    plugins: {
+      legend: {
+        labels: {
           font: "'Proxima Nova', sans-serif",
-          color : "#000000",
-          weight:'600'
-        }
-      }
-    }
-  }
+          weight: "600",
+        },
+      },
+    },
+  };
 
   if (objects.length === 0) {
     return (
@@ -58,7 +52,7 @@ export default function PortfolioGraph() {
         Ликвидность объектов в портфеле
       </div>
       <div className="w-9/12 dark:text-dark-100">
-        <Doughnut data={data} options={options}/>
+        <Doughnut data={data} options={options} />
       </div>
     </div>
   );
